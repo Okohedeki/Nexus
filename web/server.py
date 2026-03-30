@@ -442,6 +442,8 @@ ENV_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), ".env")
 
 
 class SetupSave(BaseModel):
+    provider: str = ""
+    ollama_model: str = "llama3.2"
     telegram_token: str = ""
     telegram_ids: str = ""
     discord_token: str = ""
@@ -465,11 +467,17 @@ async def setup_status():
     has_telegram = bool(tg_token and not tg_token.startswith("your-"))
     has_discord = bool(dc_token and not dc_token.startswith("your-"))
 
+    # Detect LLM providers
+    from services.providers.detection import detect_providers
+    providers = detect_providers()
+
     return {
         "configured": has_telegram or has_discord,
         "telegram": has_telegram,
         "discord": has_discord,
         "env_exists": os.path.exists(ENV_PATH),
+        "providers": providers,
+        "selected_provider": env.get("PROVIDER", ""),
     }
 
 
@@ -478,6 +486,13 @@ async def setup_save(body: SetupSave):
     """Write platform tokens and settings to .env file."""
     lines = []
 
+    # Provider
+    if body.provider:
+        lines.append(f"PROVIDER={body.provider}")
+    if body.provider == "ollama" and body.ollama_model:
+        lines.append(f"OLLAMA_MODEL={body.ollama_model}")
+
+    # Platforms
     if body.telegram_token:
         lines.append(f"TELEGRAM_BOT_TOKEN={body.telegram_token}")
         if body.telegram_ids:

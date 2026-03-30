@@ -269,9 +269,21 @@ a.wiki-link:hover { color: var(--accent); border-color: var(--accent); }
     <p style="color:var(--subtext); margin-bottom:32px;">Welcome! Configure at least one messaging platform to get started.</p>
 
     <div id="setupSteps">
+      <!-- Step 0: LLM Provider -->
+      <div id="setupStep0">
+        <h3 style="color:var(--text);">1. LLM Provider</h3>
+        <p style="color:var(--subtext); font-size:13px;">Nexus needs an AI backend. Select one below — detected providers are marked.</p>
+        <div id="providerOptions" style="margin:12px 0;"></div>
+        <div id="providerInstall" style="margin-top:8px; font-size:13px;"></div>
+        <div id="ollamaModelRow" style="display:none; margin-top:12px;">
+          <label style="color:var(--subtext); font-size:12px;">Ollama Model</label>
+          <input type="text" id="setupOllamaModel" value="llama3.2" style="width:200px; padding:8px; background:var(--surface1); border:1px solid var(--surface2); border-radius:4px; color:var(--text);">
+        </div>
+      </div>
+
       <!-- Step 1: Platform selection -->
-      <div id="setupStep1">
-        <h3 style="color:var(--text);">1. Choose Platforms</h3>
+      <div id="setupStep1" style="margin-top:24px;">
+        <h3 style="color:var(--text);">2. Messaging Platforms</h3>
         <p style="color:var(--subtext); font-size:13px;">Select which platforms you'd like to connect. You need at least one.</p>
         <label style="display:flex; align-items:center; gap:8px; margin:12px 0; color:var(--text); cursor:pointer;">
           <input type="checkbox" id="setupTelegram" onchange="updateSetupPlatforms()"> Telegram
@@ -462,6 +474,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const status = await (await fetch('/api/setup/status')).json();
     if (!status.configured) {
       document.getElementById('setupOverlay').style.display = 'block';
+      renderProviderOptions(status.providers, status.selected_provider);
       return;
     }
   } catch (e) { console.warn('Setup check failed:', e); }
@@ -474,16 +487,83 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 // ── Setup Wizard Functions ────────────────────────────────────
 
+let _selectedProvider = '';
+
+const PROVIDER_INFO = {
+  claude_code: { label: 'Claude Code', desc: 'Full agentic coding agent by Anthropic. File editing, shell, MCP.', icon: '' },
+  opencode:    { label: 'OpenCode', desc: 'Open-source AI coding agent (MIT). Supports 75+ LLM providers.', icon: '' },
+  ollama:      { label: 'Ollama (Local)', desc: 'Free local LLM inference. Chat and knowledge graph only — no agentic features.', icon: '' },
+};
+
+function renderProviderOptions(providers, selected) {
+  const container = document.getElementById('providerOptions');
+  container.innerHTML = '';
+
+  for (const [name, info] of Object.entries(providers)) {
+    const meta = PROVIDER_INFO[name] || { label: name, desc: '' };
+    const avail = info.available;
+    const isSelected = selected === name || (!selected && _selectedProvider === name);
+
+    const div = document.createElement('div');
+    div.style.cssText = `padding:12px; margin:8px 0; background:var(--surface0); border:2px solid ${isSelected ? 'var(--accent)' : 'var(--surface2)'}; border-radius:8px; cursor:pointer; transition:border-color 0.2s;`;
+    div.innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <strong style="color:var(--text);">${meta.label}</strong>
+        <span style="font-size:12px; padding:2px 8px; border-radius:4px; background:${avail ? 'var(--green)' : 'var(--surface2)'}; color:${avail ? 'var(--bg)' : 'var(--subtext)'};">
+          ${avail ? 'Installed' : 'Not found'}
+        </span>
+      </div>
+      <p style="color:var(--subtext); font-size:13px; margin:4px 0 0 0;">${meta.desc}</p>
+      ${!avail ? `<div style="margin-top:6px; font-size:12px; color:var(--peach); font-family:monospace; white-space:pre-wrap;">${info.install}</div>` : ''}
+    `;
+    div.onclick = () => selectProvider(name, providers);
+    container.appendChild(div);
+  }
+
+  if (selected) selectProvider(selected, providers);
+}
+
+function selectProvider(name, providers) {
+  _selectedProvider = name;
+  document.getElementById('ollamaModelRow').style.display = name === 'ollama' ? 'block' : 'none';
+
+  // Re-render to update border colors
+  const container = document.getElementById('providerOptions');
+  for (const child of container.children) {
+    const label = child.querySelector('strong')?.textContent || '';
+    const meta = Object.entries(PROVIDER_INFO).find(([k, v]) => v.label === label);
+    const isThis = meta && meta[0] === name;
+    child.style.borderColor = isThis ? 'var(--accent)' : 'var(--surface2)';
+  }
+
+  const info = providers?.[name];
+  const installEl = document.getElementById('providerInstall');
+  if (info && !info.available) {
+    installEl.innerHTML = `<span style="color:var(--peach);">Install ${PROVIDER_INFO[name]?.label || name} first, then restart Nexus.</span>`;
+  } else {
+    installEl.innerHTML = '';
+  }
+
+  updateSaveButton();
+}
+
 function updateSetupPlatforms() {
+  updateSaveButton();
   const tg = document.getElementById('setupTelegram').checked;
   const dc = document.getElementById('setupDiscord').checked;
   document.getElementById('setupTelegramSection').style.display = tg ? 'block' : 'none';
   document.getElementById('setupDiscordSection').style.display = dc ? 'block' : 'none';
+}
 
-  const hasAny = tg || dc;
+function updateSaveButton() {
+  const tg = document.getElementById('setupTelegram').checked;
+  const dc = document.getElementById('setupDiscord').checked;
+  const hasProvider = !!_selectedProvider;
+  const hasPlatform = tg || dc;
+  const ready = hasProvider && hasPlatform;
   const btn = document.getElementById('setupSaveBtn');
-  btn.disabled = !hasAny;
-  btn.style.opacity = hasAny ? '1' : '0.5';
+  btn.disabled = !ready;
+  btn.style.opacity = ready ? '1' : '0.5';
 }
 
 async function validateToken(platform) {
@@ -517,6 +597,8 @@ async function saveSetup() {
   statusEl.innerHTML = '<span style="color:var(--subtext)">Saving...</span>';
 
   const body = {
+    provider: _selectedProvider,
+    ollama_model: document.getElementById('setupOllamaModel')?.value?.trim() || 'llama3.2',
     telegram_token: document.getElementById('setupTgToken')?.value?.trim() || '',
     telegram_ids: document.getElementById('setupTgIds')?.value?.trim() || '',
     discord_token: document.getElementById('setupDcToken')?.value?.trim() || '',
@@ -525,7 +607,10 @@ async function saveSetup() {
     default_model: document.getElementById('setupModel')?.value?.trim() || 'sonnet',
   };
 
-  // Must have at least one token
+  if (!body.provider) {
+    statusEl.innerHTML = '<span style="color:var(--red)">Select an LLM provider</span>';
+    return;
+  }
   if (!body.telegram_token && !body.discord_token) {
     statusEl.innerHTML = '<span style="color:var(--red)">Configure at least one platform token</span>';
     return;
@@ -540,7 +625,6 @@ async function saveSetup() {
     const data = await resp.json();
     if (data.ok) {
       statusEl.innerHTML = '<span style="color:var(--green)">Saved! Restart the app to connect your bots.</span>';
-      // Hide overlay after a moment and load the main UI
       setTimeout(async () => {
         document.getElementById('setupOverlay').style.display = 'none';
         await Promise.all([loadStats(), loadSources(), loadCategories()]);

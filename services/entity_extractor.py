@@ -1,7 +1,8 @@
-import asyncio
 import json
 import logging
 import re
+
+from services.providers.detection import get_provider
 
 logger = logging.getLogger(__name__)
 
@@ -30,6 +31,17 @@ Rules:
 - Only include clear, meaningful relationships
 - Return ONLY valid JSON, no other text"""
 
+# Cached provider for extraction
+_provider = None
+
+
+def _get_extraction_provider(model: str = ""):
+    """Get the provider instance for entity extraction."""
+    global _provider
+    if _provider is None:
+        _provider = get_provider()
+    return _provider
+
 
 async def extract_entities(
     content_text: str,
@@ -37,7 +49,7 @@ async def extract_entities(
     source_type: str,
     model: str = "sonnet",
 ) -> dict:
-    """Call Claude to extract entities and relationships from content.
+    """Extract entities and relationships from content using the configured provider.
 
     Returns dict with keys: summary, entities, relationships, cost_usd, success, error
     """
@@ -50,43 +62,29 @@ async def extract_entities(
         content=truncated,
     )
 
-    cmd = [
-        "claude",
-        "-p", prompt,
-        "--output-format", "json",
-        "--model", model,
-        "--max-budget-usd", "0.50",
-    ]
-
     try:
-        proc = await asyncio.create_subprocess_exec(
-            *cmd,
-            stdout=asyncio.subprocess.PIPE,
-            stderr=asyncio.subprocess.PIPE,
+        provider = _get_extraction_provider(model)
+        raw_text, cost_usd = await provider.run_simple(
+            prompt, model=model, max_budget_usd=0.50, timeout=120,
         )
-        stdout, stderr = await asyncio.wait_for(proc.communicate(), timeout=120)
 
-        raw = stdout.decode("utf-8", errors="replace").strip()
-
-        if not raw:
-            err = stderr.decode("utf-8", errors="replace").strip()
+        if not raw_text:
             return {
                 "summary": "", "entities": [], "relationships": [],
                 "cost_usd": 0.0, "success": False,
-                "error": f"Claude returned empty output. Stderr: {err[:500]}",
+                "error": "Provider returned empty output",
             }
 
-        # Parse the outer JSON (Claude CLI wrapper)
-        cost_usd = 0.0
-        result_text = raw
+        # Try to unwrap JSON wrapper (Claude Code wraps in {"result": ..., "cost_usd": ...})
+        result_text = raw_text
         try:
-            outer = json.loads(raw)
-            result_text = outer.get("result", raw)
-            cost_usd = outer.get("cost_usd", 0.0)
+            outer = json.loads(raw_text)
+            if "result" in outer:
+                result_text = outer["result"]
+                cost_usd = outer.get("cost_usd", cost_usd)
         except json.JSONDecodeError:
             pass
 
-        # Parse the inner JSON (entity extraction result)
         parsed = _parse_extraction_json(result_text)
         if parsed:
             parsed["cost_usd"] = cost_usd
@@ -97,14 +95,9 @@ async def extract_entities(
         return {
             "summary": "", "entities": [], "relationships": [],
             "cost_usd": cost_usd, "success": False,
-            "error": f"Could not parse Claude's response as JSON: {result_text[:300]}",
+            "error": f"Could not parse response as JSON: {result_text[:300]}",
         }
 
-    except asyncio.TimeoutError:
-        return {
-            "summary": "", "entities": [], "relationships": [],
-            "cost_usd": 0.0, "success": False, "error": "Claude timed out after 120s",
-        }
     except Exception as e:
         logger.exception("Entity extraction failed")
         return {
@@ -114,7 +107,7 @@ async def extract_entities(
 
 
 def _parse_extraction_json(text: str) -> dict | None:
-    """Try to parse entity extraction JSON from Claude's response."""
+    """Try to parse entity extraction JSON from the response."""
     # Direct parse
     try:
         data = json.loads(text)
@@ -123,7 +116,7 @@ def _parse_extraction_json(text: str) -> dict | None:
     except json.JSONDecodeError:
         pass
 
-    # Try extracting JSON block from text (Claude sometimes wraps in markdown)
+    # Try extracting JSON block from text (LLMs sometimes wrap in markdown)
     match = re.search(r"\{[\s\S]*\"entities\"[\s\S]*\}", text)
     if match:
         try:

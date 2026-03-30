@@ -17,6 +17,8 @@ class PlatformConfig:
 class Config:
     telegram: PlatformConfig | None
     discord: PlatformConfig | None
+    provider: str  # "claude_code", "opencode", "ollama", or "" for auto-detect
+    ollama_model: str
     default_cwd: str
     default_model: str
     claude_timeout: int
@@ -56,6 +58,8 @@ def load_config() -> Config:
     return Config(
         telegram=telegram,
         discord=discord,
+        provider=os.environ.get("PROVIDER", ""),
+        ollama_model=os.environ.get("OLLAMA_MODEL", "llama3.2"),
         default_cwd=os.environ.get("DEFAULT_CWD", os.getcwd()),
         default_model=os.environ.get("DEFAULT_MODEL", "sonnet"),
         claude_timeout=int(os.environ.get("CLAUDE_TIMEOUT", "300")),
