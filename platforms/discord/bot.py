@@ -1,14 +1,12 @@
-"""Discord bot entry point using discord.py."""
+"""Discord bot — ingests URLs and media into the knowledge graph."""
 
-import asyncio
 import logging
 import os
 import re
 
 import discord
-from discord.ext import commands as dc_commands
 
-from platforms.discord.adapter import DiscordContext, DiscordMessageContext
+from platforms.discord.adapter import DiscordMessageContext
 from core import commands
 from services.knowledge_graph import close_db, init_db
 
@@ -24,110 +22,30 @@ def main(config):
     intents = discord.Intents.default()
     intents.message_content = True
 
-    bot = dc_commands.Bot(command_prefix="!", intents=intents, help_command=None)
+    client = discord.Client(intents=intents)
 
-    # Shared state
     db = None
     cwd_store: dict[str, str] = {}
 
-    def _ctx(cmd_ctx):
-        return DiscordContext(cmd_ctx, config, db, cwd_store)
-
-    def _msg_ctx(msg):
+    def _ctx(msg):
         return DiscordMessageContext(msg, config, db, cwd_store)
 
-    @bot.event
+    @client.event
     async def on_ready():
         nonlocal db
         os.makedirs(os.path.dirname(config.kg_db_path), exist_ok=True)
         os.makedirs(os.path.join(os.path.dirname(config.kg_db_path), "tmp"), exist_ok=True)
         db = await init_db(config.kg_db_path)
-        logger.info("Discord bot ready as %s", bot.user)
+        logger.info("Discord bot ready as %s", client.user)
 
-    # ── Commands ─────────────────────────────────────────────
-
-    @bot.command(name="start")
-    async def cmd_start(ctx):
-        await commands.handle_start(_ctx(ctx))
-
-    @bot.command(name="help")
-    async def cmd_help(ctx):
-        await commands.handle_help(_ctx(ctx))
-
-    @bot.command(name="status")
-    async def cmd_status(ctx):
-        await commands.handle_status(_ctx(ctx))
-
-    @bot.command(name="cwd")
-    async def cmd_cwd(ctx):
-        await commands.handle_cwd(_ctx(ctx))
-
-    @bot.command(name="model")
-    async def cmd_model(ctx):
-        await commands.handle_model(_ctx(ctx))
-
-    @bot.command(name="newsession")
-    async def cmd_newsession(ctx):
-        await commands.handle_newsession(_ctx(ctx))
-
-    @bot.command(name="commands")
-    async def cmd_commands(ctx):
-        await commands.handle_commands(_ctx(ctx))
-
-    @bot.command(name="mcp")
-    async def cmd_mcp(ctx):
-        await commands.handle_mcp(_ctx(ctx))
-
-    @bot.command(name="restart")
-    async def cmd_restart(ctx):
-        await commands.handle_restart(_ctx(ctx))
-
-    @bot.command(name="claude", aliases=["cl"])
-    async def cmd_claude(ctx):
-        await commands.handle_claude(_ctx(ctx))
-
-    @bot.command(name="cancel")
-    async def cmd_cancel(ctx):
-        await commands.handle_cancel(_ctx(ctx))
-
-    @bot.command(name="sh")
-    async def cmd_sh(ctx):
-        await commands.handle_shell(_ctx(ctx))
-
-    @bot.command(name="kg")
-    async def cmd_kg(ctx):
-        await commands.handle_kg(_ctx(ctx))
-
-    @bot.command(name="kgsearch")
-    async def cmd_kgsearch(ctx):
-        await commands.handle_kgsearch(_ctx(ctx))
-
-    @bot.command(name="kgstats")
-    async def cmd_kgstats(ctx):
-        await commands.handle_kgstats(_ctx(ctx))
-
-    @bot.command(name="kgrecent")
-    async def cmd_kgrecent(ctx):
-        await commands.handle_kgrecent(_ctx(ctx))
-
-    # ── Message handlers ─────────────────────────────────────
-
-    @bot.event
+    @client.event
     async def on_message(message: discord.Message):
         if message.author.bot:
             return
 
-        # Let commands process first
-        await bot.process_commands(message)
+        mc = _ctx(message)
 
-        # Skip if it was a command
-        ctx = await bot.get_context(message)
-        if ctx.valid:
-            return
-
-        mc = _msg_ctx(message)
-
-        # Check for media attachments
+        # Media attachments → transcribe & ingest
         if message.attachments:
             attachment = message.attachments[0]
             content_type = attachment.content_type or ""
@@ -142,15 +60,9 @@ def main(config):
                 await commands.handle_media_message(mc)
                 return
 
+        # URLs → extract & ingest
         text = message.content or ""
-
-        # Check for URLs
         if _URL_RE.search(text):
             await commands.handle_url_message(mc)
-            return
 
-        # Default: plain text → Claude
-        if text.strip():
-            await commands.handle_default_message(mc)
-
-    bot.run(config.discord.token, log_handler=None)
+    client.run(config.discord.token, log_handler=None)

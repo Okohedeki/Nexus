@@ -1,15 +1,13 @@
 # Nexus
 
-An agentic desktop app that gives you remote access to AI coding agents through Telegram and Discord, with a built-in knowledge graph that automatically extracts and connects entities from everything you share.
+A knowledge graph desktop app. Send URLs, audio, video, or PDFs from Telegram or Discord and Nexus auto-extracts entities, relationships, and detailed summaries into a searchable, visual knowledge graph.
 
 ## Features
 
-- **Multi-provider** - Works with Claude Code, OpenCode, or Ollama (local LLMs). Auto-detects what's installed.
-- **Multi-platform** - Control your AI agent from Telegram, Discord, or both simultaneously
-- **Knowledge Graph** - Share URLs, audio, video, or PDFs and Nexus auto-extracts entities, relationships, and summaries into a searchable graph
+- **Multi-provider** - Entity extraction via Claude Code, OpenCode, or Ollama (local LLMs). Auto-detects what's installed.
+- **Multi-platform ingestion** - Send links and media from Telegram, Discord, or both — they feed the same knowledge graph
+- **Knowledge Graph** - Auto-extracts entities, relationships, and summaries from everything you share
 - **Desktop UI** - Native desktop window with interactive D3.js graph visualization, notes editor, and category management
-- **Shell Access** - Execute shell commands remotely from your phone
-- **Session Management** - Per-user sessions with cost tracking, model switching, and working directory control
 - **Setup Wizard** - First-run guided setup in the desktop UI, no manual config needed
 - **Standalone Build** - Package as a Windows desktop app with PyInstaller
 
@@ -41,32 +39,15 @@ On first launch, the desktop app opens a setup wizard where you can configure yo
 
 ### 3. Use
 
-Send messages to your bot on Telegram or Discord:
+Send links or media to your bot on Telegram or Discord:
 
 ```
-Hello, can you help me write a Python script?   (plain text → Claude)
-/sh ls -la                                       (shell command)
-/status                                          (session info)
-https://example.com/article                      (auto-ingest URL)
+https://example.com/article           → extracts content, entities, summary
+https://youtube.com/watch?v=xyz       → transcribes audio, extracts entities
+(voice message or video)              → transcribes and ingests
 ```
 
-## Commands
-
-| Command | Description |
-|---------|-------------|
-| *(plain text)* | Chat with Claude Code |
-| `/claude <prompt>` | Send prompt to Claude (alias: `/cl`) |
-| `/sh <command>` | Execute shell command |
-| `/cancel` | Kill running Claude process |
-| `/status` | Show session info |
-| `/cwd [path]` | Get/set working directory |
-| `/model [name]` | Get/set Claude model |
-| `/newsession` | Start fresh Claude session |
-| `/mcp <subcommand>` | Manage MCP servers |
-| `/kg <question>` | Query knowledge graph |
-| `/kgsearch <term>` | Search entities |
-| `/kgstats` | Graph statistics |
-| `/kgrecent` | Recent ingestions |
+Everything appears in the desktop Knowledge Graph UI — browse entities, view summaries, explore connections.
 
 ## Architecture
 
@@ -74,10 +55,10 @@ https://example.com/article                      (auto-ingest URL)
 Nexus
 ├── launcher.py              # Entry point: starts all processes
 ├── config.py                # Multi-platform config loader
-├── core/                    # Platform-agnostic business logic
+├── core/                    # Platform-agnostic logic
 │   ├── auth.py              # Authorization decorator
-│   └── commands.py          # All command handlers
-├── platforms/               # Platform adapters
+│   └── commands.py          # URL + media ingestion handlers
+├── platforms/               # Messaging adapters
 │   ├── base.py              # PlatformContext protocol
 │   ├── telegram/            # Telegram bot + adapter
 │   └── discord/             # Discord bot + adapter
@@ -87,8 +68,6 @@ Nexus
 │   │   ├── opencode.py      # OpenCode CLI
 │   │   ├── ollama.py        # Ollama local LLM
 │   │   └── detection.py     # Auto-detection + factory
-│   ├── claude_runner.py     # Session management (uses providers)
-│   ├── shell_runner.py      # Shell command execution
 │   ├── content_extractor.py # URL/media content extraction
 │   ├── entity_extractor.py  # Claude-powered entity extraction
 │   ├── ingestion_service.py # Ingestion pipeline orchestrator
