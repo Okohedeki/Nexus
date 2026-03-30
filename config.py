@@ -26,6 +26,10 @@ class Config:
     max_budget_usd: float
     kg_db_path: str
     whisper_model: str
+    digest_enabled: bool
+    digest_daily_hour: int
+    digest_weekly_day: int
+    digest_delivery: str
 
 
 def _load_platform(token_var: str, ids_var: str, legacy_ids_var: str = None) -> PlatformConfig | None:
@@ -69,4 +73,8 @@ def load_config() -> Config:
             "KG_DB_PATH", os.path.join(os.getcwd(), "data", "knowledge.db")
         ),
         whisper_model=os.environ.get("WHISPER_MODEL", "base"),
+        digest_enabled=os.environ.get("DIGEST_ENABLED", "false").lower() == "true",
+        digest_daily_hour=int(os.environ.get("DIGEST_DAILY_HOUR", "8")),
+        digest_weekly_day=int(os.environ.get("DIGEST_WEEKLY_DAY", "0")),
+        digest_delivery=os.environ.get("DIGEST_DELIVERY", "none"),
     )

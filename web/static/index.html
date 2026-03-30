@@ -368,10 +368,12 @@ a.wiki-link:hover { color: var(--accent); border-color: var(--accent); }
 
 <div class="topbar">
   <div class="logo">NANTA</div>
-  <div class="search"><input type="text" id="searchInput" placeholder="Search entities, sources, notes..." /></div>
+  <div class="search"><input type="text" id="searchInput" placeholder="Search or ask a question (Enter for AI search)..." /></div>
   <div class="tab-bar">
     <button class="active" data-view="notes" onclick="switchView('notes', this)">Notes</button>
     <button data-view="graph" onclick="switchView('graph', this)">Graph</button>
+    <button data-view="digests" onclick="switchView('digests', this)">Digests</button>
+    <button data-view="create" onclick="switchView('create', this)">Create</button>
   </div>
   <div class="stats" id="statsBar">Loading...</div>
 </div>
@@ -1034,6 +1036,36 @@ function setupSearch() {
       }
     }, 250);
   });
+  // Enter key → AI-powered natural language search
+  input.addEventListener('keydown', async (e) => {
+    if (e.key !== 'Enter') return;
+    const q = input.value.trim();
+    if (!q) return;
+    e.preventDefault();
+    switchView('notes');
+    const content = document.getElementById('noteContent');
+    content.innerHTML = '<div style="padding:24px;color:var(--subtext);">Searching your knowledge graph...</div>';
+    const result = await apiPost('/api/search', { query: q });
+    if (!result || !result.success) {
+      content.innerHTML = `<div style="padding:24px;color:var(--red);">Search failed: ${result?.error || 'Unknown error'}</div>`;
+      return;
+    }
+    let html = `<div style="padding:24px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+        <span class="type-badge" style="background:var(--accent);color:var(--bg);">AI Answer</span>
+        <span style="color:var(--subtext);font-size:12px;">cost: $${(result.cost_usd||0).toFixed(4)}</span>
+      </div>
+      <div class="md-content">${marked.parse(result.answer||'No answer')}</div>`;
+    if (result.source_ids?.length) {
+      html += '<div style="margin-top:24px;padding-top:16px;border-top:1px solid var(--surface2);"><strong style="color:var(--subtext);">Sources Referenced</strong><div style="margin-top:8px;">';
+      for (const sid of result.source_ids) {
+        html += `<span class="entity-tag" style="cursor:pointer;" onclick="openNote(${sid})">#${sid}</span> `;
+      }
+      html += '</div></div>';
+    }
+    html += '</div>';
+    content.innerHTML = html;
+  });
 }
 
 // ── View switching ─────────────
@@ -1043,14 +1075,209 @@ function switchView(view, btn) {
   if (btn) btn.classList.add('active');
   else document.querySelector(`.tab-bar button[data-view="${view}"]`)?.classList.add('active');
 
+  document.getElementById('notesView').style.display = 'none';
+  document.getElementById('graph-container').classList.remove('active');
+
   if (view === 'graph') {
-    document.getElementById('notesView').style.display = 'none';
     document.getElementById('graph-container').classList.add('active');
     requestAnimationFrame(() => { if (!graphData) loadGraph(); else renderGraph(); });
+  } else if (view === 'digests') {
+    document.getElementById('notesView').style.display = 'block';
+    loadDigestsView();
+  } else if (view === 'create') {
+    document.getElementById('notesView').style.display = 'block';
+    loadCreateView();
   } else {
     document.getElementById('notesView').style.display = 'block';
-    document.getElementById('graph-container').classList.remove('active');
   }
+}
+
+// ── Digests View ──────────────
+async function loadDigestsView() {
+  const content = document.getElementById('noteContent');
+  const digests = await api('/api/digests?limit=20') || [];
+  let html = `<div style="padding:24px;">
+    <div style="display:flex;gap:8px;margin-bottom:24px;">
+      <button onclick="generateDigest('daily')" style="padding:8px 16px;background:var(--accent);color:var(--bg);border:none;border-radius:6px;cursor:pointer;">Generate Daily</button>
+      <button onclick="generateDigest('weekly')" style="padding:8px 16px;background:var(--mauve);color:var(--bg);border:none;border-radius:6px;cursor:pointer;">Generate Weekly</button>
+    </div>
+    <div id="digestStatus"></div>`;
+  if (digests.length) {
+    html += '<h3 style="color:var(--text);margin-bottom:12px;">Past Digests</h3>';
+    for (const d of digests) {
+      html += `<div class="sidebar-item" onclick="openDigest(${d.id})" style="margin-bottom:8px;padding:12px;background:var(--surface0);border-radius:8px;cursor:pointer;">
+        <div class="title">${esc(d.title)}</div>
+        <div class="meta"><span class="type-badge">${d.content_type}</span> <span>${d.created_at}</span> <span>$${(d.cost_usd||0).toFixed(4)}</span></div>
+      </div>`;
+    }
+  } else {
+    html += '<p style="color:var(--subtext);">No digests yet. Generate one above.</p>';
+  }
+  html += '</div>';
+  content.innerHTML = html;
+}
+
+async function generateDigest(period) {
+  const el = document.getElementById('digestStatus');
+  el.innerHTML = '<span style="color:var(--subtext);">Generating digest... this may take 30-60 seconds.</span>';
+  const result = await apiPost('/api/digests/generate', { period });
+  if (result?.success) {
+    el.innerHTML = `<span style="color:var(--green);">Generated! Cost: $${(result.cost_usd||0).toFixed(4)}</span>`;
+    const content = document.getElementById('noteContent');
+    const rendered = `<div style="padding:24px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+        <h2 style="color:var(--text);margin:0;">${esc(result.title)}</h2>
+        <span class="type-badge" style="background:var(--accent);color:var(--bg);">Digest</span>
+      </div>
+      <div class="md-content">${marked.parse(result.content||'')}</div>
+      <div style="margin-top:16px;color:var(--subtext);font-size:12px;">${result.source_count} sources | $${(result.cost_usd||0).toFixed(4)}</div>
+    </div>`;
+    content.innerHTML = rendered;
+  } else {
+    el.innerHTML = `<span style="color:var(--red);">${result?.error || 'Failed'}</span>`;
+  }
+}
+
+async function openDigest(id) {
+  const data = await api(`/api/digests/${id}`);
+  if (!data) return;
+  const content = document.getElementById('noteContent');
+  let html = `<div style="padding:24px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+      <h2 style="color:var(--text);margin:0;">${esc(data.title)}</h2>
+      <span class="type-badge">${data.content_type}</span>
+      <button onclick="deleteGenerated(${id},'digests')" style="margin-left:auto;padding:4px 12px;background:var(--red);color:var(--bg);border:none;border-radius:4px;cursor:pointer;font-size:12px;">Delete</button>
+    </div>
+    <div class="md-content">${marked.parse(data.content||'')}</div>`;
+  if (data.sources?.length) {
+    html += '<div style="margin-top:24px;padding-top:16px;border-top:1px solid var(--surface2);"><strong style="color:var(--subtext);">Sources Used</strong><div style="margin-top:8px;">';
+    for (const s of data.sources) {
+      html += `<div class="sidebar-item" onclick="openNote(${s.id})" style="display:inline-block;margin:4px;padding:4px 12px;background:var(--surface0);border-radius:4px;cursor:pointer;font-size:13px;">${esc(s.title||s.url||'#'+s.id)}</div>`;
+    }
+    html += '</div></div>';
+  }
+  html += '</div>';
+  content.innerHTML = html;
+}
+
+async function deleteGenerated(id, returnView) {
+  await api(`/api/generated/${id}`, { method: 'DELETE' });
+  if (returnView === 'digests') loadDigestsView();
+  else loadCreateView();
+}
+
+// ── Create View ───────────────
+async function loadCreateView() {
+  const content = document.getElementById('noteContent');
+  const sources = await api('/api/sources?limit=50') || [];
+  const generated = await api('/api/generated?limit=20') || [];
+
+  let sourceOpts = sources.map(s =>
+    `<label style="display:flex;align-items:center;gap:6px;padding:4px 0;color:var(--text);font-size:13px;cursor:pointer;">
+      <input type="checkbox" class="gen-source-cb" value="${s.id}">
+      <span>${esc(s.title||s.url||'#'+s.id)}</span>
+      <span style="color:var(--subtext);font-size:11px;">${s.source_type}</span>
+    </label>`
+  ).join('');
+
+  let html = `<div style="padding:24px;">
+    <h2 style="color:var(--text);margin-bottom:16px;">Create Content</h2>
+    <div style="display:flex;gap:8px;margin-bottom:16px;">
+      <label style="color:var(--text);cursor:pointer;"><input type="radio" name="genType" value="article" checked> Article</label>
+      <label style="color:var(--text);cursor:pointer;"><input type="radio" name="genType" value="newsletter"> Newsletter</label>
+      <label style="color:var(--text);cursor:pointer;"><input type="radio" name="genType" value="podcast_script"> Podcast Script</label>
+    </div>
+    <div style="margin-bottom:12px;">
+      <label style="color:var(--subtext);font-size:12px;">Topic / Title</label>
+      <input type="text" id="genTopic" placeholder="e.g. AI regulation trends" style="width:100%;padding:8px;background:var(--surface1);border:1px solid var(--surface2);border-radius:4px;color:var(--text);box-sizing:border-box;">
+    </div>
+    <div style="margin-bottom:12px;">
+      <label style="color:var(--subtext);font-size:12px;">Select Sources (optional — leave empty to auto-find by topic)</label>
+      <div style="max-height:200px;overflow-y:auto;background:var(--surface0);border-radius:6px;padding:8px;">${sourceOpts || '<span style="color:var(--subtext)">No sources yet</span>'}</div>
+    </div>
+    <div style="margin-bottom:12px;">
+      <label style="color:var(--subtext);font-size:12px;">Extra Instructions (optional)</label>
+      <textarea id="genExtra" rows="2" placeholder="e.g. Focus on the regulatory angle..." style="width:100%;padding:8px;background:var(--surface1);border:1px solid var(--surface2);border-radius:4px;color:var(--text);box-sizing:border-box;resize:vertical;"></textarea>
+    </div>
+    <button onclick="runGenerate()" style="padding:10px 24px;background:var(--accent);color:var(--bg);border:none;border-radius:6px;cursor:pointer;font-weight:600;">Generate</button>
+    <div id="genStatus" style="margin-top:8px;"></div>`;
+
+  if (generated.length) {
+    html += '<h3 style="color:var(--text);margin-top:32px;margin-bottom:12px;">Past Creations</h3>';
+    for (const g of generated) {
+      html += `<div class="sidebar-item" onclick="openGenerated(${g.id})" style="margin-bottom:8px;padding:12px;background:var(--surface0);border-radius:8px;cursor:pointer;">
+        <div class="title">${esc(g.title)}</div>
+        <div class="meta"><span class="type-badge">${g.content_type}</span> <span>${g.created_at}</span></div>
+      </div>`;
+    }
+  }
+  html += '</div>';
+  content.innerHTML = html;
+}
+
+async function runGenerate() {
+  const el = document.getElementById('genStatus');
+  el.innerHTML = '<span style="color:var(--subtext);">Generating... this may take 30-90 seconds.</span>';
+
+  const contentType = document.querySelector('input[name="genType"]:checked')?.value || 'article';
+  const topic = document.getElementById('genTopic')?.value?.trim() || '';
+  const extra = document.getElementById('genExtra')?.value?.trim() || '';
+  const sourceIds = [...document.querySelectorAll('.gen-source-cb:checked')].map(cb => parseInt(cb.value));
+
+  const body = {
+    content_type: contentType,
+    topic: topic,
+    title_hint: topic,
+    source_ids: sourceIds,
+    extra_instructions: extra,
+  };
+
+  const result = await apiPost('/api/generate', body);
+  if (result?.success) {
+    el.innerHTML = `<span style="color:var(--green);">Done! Cost: $${(result.cost_usd||0).toFixed(4)}</span>`;
+    showGeneratedResult(result);
+  } else {
+    el.innerHTML = `<span style="color:var(--red);">${result?.error || 'Failed'}</span>`;
+  }
+}
+
+function showGeneratedResult(result) {
+  const content = document.getElementById('noteContent');
+  const typeLabel = (result.content_type||'').replace('_',' ');
+  let html = `<div style="padding:24px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+      <h2 style="color:var(--text);margin:0;">${esc(result.title)}</h2>
+      <span class="type-badge" style="background:var(--green);color:var(--bg);">${typeLabel}</span>
+      <button onclick="navigator.clipboard.writeText(document.getElementById('genContent').innerText)" style="margin-left:auto;padding:4px 12px;background:var(--surface2);color:var(--text);border:none;border-radius:4px;cursor:pointer;font-size:12px;">Copy</button>
+    </div>
+    <div id="genContent" class="md-content">${marked.parse(result.content||'')}</div>
+    <div style="margin-top:16px;color:var(--subtext);font-size:12px;">$${(result.cost_usd||0).toFixed(4)} | ${result.source_ids?.length||0} sources</div>
+  </div>`;
+  content.innerHTML = html;
+}
+
+async function openGenerated(id) {
+  const data = await api(`/api/generated/${id}`);
+  if (!data) return;
+  const content = document.getElementById('noteContent');
+  const typeLabel = (data.content_type||'').replace('_',' ');
+  let html = `<div style="padding:24px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+      <h2 style="color:var(--text);margin:0;">${esc(data.title)}</h2>
+      <span class="type-badge">${typeLabel}</span>
+      <button onclick="navigator.clipboard.writeText(document.getElementById('genContent').innerText)" style="margin-left:auto;padding:4px 12px;background:var(--surface2);color:var(--text);border:none;border-radius:4px;cursor:pointer;font-size:12px;">Copy</button>
+      <button onclick="deleteGenerated(${id},'create')" style="padding:4px 12px;background:var(--red);color:var(--bg);border:none;border-radius:4px;cursor:pointer;font-size:12px;">Delete</button>
+    </div>
+    <div id="genContent" class="md-content">${marked.parse(data.content||'')}</div>`;
+  if (data.sources?.length) {
+    html += '<div style="margin-top:24px;padding-top:16px;border-top:1px solid var(--surface2);"><strong style="color:var(--subtext);">Sources Used</strong><div style="margin-top:8px;">';
+    for (const s of data.sources) {
+      html += `<div style="display:inline-block;margin:4px;padding:4px 12px;background:var(--surface0);border-radius:4px;cursor:pointer;font-size:13px;" onclick="openNote(${s.id})">${esc(s.title||s.url||'#'+s.id)}</div>`;
+    }
+    html += '</div></div>';
+  }
+  html += '</div>';
+  content.innerHTML = html;
 }
 
 function switchToNotes() {

@@ -60,6 +60,26 @@ CREATE INDEX IF NOT EXISTS idx_sources_url ON sources(url);
 CREATE INDEX IF NOT EXISTS idx_categories_parent ON categories(parent_id);
 CREATE INDEX IF NOT EXISTS idx_source_categories_source ON source_categories(source_id);
 CREATE INDEX IF NOT EXISTS idx_source_categories_category ON source_categories(category_id);
+
+CREATE TABLE IF NOT EXISTS generated_content (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    content_type TEXT NOT NULL,
+    title TEXT NOT NULL,
+    content TEXT NOT NULL,
+    parameters TEXT,
+    model_used TEXT,
+    cost_usd REAL DEFAULT 0.0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS generated_content_sources (
+    generated_id INTEGER REFERENCES generated_content(id) ON DELETE CASCADE,
+    source_id INTEGER REFERENCES sources(id) ON DELETE CASCADE,
+    PRIMARY KEY (generated_id, source_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_generated_content_type ON generated_content(content_type);
+CREATE INDEX IF NOT EXISTS idx_generated_content_created ON generated_content(created_at);
 """
 
 
@@ -569,3 +589,127 @@ async def get_graph_context_for_query(
     )
 
     return "\n".join(parts) if parts else "(Knowledge graph is empty)"
+
+
+# ── Date-range and bulk queries ──────────────────────────────────
+
+
+async def get_sources_by_date_range(
+    conn: aiosqlite.Connection,
+    start_date: str,
+    end_date: str,
+    category_id: int | None = None,
+) -> list[dict]:
+    """Get sources ingested within a date range."""
+    if category_id:
+        cursor = await conn.execute(
+            """SELECT s.id, s.url, s.title, s.source_type, s.content_text, s.summary,
+                      s.ingested_at, COALESCE(s.is_note, 0) AS is_note
+               FROM sources s
+               JOIN source_categories sc ON sc.source_id = s.id
+               WHERE s.ingested_at BETWEEN ? AND ? AND sc.category_id = ?
+               ORDER BY s.ingested_at DESC""",
+            (start_date, end_date, category_id),
+        )
+    else:
+        cursor = await conn.execute(
+            """SELECT s.id, s.url, s.title, s.source_type, s.content_text, s.summary,
+                      s.ingested_at, COALESCE(s.is_note, 0) AS is_note
+               FROM sources s
+               WHERE s.ingested_at BETWEEN ? AND ?
+               ORDER BY s.ingested_at DESC""",
+            (start_date, end_date),
+        )
+    return [dict(r) for r in await cursor.fetchall()]
+
+
+async def get_sources_by_ids(
+    conn: aiosqlite.Connection, source_ids: list[int]
+) -> list[dict]:
+    """Bulk fetch sources by ID with full content."""
+    if not source_ids:
+        return []
+    ph = ",".join("?" * len(source_ids))
+    cursor = await conn.execute(
+        f"""SELECT s.id, s.url, s.title, s.source_type, s.content_text, s.summary,
+                   s.ingested_at, COALESCE(s.is_note, 0) AS is_note
+            FROM sources s WHERE s.id IN ({ph})""",
+        source_ids,
+    )
+    return [dict(r) for r in await cursor.fetchall()]
+
+
+# ── Generated content ────────────────────────────────────────────
+
+
+async def save_generated_content(
+    conn: aiosqlite.Connection,
+    content_type: str,
+    title: str,
+    content: str,
+    parameters: str | None,
+    model_used: str,
+    cost_usd: float,
+    source_ids: list[int],
+) -> int:
+    cursor = await conn.execute(
+        """INSERT INTO generated_content (content_type, title, content, parameters, model_used, cost_usd)
+           VALUES (?, ?, ?, ?, ?, ?)""",
+        (content_type, title, content, parameters, model_used, cost_usd),
+    )
+    gen_id = cursor.lastrowid
+    for sid in source_ids:
+        await conn.execute(
+            "INSERT OR IGNORE INTO generated_content_sources (generated_id, source_id) VALUES (?, ?)",
+            (gen_id, sid),
+        )
+    await conn.commit()
+    return gen_id
+
+
+async def get_generated_content(conn: aiosqlite.Connection, content_id: int) -> dict | None:
+    cursor = await conn.execute(
+        "SELECT * FROM generated_content WHERE id = ?", (content_id,)
+    )
+    row = await cursor.fetchone()
+    if not row:
+        return None
+    result = dict(row)
+    cursor = await conn.execute(
+        """SELECT s.id, s.title, s.source_type, s.url
+           FROM sources s
+           JOIN generated_content_sources gcs ON gcs.source_id = s.id
+           WHERE gcs.generated_id = ?""",
+        (content_id,),
+    )
+    result["sources"] = [dict(r) for r in await cursor.fetchall()]
+    return result
+
+
+async def list_generated_content(
+    conn: aiosqlite.Connection,
+    content_type: str | None = None,
+    limit: int = 20,
+) -> list[dict]:
+    if content_type:
+        cursor = await conn.execute(
+            """SELECT id, content_type, title, cost_usd, created_at
+               FROM generated_content WHERE content_type LIKE ?
+               ORDER BY created_at DESC LIMIT ?""",
+            (f"{content_type}%", limit),
+        )
+    else:
+        cursor = await conn.execute(
+            """SELECT id, content_type, title, cost_usd, created_at
+               FROM generated_content ORDER BY created_at DESC LIMIT ?""",
+            (limit,),
+        )
+    return [dict(r) for r in await cursor.fetchall()]
+
+
+async def delete_generated_content(conn: aiosqlite.Connection, content_id: int) -> bool:
+    cursor = await conn.execute(
+        "DELETE FROM generated_content WHERE id = ?", (content_id,)
+    )
+    await conn.commit()
+    return cursor.rowcount > 0

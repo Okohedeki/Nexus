@@ -554,6 +554,157 @@ async def setup_validate(body: dict):
         return {"valid": False, "error": str(e)}
 
 
+# ── API: Natural Language Search ────────────────────────────────
+
+
+class SearchQuery(BaseModel):
+    query: str
+    model: str = ""
+
+
+@app.post("/api/search")
+async def nl_search(body: SearchQuery):
+    db = await get_db()
+    try:
+        from services.nl_search import search_knowledge_graph
+        model = body.model or os.environ.get("DEFAULT_MODEL", "sonnet")
+        return await search_knowledge_graph(db, body.query, model=model)
+    finally:
+        await db.close()
+
+
+# ── API: Digests ────────────────────────────────────────────────
+
+
+class DigestRequest(BaseModel):
+    period: str = "weekly"
+    category_id: int | None = None
+
+
+@app.post("/api/digests/generate")
+async def generate_digest_endpoint(body: DigestRequest):
+    db = await get_db()
+    try:
+        from services.digest_service import generate_digest
+        model = os.environ.get("DEFAULT_MODEL", "sonnet")
+        return await generate_digest(db, period=body.period, model=model, category_id=body.category_id)
+    finally:
+        await db.close()
+
+
+@app.get("/api/digests")
+async def list_digests(limit: int = Query(20)):
+    db = await get_db()
+    try:
+        from services.knowledge_graph import list_generated_content
+        return await list_generated_content(db, content_type="digest", limit=limit)
+    finally:
+        await db.close()
+
+
+@app.get("/api/digests/{digest_id}")
+async def get_digest(digest_id: int):
+    db = await get_db()
+    try:
+        from services.knowledge_graph import get_generated_content
+        result = await get_generated_content(db, digest_id)
+        if not result:
+            return JSONResponse({"error": "not found"}, status_code=404)
+        return result
+    finally:
+        await db.close()
+
+
+@app.delete("/api/digests/{digest_id}")
+async def delete_digest(digest_id: int):
+    db = await get_db()
+    try:
+        from services.knowledge_graph import delete_generated_content
+        ok = await delete_generated_content(db, digest_id)
+        if not ok:
+            return JSONResponse({"error": "not found"}, status_code=404)
+        return {"ok": True}
+    finally:
+        await db.close()
+
+
+# ── API: Content Generation ─────────────────────────────────────
+
+
+class GenerateRequest(BaseModel):
+    content_type: str
+    title_hint: str = ""
+    topic: str = ""
+    source_ids: list[int] = []
+    category_id: int | None = None
+    date_range_start: str | None = None
+    date_range_end: str | None = None
+    extra_instructions: str = ""
+
+
+@app.post("/api/generate")
+async def generate_content_endpoint(body: GenerateRequest):
+    db = await get_db()
+    try:
+        from services.content_generator import generate_content
+        model = os.environ.get("DEFAULT_MODEL", "sonnet")
+        date_range = None
+        if body.date_range_start and body.date_range_end:
+            date_range = (body.date_range_start, body.date_range_end)
+        return await generate_content(
+            db,
+            content_type=body.content_type,
+            title_hint=body.title_hint,
+            topic=body.topic,
+            source_ids=body.source_ids or None,
+            category_id=body.category_id,
+            date_range=date_range,
+            model=model,
+            extra_instructions=body.extra_instructions,
+        )
+    finally:
+        await db.close()
+
+
+@app.get("/api/generated")
+async def list_generated(
+    content_type: str = Query(None),
+    limit: int = Query(20),
+):
+    db = await get_db()
+    try:
+        from services.knowledge_graph import list_generated_content
+        return await list_generated_content(db, content_type=content_type, limit=limit)
+    finally:
+        await db.close()
+
+
+@app.get("/api/generated/{content_id}")
+async def get_generated(content_id: int):
+    db = await get_db()
+    try:
+        from services.knowledge_graph import get_generated_content
+        result = await get_generated_content(db, content_id)
+        if not result:
+            return JSONResponse({"error": "not found"}, status_code=404)
+        return result
+    finally:
+        await db.close()
+
+
+@app.delete("/api/generated/{content_id}")
+async def delete_generated(content_id: int):
+    db = await get_db()
+    try:
+        from services.knowledge_graph import delete_generated_content
+        ok = await delete_generated_content(db, content_id)
+        if not ok:
+            return JSONResponse({"error": "not found"}, status_code=404)
+        return {"ok": True}
+    finally:
+        await db.close()
+
+
 # ── Static files (must be last) ──────────────────────────────────
 
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
