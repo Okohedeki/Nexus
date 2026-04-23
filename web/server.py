@@ -583,11 +583,18 @@ class DigestRequest(BaseModel):
 
 @app.post("/api/digests/generate")
 async def generate_digest_endpoint(body: DigestRequest):
+    """Queue a digest generation job; returns immediately with job_id."""
     db = await get_db()
     try:
-        from services.digest_service import generate_digest
+        from services.jobs import queue_digest_job
         model = os.environ.get("DEFAULT_MODEL", "sonnet")
-        return await generate_digest(db, period=body.period, model=model, category_id=body.category_id)
+        request = {
+            "period": body.period,
+            "category_id": body.category_id,
+            "model": model,
+        }
+        job_id = await queue_digest_job(db, DB_PATH, request)
+        return {"success": True, "job_id": job_id, "status": "queued"}
     finally:
         await db.close()
 
@@ -642,28 +649,247 @@ class GenerateRequest(BaseModel):
     extra_instructions: str = ""
 
 
+@app.get("/api/audio/{filename}")
+async def serve_audio(filename: str):
+    # Prevent path traversal — only allow a plain filename
+    if "/" in filename or "\\" in filename or ".." in filename:
+        return JSONResponse({"error": "invalid filename"}, status_code=400)
+    audio_dir = os.path.join(os.path.dirname(DB_PATH), "audio")
+    path = os.path.join(audio_dir, filename)
+    if not os.path.isfile(path):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    media = "audio/wav" if filename.lower().endswith(".wav") else "audio/mpeg"
+    return FileResponse(path, media_type=media)
+
+
 @app.post("/api/generate")
 async def generate_content_endpoint(body: GenerateRequest):
+    """Queue a generation job; returns immediately with job_id."""
     db = await get_db()
     try:
-        from services.content_generator import generate_content
+        from services.jobs import queue_content_job
         model = os.environ.get("DEFAULT_MODEL", "sonnet")
         date_range = None
         if body.date_range_start and body.date_range_end:
             date_range = (body.date_range_start, body.date_range_end)
-        return await generate_content(
-            db,
-            content_type=body.content_type,
-            title_hint=body.title_hint,
-            topic=body.topic,
-            source_ids=body.source_ids or None,
-            category_id=body.category_id,
-            date_range=date_range,
-            model=model,
-            extra_instructions=body.extra_instructions,
-        )
+        request = {
+            "content_type": body.content_type,
+            "title_hint": body.title_hint,
+            "topic": body.topic,
+            "source_ids": body.source_ids or None,
+            "category_id": body.category_id,
+            "date_range": date_range,
+            "model": model,
+            "extra_instructions": body.extra_instructions,
+        }
+        job_id = await queue_content_job(db, DB_PATH, request)
+        return {"success": True, "job_id": job_id, "status": "queued"}
     finally:
         await db.close()
+
+
+@app.get("/api/jobs")
+async def list_jobs_endpoint(
+    active: int = Query(0),
+    limit: int = Query(30),
+):
+    db = await get_db()
+    try:
+        from services.knowledge_graph import list_jobs
+        return await list_jobs(db, active_only=bool(active), limit=limit)
+    finally:
+        await db.close()
+
+
+@app.get("/api/jobs/{job_id}")
+async def get_job_endpoint(job_id: int):
+    db = await get_db()
+    try:
+        from services.knowledge_graph import get_job
+        job = await get_job(db, job_id)
+        if not job:
+            return JSONResponse({"error": "not found"}, status_code=404)
+        return job
+    finally:
+        await db.close()
+
+
+@app.delete("/api/jobs/{job_id}")
+async def delete_job_endpoint(job_id: int):
+    db = await get_db()
+    try:
+        from services.knowledge_graph import delete_job
+        ok = await delete_job(db, job_id)
+        if not ok:
+            return JSONResponse({"error": "not found"}, status_code=404)
+        return {"ok": True}
+    finally:
+        await db.close()
+
+
+# ── API: Research threads ────────────────────────────────────────
+
+
+class ThreadCreate(BaseModel):
+    generated_id: int
+    cadence_hours: int = 24
+    max_per_poll: int = 5
+    focus_keywords: str = ""
+
+
+class ThreadUpdate(BaseModel):
+    status: str | None = None
+    cadence_hours: int | None = None
+    max_per_poll: int | None = None
+    focus_keywords: str | None = None
+
+
+@app.post("/api/threads")
+async def create_thread_endpoint(body: ThreadCreate):
+    db = await get_db()
+    try:
+        from services.knowledge_graph import (
+            create_thread, get_generated_content, get_thread_for_generated,
+        )
+        existing = await get_thread_for_generated(db, body.generated_id)
+        if existing:
+            return existing
+        gen = await get_generated_content(db, body.generated_id)
+        if not gen:
+            return JSONResponse({"error": "generated content not found"}, status_code=404)
+        thread_id = await create_thread(
+            db, body.generated_id, cadence_hours=body.cadence_hours,
+            max_per_poll=body.max_per_poll, focus_keywords=body.focus_keywords,
+        )
+        from services.knowledge_graph import get_thread
+        return await get_thread(db, thread_id)
+    finally:
+        await db.close()
+
+
+@app.get("/api/threads/by-generated/{generated_id}")
+async def get_thread_by_generated_endpoint(generated_id: int):
+    db = await get_db()
+    try:
+        from services.research import get_thread_with_discoveries
+        thread = await get_thread_with_discoveries(db, generated_id)
+        if not thread:
+            return JSONResponse({"error": "no thread"}, status_code=404)
+        return thread
+    finally:
+        await db.close()
+
+
+@app.patch("/api/threads/{thread_id}")
+async def update_thread_endpoint(thread_id: int, body: ThreadUpdate):
+    db = await get_db()
+    try:
+        from services.knowledge_graph import get_thread, update_thread
+        existing = await get_thread(db, thread_id)
+        if not existing:
+            return JSONResponse({"error": "not found"}, status_code=404)
+        await update_thread(
+            db, thread_id,
+            status=body.status,
+            cadence_hours=body.cadence_hours,
+            max_per_poll=body.max_per_poll,
+            focus_keywords=body.focus_keywords,
+        )
+        return await get_thread(db, thread_id)
+    finally:
+        await db.close()
+
+
+@app.delete("/api/threads/{thread_id}")
+async def delete_thread_endpoint(thread_id: int):
+    db = await get_db()
+    try:
+        from services.knowledge_graph import delete_thread
+        ok = await delete_thread(db, thread_id)
+        if not ok:
+            return JSONResponse({"error": "not found"}, status_code=404)
+        return {"ok": True}
+    finally:
+        await db.close()
+
+
+@app.post("/api/threads/{thread_id}/run")
+async def run_thread_endpoint(thread_id: int):
+    db = await get_db()
+    try:
+        from services.knowledge_graph import get_thread, get_generated_content
+        from services.jobs import queue_research_job
+        thread = await get_thread(db, thread_id)
+        if not thread:
+            return JSONResponse({"error": "not found"}, status_code=404)
+        gen = await get_generated_content(db, thread["generated_id"])
+        title = (gen or {}).get("title", "")
+        model = os.environ.get("DEFAULT_MODEL", "sonnet")
+        job_id = await queue_research_job(db, DB_PATH, thread_id,
+                                          article_title=title, model=model)
+        return {"success": True, "job_id": job_id, "status": "queued"}
+    finally:
+        await db.close()
+
+
+# ── API: Graph intel + manual auto-cycle triggers ────────────────
+
+
+@app.get("/api/graph/hot-topics")
+async def hot_topics_endpoint(limit: int = Query(10)):
+    db = await get_db()
+    try:
+        from services.graph_intel import score_entities
+        return await score_entities(db, recent_days=7, limit=limit)
+    finally:
+        await db.close()
+
+
+@app.post("/api/auto/topic-research")
+async def trigger_topic_research():
+    db = await get_db()
+    try:
+        from services.graph_intel import pick_topic_for_research
+        from services.jobs import queue_topic_research_job
+        pick = await pick_topic_for_research(db, cooldown_hours=72)
+        if not pick:
+            return {"success": True, "skipped": True, "reason": "no eligible topic right now"}
+        model = os.environ.get("DEFAULT_MODEL", "sonnet")
+        job_id = await queue_topic_research_job(db, DB_PATH, pick["id"], pick["name"], model=model)
+        return {"success": True, "job_id": job_id, "topic": pick["name"], "score": pick["score"]}
+    finally:
+        await db.close()
+
+
+@app.post("/api/auto/podcast")
+async def trigger_auto_podcast():
+    db = await get_db()
+    try:
+        from services.graph_intel import pick_topic_for_podcast
+        from services.jobs import queue_auto_podcast_job
+        pick = await pick_topic_for_podcast(db, cooldown_hours=168, min_recent=3)
+        if not pick:
+            return {"success": True, "skipped": True, "reason": "no fresh interesting topic"}
+        model = os.environ.get("DEFAULT_MODEL", "sonnet")
+        job_id = await queue_auto_podcast_job(db, DB_PATH, pick["id"], pick["name"], model=model)
+        return {"success": True, "job_id": job_id, "topic": pick["name"], "score": pick["score"]}
+    finally:
+        await db.close()
+
+
+# ── App lifecycle ────────────────────────────────────────────────
+
+
+@app.on_event("startup")
+async def _on_startup():
+    from services.scheduler import start_research_scheduler
+    start_research_scheduler(DB_PATH)
+
+
+@app.on_event("shutdown")
+async def _on_shutdown():
+    from services.scheduler import stop_research_scheduler
+    await stop_research_scheduler()
 
 
 @app.get("/api/generated")

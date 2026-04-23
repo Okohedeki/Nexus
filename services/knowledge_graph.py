@@ -80,7 +80,94 @@ CREATE TABLE IF NOT EXISTS generated_content_sources (
 
 CREATE INDEX IF NOT EXISTS idx_generated_content_type ON generated_content(content_type);
 CREATE INDEX IF NOT EXISTS idx_generated_content_created ON generated_content(created_at);
+
+CREATE TABLE IF NOT EXISTS generation_jobs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    job_kind TEXT NOT NULL,                -- 'content' | 'digest'
+    content_type TEXT,                     -- 'article'|'newsletter'|'podcast_script'|'daily'|'weekly'
+    title TEXT,
+    params TEXT,                           -- JSON blob of request parameters
+    status TEXT NOT NULL DEFAULT 'queued', -- queued|running|completed|failed|cancelled
+    progress_note TEXT,
+    result_id INTEGER,                     -- FK into generated_content(id) when done
+    error TEXT,
+    cost_usd REAL DEFAULT 0.0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    started_at TIMESTAMP,
+    completed_at TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_generation_jobs_status ON generation_jobs(status);
+CREATE INDEX IF NOT EXISTS idx_generation_jobs_created ON generation_jobs(created_at);
+
+CREATE TABLE IF NOT EXISTS research_threads (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    generated_id INTEGER NOT NULL REFERENCES generated_content(id) ON DELETE CASCADE,
+    status TEXT NOT NULL DEFAULT 'active',     -- active | paused | archived
+    cadence_hours INTEGER NOT NULL DEFAULT 24,
+    max_per_poll INTEGER NOT NULL DEFAULT 5,
+    focus_keywords TEXT,                       -- user-supplied research focus / topics
+    last_polled_at TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_research_threads_gen ON research_threads(generated_id);
+
+CREATE TABLE IF NOT EXISTS research_discoveries (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    thread_id INTEGER NOT NULL REFERENCES research_threads(id) ON DELETE CASCADE,
+    source_id INTEGER NOT NULL REFERENCES sources(id) ON DELETE CASCADE,
+    query TEXT,
+    discovered_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(thread_id, source_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_research_discoveries_thread ON research_discoveries(thread_id);
+
+CREATE TABLE IF NOT EXISTS topic_attention (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    entity_id INTEGER NOT NULL REFERENCES entities(id) ON DELETE CASCADE,
+    attention_kind TEXT NOT NULL,             -- 'research' | 'podcast'
+    occurred_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    detail TEXT
+);
+
+CREATE INDEX IF NOT EXISTS idx_topic_attention_entity ON topic_attention(entity_id, attention_kind, occurred_at);
 """
+
+
+DEFAULT_CATEGORIES = [
+    ("AI & Machine Learning",  "#cba6f7"),
+    ("Software & Engineering", "#89b4fa"),
+    ("Business & Startups",    "#fab387"),
+    ("Politics & Policy",      "#f38ba8"),
+    ("Science & Research",     "#94e2d5"),
+    ("Health & Biotech",       "#a6e3a1"),
+    ("Climate & Environment",  "#74c7ec"),
+    ("Society & Culture",      "#f5c2e7"),
+    ("Media & Communication",  "#f9e2af"),
+    ("Finance & Markets",      "#b4befe"),
+    ("Education & Learning",   "#89dceb"),
+    ("Personal Productivity",  "#cdd6f4"),
+]
+
+
+async def _seed_default_categories(conn: aiosqlite.Connection):
+    """Ensure each of the 12 default categories exists. Additive — never deletes."""
+    cursor = await conn.execute("SELECT name FROM categories")
+    existing = {row[0] for row in await cursor.fetchall()}
+    inserted = 0
+    for idx, (name, color) in enumerate(DEFAULT_CATEGORIES):
+        if name in existing:
+            continue
+        await conn.execute(
+            "INSERT OR IGNORE INTO categories (name, color, sort_order) VALUES (?, ?, ?)",
+            (name, color, 100 + idx),  # sort defaults after any user categories
+        )
+        inserted += 1
+    if inserted:
+        await conn.commit()
+        logger.info("Seeded %d default categories", inserted)
 
 
 async def init_db(db_path: str) -> aiosqlite.Connection:
@@ -90,6 +177,7 @@ async def init_db(db_path: str) -> aiosqlite.Connection:
     await conn.execute("PRAGMA journal_mode=WAL")
     await conn.executescript(_SCHEMA)
     await _run_migrations(conn)
+    await _seed_default_categories(conn)
     await conn.commit()
     logger.info("Knowledge graph DB ready at %s", db_path)
     return conn
@@ -104,6 +192,12 @@ async def _run_migrations(conn: aiosqlite.Connection):
         await conn.execute("ALTER TABLE sources ADD COLUMN is_note INTEGER DEFAULT 0")
     if "updated_at" not in columns:
         await conn.execute("ALTER TABLE sources ADD COLUMN updated_at TIMESTAMP")
+
+    # research_threads — added focus_keywords later
+    cursor = await conn.execute("PRAGMA table_info(research_threads)")
+    rt_cols = {row[1] for row in await cursor.fetchall()}
+    if rt_cols and "focus_keywords" not in rt_cols:
+        await conn.execute("ALTER TABLE research_threads ADD COLUMN focus_keywords TEXT")
 
     await conn.commit()
 
@@ -713,3 +807,225 @@ async def delete_generated_content(conn: aiosqlite.Connection, content_id: int) 
     )
     await conn.commit()
     return cursor.rowcount > 0
+
+
+# ── Generation jobs ──────────────────────────────────────────────
+
+async def create_job(
+    conn: aiosqlite.Connection,
+    job_kind: str,
+    content_type: str,
+    title: str,
+    params_json: str,
+) -> int:
+    cursor = await conn.execute(
+        """INSERT INTO generation_jobs (job_kind, content_type, title, params, status)
+           VALUES (?, ?, ?, ?, 'queued')""",
+        (job_kind, content_type, title, params_json),
+    )
+    await conn.commit()
+    return cursor.lastrowid
+
+
+async def update_job(
+    conn: aiosqlite.Connection,
+    job_id: int,
+    *,
+    status: str | None = None,
+    progress_note: str | None = None,
+    result_id: int | None = None,
+    error: str | None = None,
+    cost_usd: float | None = None,
+    title: str | None = None,
+    mark_started: bool = False,
+    mark_completed: bool = False,
+) -> None:
+    fields, values = [], []
+    if status is not None:
+        fields.append("status = ?"); values.append(status)
+    if progress_note is not None:
+        fields.append("progress_note = ?"); values.append(progress_note)
+    if result_id is not None:
+        fields.append("result_id = ?"); values.append(result_id)
+    if error is not None:
+        fields.append("error = ?"); values.append(error)
+    if cost_usd is not None:
+        fields.append("cost_usd = ?"); values.append(cost_usd)
+    if title is not None:
+        fields.append("title = ?"); values.append(title)
+    if mark_started:
+        fields.append("started_at = CURRENT_TIMESTAMP")
+    if mark_completed:
+        fields.append("completed_at = CURRENT_TIMESTAMP")
+    if not fields:
+        return
+    values.append(job_id)
+    await conn.execute(
+        f"UPDATE generation_jobs SET {', '.join(fields)} WHERE id = ?", values
+    )
+    await conn.commit()
+
+
+async def get_job(conn: aiosqlite.Connection, job_id: int) -> dict | None:
+    cursor = await conn.execute(
+        "SELECT * FROM generation_jobs WHERE id = ?", (job_id,)
+    )
+    row = await cursor.fetchone()
+    return dict(row) if row else None
+
+
+async def list_jobs(
+    conn: aiosqlite.Connection,
+    active_only: bool = False,
+    limit: int = 30,
+) -> list[dict]:
+    if active_only:
+        cursor = await conn.execute(
+            """SELECT * FROM generation_jobs
+               WHERE status IN ('queued', 'running')
+               ORDER BY created_at DESC
+               LIMIT ?""",
+            (limit,),
+        )
+    else:
+        cursor = await conn.execute(
+            "SELECT * FROM generation_jobs ORDER BY created_at DESC LIMIT ?",
+            (limit,),
+        )
+    return [dict(r) for r in await cursor.fetchall()]
+
+
+async def delete_job(conn: aiosqlite.Connection, job_id: int) -> bool:
+    cursor = await conn.execute(
+        "DELETE FROM generation_jobs WHERE id = ?", (job_id,)
+    )
+    await conn.commit()
+    return cursor.rowcount > 0
+
+
+# ── Research threads ─────────────────────────────────────────────
+
+async def create_thread(
+    conn: aiosqlite.Connection,
+    generated_id: int,
+    cadence_hours: int = 24,
+    max_per_poll: int = 5,
+    focus_keywords: str = "",
+) -> int:
+    cursor = await conn.execute(
+        """INSERT INTO research_threads (generated_id, cadence_hours, max_per_poll, focus_keywords, status)
+           VALUES (?, ?, ?, ?, 'active')""",
+        (generated_id, cadence_hours, max_per_poll, focus_keywords or None),
+    )
+    await conn.commit()
+    return cursor.lastrowid
+
+
+async def get_thread(conn: aiosqlite.Connection, thread_id: int) -> dict | None:
+    cursor = await conn.execute(
+        "SELECT * FROM research_threads WHERE id = ?", (thread_id,)
+    )
+    row = await cursor.fetchone()
+    return dict(row) if row else None
+
+
+async def get_thread_for_generated(
+    conn: aiosqlite.Connection, generated_id: int
+) -> dict | None:
+    cursor = await conn.execute(
+        "SELECT * FROM research_threads WHERE generated_id = ?", (generated_id,)
+    )
+    row = await cursor.fetchone()
+    return dict(row) if row else None
+
+
+async def update_thread(
+    conn: aiosqlite.Connection,
+    thread_id: int,
+    *,
+    status: str | None = None,
+    cadence_hours: int | None = None,
+    max_per_poll: int | None = None,
+    focus_keywords: str | None = None,
+    mark_polled: bool = False,
+) -> None:
+    fields, values = [], []
+    if status is not None:
+        fields.append("status = ?"); values.append(status)
+    if cadence_hours is not None:
+        fields.append("cadence_hours = ?"); values.append(cadence_hours)
+    if max_per_poll is not None:
+        fields.append("max_per_poll = ?"); values.append(max_per_poll)
+    if focus_keywords is not None:
+        # Empty string means "clear it"; store NULL for clarity in queries
+        fields.append("focus_keywords = ?"); values.append(focus_keywords.strip() or None)
+    if mark_polled:
+        fields.append("last_polled_at = CURRENT_TIMESTAMP")
+    if not fields:
+        return
+    values.append(thread_id)
+    await conn.execute(
+        f"UPDATE research_threads SET {', '.join(fields)} WHERE id = ?", values
+    )
+    await conn.commit()
+
+
+async def delete_thread(conn: aiosqlite.Connection, thread_id: int) -> bool:
+    cursor = await conn.execute(
+        "DELETE FROM research_threads WHERE id = ?", (thread_id,)
+    )
+    await conn.commit()
+    return cursor.rowcount > 0
+
+
+async def list_due_threads(conn: aiosqlite.Connection) -> list[dict]:
+    """Active threads where last_polled_at is NULL or older than cadence_hours."""
+    cursor = await conn.execute(
+        """SELECT * FROM research_threads
+           WHERE status = 'active'
+             AND (last_polled_at IS NULL
+                  OR datetime(last_polled_at, '+' || cadence_hours || ' hours') <= CURRENT_TIMESTAMP)"""
+    )
+    return [dict(r) for r in await cursor.fetchall()]
+
+
+async def add_discovery(
+    conn: aiosqlite.Connection,
+    thread_id: int,
+    source_id: int,
+    query: str = "",
+) -> int | None:
+    """Insert a discovery row. Returns id or None if (thread_id, source_id) already exists."""
+    try:
+        cursor = await conn.execute(
+            """INSERT INTO research_discoveries (thread_id, source_id, query)
+               VALUES (?, ?, ?)""",
+            (thread_id, source_id, query),
+        )
+        await conn.commit()
+        return cursor.lastrowid
+    except aiosqlite.IntegrityError:
+        return None
+
+
+async def list_discoveries(
+    conn: aiosqlite.Connection, thread_id: int, limit: int = 50
+) -> list[dict]:
+    """Return discoveries joined with the source row, newest first."""
+    cursor = await conn.execute(
+        """SELECT d.id AS discovery_id, d.discovered_at, d.query,
+                  s.id AS source_id, s.url, s.title, s.source_type, s.summary
+           FROM research_discoveries d
+           JOIN sources s ON s.id = d.source_id
+           WHERE d.thread_id = ?
+           ORDER BY d.discovered_at DESC
+           LIMIT ?""",
+        (thread_id, limit),
+    )
+    return [dict(r) for r in await cursor.fetchall()]
+
+
+async def get_source_id_by_url(conn: aiosqlite.Connection, url: str) -> int | None:
+    cursor = await conn.execute("SELECT id FROM sources WHERE url = ?", (url,))
+    row = await cursor.fetchone()
+    return row[0] if row else None

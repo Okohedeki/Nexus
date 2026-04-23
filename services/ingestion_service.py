@@ -80,6 +80,16 @@ async def ingest_url(
 
         entity_count, rel_count = await _link_extraction(db, source_id, extraction)
 
+        # Auto-categorize (best-effort; never fail the ingest if this errors)
+        try:
+            from services.categorizer import auto_categorize_source
+            await auto_categorize_source(
+                db, source_id, content.title or "",
+                summary or content.content_text or "", model=model,
+            )
+        except Exception:
+            logger.exception("Auto-categorize failed for source %s", source_id)
+
         return {
             "success": True,
             "source_id": source_id,
@@ -123,6 +133,15 @@ async def ingest_note_content(
         await update_note(db, source_id, title, content_text, summary)
 
         entity_count, rel_count = await _link_extraction(db, source_id, extraction)
+
+        try:
+            from services.categorizer import auto_categorize_source
+            await auto_categorize_source(
+                db, source_id, title or "",
+                summary or content_text, model=model,
+            )
+        except Exception:
+            logger.exception("Auto-categorize failed for note %s", source_id)
 
         return {
             "success": True,

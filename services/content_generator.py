@@ -2,6 +2,9 @@
 
 import json
 import logging
+import os
+import time
+from pathlib import Path
 
 from services.knowledge_graph import (
     get_graph_context_for_query,
@@ -57,24 +60,34 @@ Create a newsletter edition:
 - Conversational but informed tone
 - Format in Markdown with clear headers""",
 
-    "podcast_script": """You are writing a podcast script covering content from a personal knowledge base.
+    "podcast_script": """You are writing a professional podcast briefing covering content from a personal knowledge base.
 
 CONTENT TO COVER:
 {source_material}
 
 {extra}
 
-Write a conversational podcast script:
-- Format: Single host "thinking out loud" style
-- Duration: ~10-15 minutes of speaking (roughly 1500-2000 words)
-- Open with a brief teaser of what's covered
-- Transition naturally between topics
-- Add brief context/background for each topic
-- Include rhetorical questions and "what this means" analysis
-- End with key takeaways and a sign-off
-- Use paragraph breaks for natural pause points
-- Mark sections with [SECTION: Topic Name] headers
-- Mark emphasis with *asterisks* for vocal stress""",
+Write a polished, professional podcast script suitable for a news/analysis show.
+Tone: confident, journalistic, measured — think NPR's "Marketplace" or "The Daily",
+not casual chat or self-conscious narration.
+
+REQUIREMENTS
+- Single host. Use first-person sparingly ("Today on the briefing…").
+- Open with a tight cold open (2-3 sentences) framing the central thread before
+  the formal introduction.
+- Duration target: ~10-15 minutes spoken (roughly 1500-2000 words).
+- Transition cleanly between topics with short framing sentences.
+- Add concise context for each topic before analysis. Use specific names, dates,
+  numbers, and direct quotes from the source material whenever present.
+- Keep sentences short to medium-length for clear vocal delivery.
+- Close with a brief synthesis ("Putting it together…") and a quiet sign-off.
+
+STRICT FORMAT RULES (these affect the audio)
+- Output ONLY the spoken script. No host names, no music cues, no stage
+  directions, no [SECTION:] tags, no headers, no markdown bullets.
+- Use plain paragraph breaks for natural pauses.
+- Use *asterisks* very sparingly to mark a single emphasized word when it
+  truly matters. Default to no emphasis.""",
 }
 
 
@@ -179,16 +192,46 @@ async def generate_content(
             if not title:
                 title = f"{content_type.replace('_', ' ').title()}: {topic or 'Untitled'}"
 
+        # Synthesize audio for podcasts
+        audio_path = None
+        if content_type == "podcast_script":
+            try:
+                from services.tts import synthesize_to_file
+                db_path = os.environ.get("KG_DB_PATH") or os.path.join(os.getcwd(), "data", "knowledge.db")
+                audio_dir = Path(db_path).parent / "audio"
+                safe_title = "".join(c if c.isalnum() or c in "-_ " else "_" for c in title)[:60].strip() or "podcast"
+                out = audio_dir / f"{int(time.time())}_{safe_title}.wav"
+                voice = os.environ.get("PODCAST_VOICE", "bm_george")
+                speed = float(os.environ.get("PODCAST_SPEED", "0.95"))
+                audio_path = str(await synthesize_to_file(content, out, voice=voice, speed=speed))
+            except Exception as e:
+                logger.exception("TTS synthesis failed — returning script without audio")
+                audio_path = None
+
+        parameters = {
+            "topic": topic,
+            "source_ids": used_ids,
+            "category_id": category_id,
+            "extra_instructions": extra_instructions,
+        }
+        if audio_path:
+            parameters["audio_path"] = audio_path
+
         gen_id = await save_generated_content(
             db, content_type, title, content,
-            json.dumps({
-                "topic": topic,
-                "source_ids": used_ids,
-                "category_id": category_id,
-                "extra_instructions": extra_instructions,
-            }),
+            json.dumps(parameters),
             model, cost_usd, used_ids,
         )
+
+        # Auto-create a research thread for every new article (best-effort)
+        if content_type == "article":
+            try:
+                from services.knowledge_graph import create_thread, get_thread_for_generated
+                if not await get_thread_for_generated(db, gen_id):
+                    await create_thread(db, gen_id, cadence_hours=24, max_per_poll=5)
+                    logger.info("Auto-created research thread for article %s", gen_id)
+            except Exception:
+                logger.exception("Failed to auto-create research thread for article %s", gen_id)
 
         return {
             "id": gen_id,
@@ -197,6 +240,7 @@ async def generate_content(
             "content_type": content_type,
             "source_ids": used_ids,
             "cost_usd": cost_usd,
+            "audio_path": audio_path,
             "success": True,
         }
 

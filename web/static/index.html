@@ -16,6 +16,7 @@
   --text-secondary: #a6adc8;
   --text-muted: #6c7086;
   --accent: #89b4fa;
+  --accent-hover: #a0c4fc;
   --accent-dim: #45475a;
   --green: #a6e3a1;
   --red: #f38ba8;
@@ -25,7 +26,137 @@
   --teal: #94e2d5;
   --border: #313244;
   --radius: 8px;
+
+  /* Aliases for legacy inline styles */
+  --bg: var(--bg-primary);
+  --text: var(--text-primary);
+  --subtext: var(--text-secondary);
+  --surface0: #181825;
+  --surface1: #252536;
+  --surface2: #313244;
+
+  /* Design tokens */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --fs-xs: 11px;
+  --fs-sm: 13px;
+  --fs-md: 14px;
+  --fs-lg: 16px;
+  --fs-xl: 20px;
+  --fs-2xl: 24px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
 }
+
+/* ── Utility: typography ──────── */
+.h1 { font-size: var(--fs-2xl); font-weight: 700; color: var(--text-primary); letter-spacing: -0.01em; }
+.h2 { font-size: var(--fs-xl); font-weight: 600; color: var(--text-primary); letter-spacing: -0.01em; }
+.h3 { font-size: var(--fs-md); font-weight: 600; color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.06em; }
+.muted { color: var(--text-muted); font-size: var(--fs-sm); }
+.subtext { color: var(--text-secondary); font-size: var(--fs-sm); }
+
+/* ── Utility: buttons ──────── */
+.btn {
+  padding: 8px 16px; border-radius: var(--radius-md); border: 1px solid transparent;
+  background: var(--bg-surface); color: var(--text-primary);
+  font-size: var(--fs-sm); font-weight: 500; cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.05s;
+  display: inline-flex; align-items: center; gap: 6px; line-height: 1;
+}
+.btn:hover { background: var(--bg-hover); }
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--accent); color: var(--bg-primary); font-weight: 600; }
+.btn-primary:hover { background: var(--accent-hover); }
+.btn-ghost { background: transparent; border-color: var(--border); }
+.btn-ghost:hover { background: var(--bg-hover); border-color: var(--bg-hover); }
+.btn-danger { background: var(--red); color: var(--bg-primary); }
+.btn-danger:hover { filter: brightness(1.1); }
+.btn-sm { padding: 4px 10px; font-size: var(--fs-xs); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── Utility: card ──────── */
+.card {
+  background: var(--bg-surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: var(--space-4);
+  transition: border-color 0.15s, background 0.15s;
+}
+.card.clickable { cursor: pointer; }
+.card.clickable:hover { border-color: var(--accent-dim); background: var(--bg-hover); }
+.card-title { font-size: var(--fs-md); font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+.card-meta { display: flex; gap: 8px; align-items: center; font-size: var(--fs-xs); color: var(--text-muted); flex-wrap: wrap; }
+
+/* ── Utility: chips ──────── */
+.chip {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 2px 8px; border-radius: 999px;
+  font-size: var(--fs-xs); font-weight: 500;
+  background: var(--bg-hover); color: var(--text-secondary);
+}
+.chip-accent { background: color-mix(in srgb, var(--accent) 18%, transparent); color: var(--accent); }
+.chip-green  { background: color-mix(in srgb, var(--green) 18%, transparent);  color: var(--green); }
+.chip-red    { background: color-mix(in srgb, var(--red) 18%, transparent);    color: var(--red); }
+.chip-peach  { background: color-mix(in srgb, var(--peach) 18%, transparent);  color: var(--peach); }
+
+/* ── Utility: form controls ──────── */
+.field-label { display: block; color: var(--text-secondary); font-size: var(--fs-xs); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
+.field-input, .field-textarea {
+  width: 100%; padding: 10px 12px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-radius: var(--radius-md);
+  color: var(--text-primary); font-size: var(--fs-sm); font-family: inherit;
+  box-sizing: border-box; outline: none; transition: border-color 0.15s;
+}
+.field-input:focus, .field-textarea:focus { border-color: var(--accent); }
+.field-textarea { resize: vertical; min-height: 64px; }
+
+/* ── Utility: empty state ──────── */
+.empty-state {
+  text-align: center; padding: var(--space-7) var(--space-4);
+  color: var(--text-muted); font-size: var(--fs-sm);
+}
+.empty-state .empty-icon { font-size: 32px; opacity: 0.3; margin-bottom: var(--space-3); }
+.empty-state .empty-title { color: var(--text-secondary); font-size: var(--fs-md); margin-bottom: 4px; }
+
+/* ── Spinner ──────── */
+@keyframes spin { to { transform: rotate(360deg); } }
+.spinner {
+  width: 14px; height: 14px; border: 2px solid var(--accent-dim);
+  border-top-color: var(--accent); border-radius: 50%;
+  animation: spin 0.9s linear infinite; display: inline-block; vertical-align: -2px;
+}
+
+/* ── Create/Digests layout ──────── */
+.dual-grid {
+  display: grid; grid-template-columns: minmax(320px, 440px) 1fr;
+  gap: var(--space-5); padding: var(--space-5);
+  height: 100%; overflow: hidden; align-items: start;
+}
+.dual-grid > .pane { min-height: 0; overflow-y: auto; padding-right: 4px; }
+.dual-grid > .pane-left { position: sticky; top: 0; }
+.section-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: var(--space-3); }
+.source-list { max-height: 220px; overflow-y: auto; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--space-2); }
+.source-list label { display: flex; align-items: center; gap: 8px; padding: 4px 6px; border-radius: 4px; color: var(--text-primary); font-size: var(--fs-sm); cursor: pointer; }
+.source-list label:hover { background: var(--bg-hover); }
+.source-list .src-type { color: var(--text-muted); font-size: var(--fs-xs); margin-left: auto; }
+
+/* Job items */
+.job-item { display: flex; align-items: center; gap: var(--space-3); padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--bg-surface); margin-bottom: var(--space-2); }
+.job-item.status-completed { cursor: pointer; }
+.job-item.status-completed:hover { border-color: var(--accent-dim); background: var(--bg-hover); }
+.job-item.status-failed { border-color: color-mix(in srgb, var(--red) 40%, var(--border)); }
+.job-item .job-main { flex: 1; min-width: 0; }
+.job-item .job-title { font-size: var(--fs-sm); color: var(--text-primary); font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.job-item .job-meta { font-size: var(--fs-xs); color: var(--text-muted); margin-top: 2px; }
+.job-item .job-error { font-size: var(--fs-xs); color: var(--red); margin-top: 2px; }
+.job-delete { background: transparent; border: none; color: var(--text-muted); cursor: pointer; padding: 4px 8px; border-radius: 4px; font-size: 14px; }
+.job-delete:hover { background: var(--bg-hover); color: var(--red); }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
   font-family: 'Segoe UI', -apple-system, sans-serif;
@@ -143,13 +274,37 @@ body {
 .note-header .note-meta {
   font-size: 12px; color: var(--text-muted); display: flex; gap: 16px; flex-wrap: wrap; align-items: center;
 }
-.note-body { font-size: 14px; line-height: 1.7; color: var(--text-secondary); max-width: 800px; }
-.note-body h1, .note-body h2, .note-body h3 { color: var(--text-primary); margin: 20px 0 10px; }
-.note-body p { margin-bottom: 12px; }
-.note-body a { color: var(--accent); }
-.note-body code { background: var(--bg-surface); padding: 2px 6px; border-radius: 4px; font-size: 13px; }
-.note-body pre { background: var(--bg-surface); padding: 12px; border-radius: var(--radius); overflow-x: auto; margin-bottom: 12px; }
-.note-body blockquote { border-left: 3px solid var(--accent); padding-left: 14px; color: var(--text-muted); margin-bottom: 12px; }
+.note-body, .md-content {
+  font-size: var(--fs-md); line-height: 1.7; color: var(--text-secondary); max-width: 780px;
+}
+.note-body h1, .md-content h1 { font-size: var(--fs-2xl); color: var(--text-primary); margin: 28px 0 12px; letter-spacing: -0.01em; font-weight: 700; }
+.note-body h2, .md-content h2 { font-size: var(--fs-xl); color: var(--text-primary); margin: 24px 0 10px; letter-spacing: -0.01em; font-weight: 600; }
+.note-body h3, .md-content h3 { font-size: var(--fs-lg); color: var(--text-primary); margin: 20px 0 8px; font-weight: 600; text-transform: none; letter-spacing: 0; }
+.note-body p,  .md-content p  { margin-bottom: 12px; }
+.note-body a,  .md-content a  { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; }
+.note-body a:hover, .md-content a:hover { border-bottom-color: var(--accent); }
+.note-body code, .md-content code { background: var(--bg-surface); padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'JetBrains Mono', Consolas, ui-monospace, monospace; color: var(--peach); }
+.note-body pre,  .md-content pre  { background: var(--bg-secondary); border: 1px solid var(--border); padding: 14px 16px; border-radius: var(--radius-md); overflow-x: auto; margin-bottom: 14px; }
+.note-body pre code, .md-content pre code { background: transparent; padding: 0; color: var(--text-secondary); }
+.note-body blockquote, .md-content blockquote { border-left: 3px solid var(--accent); padding: 2px 16px; color: var(--text-secondary); background: var(--bg-surface); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin: 14px 0; }
+.note-body ul, .md-content ul, .note-body ol, .md-content ol { margin: 8px 0 14px 22px; }
+.note-body li, .md-content li { margin-bottom: 4px; }
+.note-body hr, .md-content hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+
+/* Polish — welcome, sidebar items, editor */
+.welcome { padding: var(--space-6); gap: var(--space-3); }
+.welcome h2 { font-size: var(--fs-xl); color: var(--text-primary); letter-spacing: -0.01em; }
+.welcome p  { color: var(--text-muted); }
+.sidebar-item { padding: 10px 12px; margin-bottom: 1px; border-radius: var(--radius-md); }
+.sidebar-item .meta { margin-top: 4px; }
+.sidebar-item.active { background: var(--bg-hover); border-left: 2px solid var(--accent); padding-left: 10px; }
+.type-badge {
+  font-size: 10px; padding: 2px 8px; border-radius: 999px;
+  background: color-mix(in srgb, var(--accent-dim) 70%, transparent);
+  color: var(--text-secondary); letter-spacing: 0.02em; font-weight: 500;
+}
+.editor-title { font-size: var(--fs-xl); padding: 10px 0; }
+.editor-toolbar button { border-radius: var(--radius-md); }
 
 .entity-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0; }
 .entity-tag {
@@ -1075,17 +1230,28 @@ function switchView(view, btn) {
   if (btn) btn.classList.add('active');
   else document.querySelector(`.tab-bar button[data-view="${view}"]`)?.classList.add('active');
 
+  // Always stop any active job poller when switching views; the target view restarts it if needed
+  stopJobPolling();
+
   document.getElementById('notesView').style.display = 'none';
   document.getElementById('graph-container').classList.remove('active');
+
+  const dynamicViews = new Set(['digests', 'create']);
+  if (dynamicViews.has(view)) {
+    document.getElementById('notesView').style.display = 'block';
+    document.getElementById('welcomeState').style.display = 'none';
+    document.getElementById('noteEditor').classList.remove('active');
+    const nc = document.getElementById('noteContent');
+    nc.style.display = 'block';
+    nc.innerHTML = '';
+  }
 
   if (view === 'graph') {
     document.getElementById('graph-container').classList.add('active');
     requestAnimationFrame(() => { if (!graphData) loadGraph(); else renderGraph(); });
   } else if (view === 'digests') {
-    document.getElementById('notesView').style.display = 'block';
     loadDigestsView();
   } else if (view === 'create') {
-    document.getElementById('notesView').style.display = 'block';
     loadCreateView();
   } else {
     document.getElementById('notesView').style.display = 'block';
@@ -1095,46 +1261,96 @@ function switchView(view, btn) {
 // ── Digests View ──────────────
 async function loadDigestsView() {
   const content = document.getElementById('noteContent');
-  const digests = await api('/api/digests?limit=20') || [];
-  let html = `<div style="padding:24px;">
-    <div style="display:flex;gap:8px;margin-bottom:24px;">
-      <button onclick="generateDigest('daily')" style="padding:8px 16px;background:var(--accent);color:var(--bg);border:none;border-radius:6px;cursor:pointer;">Generate Daily</button>
-      <button onclick="generateDigest('weekly')" style="padding:8px 16px;background:var(--mauve);color:var(--bg);border:none;border-radius:6px;cursor:pointer;">Generate Weekly</button>
+  content.innerHTML = `
+    <div class="dual-grid">
+      <div class="pane pane-left">
+        <h2 class="h1" style="margin-bottom:var(--space-5);">Digests</h2>
+        <p class="subtext" style="margin-bottom:var(--space-4);">Themed summaries from your recent sources.</p>
+
+        <label class="field-label">Period</label>
+        <div style="display:flex; gap:var(--space-2); margin-bottom:var(--space-5);">
+          <button class="btn btn-primary" onclick="generateDigest('daily')">Queue daily</button>
+          <button class="btn" style="background:var(--mauve); color:var(--bg-primary); font-weight:600;" onclick="generateDigest('weekly')">Queue weekly</button>
+        </div>
+        <div id="digestStatus" class="subtext"></div>
+      </div>
+
+      <div class="pane pane-right">
+        <div class="section-header">
+          <div class="h3">Jobs</div>
+          <span class="muted" id="digestJobsSummary"></span>
+        </div>
+        <div id="digestJobsList"><div class="empty-state"><div>Loading…</div></div></div>
+
+        <div class="section-header" style="margin-top:var(--space-6);">
+          <div class="h3">Past Digests</div>
+        </div>
+        <div id="pastDigestsList"></div>
+      </div>
     </div>
-    <div id="digestStatus"></div>`;
-  if (digests.length) {
-    html += '<h3 style="color:var(--text);margin-bottom:12px;">Past Digests</h3>';
-    for (const d of digests) {
-      html += `<div class="sidebar-item" onclick="openDigest(${d.id})" style="margin-bottom:8px;padding:12px;background:var(--surface0);border-radius:8px;cursor:pointer;">
-        <div class="title">${esc(d.title)}</div>
-        <div class="meta"><span class="type-badge">${d.content_type}</span> <span>${d.created_at}</span> <span>$${(d.cost_usd||0).toFixed(4)}</span></div>
-      </div>`;
-    }
-  } else {
-    html += '<p style="color:var(--subtext);">No digests yet. Generate one above.</p>';
-  }
-  html += '</div>';
-  content.innerHTML = html;
+  `;
+  startJobPolling(refreshDigestsPanels);
+}
+
+async function refreshDigestsPanels() {
+  const jobsEl = document.getElementById('digestJobsList');
+  const listEl = document.getElementById('pastDigestsList');
+  const sumEl = document.getElementById('digestJobsSummary');
+  if (!jobsEl || !listEl) return;
+
+  const [jobs, digests] = await Promise.all([
+    fetchJobs(),
+    api('/api/digests?limit=20').then(r => r || []),
+  ]);
+
+  const digestJobs = jobs.filter(j => j.job_kind === 'digest');
+  jobsEl.innerHTML = digestJobs.length
+    ? digestJobs.map(renderDigestJobItem).join('')
+    : '<div class="empty-state"><div class="muted">No jobs yet.</div></div>';
+
+  const active = digestJobs.filter(j => j.status === 'queued' || j.status === 'running').length;
+  if (sumEl) sumEl.textContent = active ? `${active} active` : '';
+
+  const linkedIds = new Set(digestJobs.filter(j => j.result_id).map(j => j.result_id));
+  const pastItems = digests.filter(d => !linkedIds.has(d.id));
+  listEl.innerHTML = pastItems.length
+    ? pastItems.map(d => `
+        <div class="card clickable" onclick="openDigest(${d.id})" style="margin-bottom:var(--space-2);">
+          <div class="card-title">${esc(d.title)}</div>
+          <div class="card-meta">
+            <span class="chip">${esc(d.content_type||'')}</span>
+            <span>${esc(d.created_at||'')}</span>
+            <span>$${(d.cost_usd||0).toFixed(4)}</span>
+          </div>
+        </div>`).join('')
+    : '<div class="empty-state"><div class="muted">No digests yet. Queue one on the left.</div></div>';
+}
+
+function renderDigestJobItem(j) {
+  const isDone = j.status === 'completed' && j.result_id;
+  const time = (j.completed_at || j.started_at || j.created_at || '').replace('T',' ');
+  const err = j.status === 'failed' && j.error ? `<div class="job-error">${esc(j.error)}</div>` : '';
+  const onClick = isDone ? `onclick="openDigest(${j.result_id})"` : '';
+  return `<div class="job-item status-${j.status}" ${onClick}>
+    <div class="job-main">
+      <div class="job-title">${esc(j.title || '(untitled)')}</div>
+      <div class="job-meta">${statusChipHTML(j.status)} · ${esc(j.content_type||'')} · ${esc(time)}</div>
+      ${err}
+    </div>
+    <button class="job-delete" title="Dismiss" onclick="event.stopPropagation(); deleteJob(${j.id})">×</button>
+  </div>`;
 }
 
 async function generateDigest(period) {
   const el = document.getElementById('digestStatus');
-  el.innerHTML = '<span style="color:var(--subtext);">Generating digest... this may take 30-60 seconds.</span>';
+  el.textContent = 'Queueing…';
   const result = await apiPost('/api/digests/generate', { period });
   if (result?.success) {
-    el.innerHTML = `<span style="color:var(--green);">Generated! Cost: $${(result.cost_usd||0).toFixed(4)}</span>`;
-    const content = document.getElementById('noteContent');
-    const rendered = `<div style="padding:24px;">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
-        <h2 style="color:var(--text);margin:0;">${esc(result.title)}</h2>
-        <span class="type-badge" style="background:var(--accent);color:var(--bg);">Digest</span>
-      </div>
-      <div class="md-content">${marked.parse(result.content||'')}</div>
-      <div style="margin-top:16px;color:var(--subtext);font-size:12px;">${result.source_count} sources | $${(result.cost_usd||0).toFixed(4)}</div>
-    </div>`;
-    content.innerHTML = rendered;
+    el.innerHTML = `<span style="color:var(--green);">Queued #${result.job_id}</span>`;
+    setTimeout(() => { if (el) el.textContent = ''; }, 3000);
+    refreshDigestsPanels();
   } else {
-    el.innerHTML = `<span style="color:var(--red);">${result?.error || 'Failed'}</span>`;
+    el.innerHTML = `<span style="color:var(--red);">${esc(result?.error || 'Failed')}</span>`;
   }
 }
 
@@ -1166,78 +1382,205 @@ async function deleteGenerated(id, returnView) {
   else loadCreateView();
 }
 
+// ── Job polling (shared across Create + Digests) ───
+let jobPollerInterval = null;
+let jobPollerRenderer = null;
+
+function startJobPolling(renderFn) {
+  stopJobPolling();
+  jobPollerRenderer = renderFn;
+  renderFn();
+  jobPollerInterval = setInterval(() => {
+    if (jobPollerRenderer) jobPollerRenderer();
+  }, 2500);
+}
+function stopJobPolling() {
+  if (jobPollerInterval) { clearInterval(jobPollerInterval); jobPollerInterval = null; }
+  jobPollerRenderer = null;
+}
+async function fetchJobs() {
+  return (await api('/api/jobs?limit=30')) || [];
+}
+function statusChipHTML(status) {
+  if (status === 'queued')    return '<span class="chip chip-peach">Queued</span>';
+  if (status === 'running')   return '<span class="chip chip-accent"><span class="spinner"></span>&nbsp;Running</span>';
+  if (status === 'completed') return '<span class="chip chip-green">Done</span>';
+  if (status === 'failed')    return '<span class="chip chip-red">Failed</span>';
+  return `<span class="chip">${esc(status)}</span>`;
+}
+function renderJobItem(j) {
+  const kind = j.job_kind || 'content';
+  const isDone = j.status === 'completed' && j.result_id;
+  const time = (j.completed_at || j.started_at || j.created_at || '').replace('T',' ');
+  const err = j.status === 'failed' && j.error ? `<div class="job-error">${esc(j.error)}</div>` : '';
+  const onClick = isDone ? `onclick="openGenerated(${j.result_id})"` : '';
+  const kindChip = {
+    content:        '<span class="chip">content</span>',
+    research:       '<span class="chip chip-accent">research</span>',
+    topic_research: '<span class="chip chip-peach">topic-research</span>',
+    auto_podcast:   '<span class="chip" style="background:color-mix(in srgb,var(--mauve) 18%, transparent);color:var(--mauve);">auto-podcast</span>',
+    digest:         '<span class="chip">digest</span>',
+  }[kind] || `<span class="chip">${esc(kind)}</span>`;
+  const showProgress = j.progress_note && (j.status === 'completed' || j.status === 'running');
+  const note = showProgress
+    ? ` · <span style="color:${j.status==='completed'?'var(--green)':'var(--text-secondary)'};">${esc(j.progress_note)}</span>` : '';
+  return `<div class="job-item status-${j.status}" ${onClick}>
+    <div class="job-main">
+      <div class="job-title">${esc(j.title || '(untitled)')}</div>
+      <div class="job-meta">${statusChipHTML(j.status)} · ${kindChip} · ${esc(time)}${note}</div>
+      ${err}
+    </div>
+    <button class="job-delete" title="Dismiss" onclick="event.stopPropagation(); deleteJob(${j.id})">×</button>
+  </div>`;
+}
+
+async function triggerAuto(kind) {
+  const path = kind === 'topic_research' ? '/api/auto/topic-research' : '/api/auto/podcast';
+  const r = await apiPost(path, {});
+  if (r?.skipped) {
+    showToast(`Skipped — ${r.reason || 'nothing to do'}`, 'info');
+  } else if (r?.success) {
+    showToast(`Queued ${kind.replace('_',' ')}: ${r.topic}`, 'success');
+    if (jobPollerRenderer) jobPollerRenderer();
+  } else {
+    showToast('Failed to trigger', 'error');
+  }
+}
+async function deleteJob(id) {
+  await api(`/api/jobs/${id}`, { method: 'DELETE' });
+  if (jobPollerRenderer) jobPollerRenderer();
+}
+
 // ── Create View ───────────────
 async function loadCreateView() {
   const content = document.getElementById('noteContent');
   const sources = await api('/api/sources?limit=50') || [];
-  const generated = await api('/api/generated?limit=20') || [];
-
-  let sourceOpts = sources.map(s =>
-    `<label style="display:flex;align-items:center;gap:6px;padding:4px 0;color:var(--text);font-size:13px;cursor:pointer;">
+  const sourceOpts = sources.map(s =>
+    `<label>
       <input type="checkbox" class="gen-source-cb" value="${s.id}">
       <span>${esc(s.title||s.url||'#'+s.id)}</span>
-      <span style="color:var(--subtext);font-size:11px;">${s.source_type}</span>
+      <span class="src-type">${esc(s.source_type||'')}</span>
     </label>`
   ).join('');
 
-  let html = `<div style="padding:24px;">
-    <h2 style="color:var(--text);margin-bottom:16px;">Create Content</h2>
-    <div style="display:flex;gap:8px;margin-bottom:16px;">
-      <label style="color:var(--text);cursor:pointer;"><input type="radio" name="genType" value="article" checked> Article</label>
-      <label style="color:var(--text);cursor:pointer;"><input type="radio" name="genType" value="newsletter"> Newsletter</label>
-      <label style="color:var(--text);cursor:pointer;"><input type="radio" name="genType" value="podcast_script"> Podcast Script</label>
-    </div>
-    <div style="margin-bottom:12px;">
-      <label style="color:var(--subtext);font-size:12px;">Topic / Title</label>
-      <input type="text" id="genTopic" placeholder="e.g. AI regulation trends" style="width:100%;padding:8px;background:var(--surface1);border:1px solid var(--surface2);border-radius:4px;color:var(--text);box-sizing:border-box;">
-    </div>
-    <div style="margin-bottom:12px;">
-      <label style="color:var(--subtext);font-size:12px;">Select Sources (optional — leave empty to auto-find by topic)</label>
-      <div style="max-height:200px;overflow-y:auto;background:var(--surface0);border-radius:6px;padding:8px;">${sourceOpts || '<span style="color:var(--subtext)">No sources yet</span>'}</div>
-    </div>
-    <div style="margin-bottom:12px;">
-      <label style="color:var(--subtext);font-size:12px;">Extra Instructions (optional)</label>
-      <textarea id="genExtra" rows="2" placeholder="e.g. Focus on the regulatory angle..." style="width:100%;padding:8px;background:var(--surface1);border:1px solid var(--surface2);border-radius:4px;color:var(--text);box-sizing:border-box;resize:vertical;"></textarea>
-    </div>
-    <button onclick="runGenerate()" style="padding:10px 24px;background:var(--accent);color:var(--bg);border:none;border-radius:6px;cursor:pointer;font-weight:600;">Generate</button>
-    <div id="genStatus" style="margin-top:8px;"></div>`;
+  content.innerHTML = `
+    <div class="dual-grid">
+      <div class="pane pane-left">
+        <h2 class="h1" style="margin-bottom:var(--space-5);">Create</h2>
 
-  if (generated.length) {
-    html += '<h3 style="color:var(--text);margin-top:32px;margin-bottom:12px;">Past Creations</h3>';
-    for (const g of generated) {
-      html += `<div class="sidebar-item" onclick="openGenerated(${g.id})" style="margin-bottom:8px;padding:12px;background:var(--surface0);border-radius:8px;cursor:pointer;">
-        <div class="title">${esc(g.title)}</div>
-        <div class="meta"><span class="type-badge">${g.content_type}</span> <span>${g.created_at}</span></div>
-      </div>`;
-    }
-  }
-  html += '</div>';
-  content.innerHTML = html;
+        <label class="field-label">Format</label>
+        <div style="display:flex; gap:var(--space-2); margin-bottom:var(--space-4); flex-wrap:wrap;">
+          <label class="btn btn-ghost" style="cursor:pointer;"><input type="radio" name="genType" value="article" checked style="margin-right:6px;"> Article</label>
+          <label class="btn btn-ghost" style="cursor:pointer;"><input type="radio" name="genType" value="newsletter" style="margin-right:6px;"> Newsletter</label>
+          <label class="btn btn-ghost" style="cursor:pointer;"><input type="radio" name="genType" value="podcast_script" style="margin-right:6px;"> Podcast</label>
+        </div>
+
+        <label class="field-label" for="genTopic">Topic / Title</label>
+        <input type="text" id="genTopic" class="field-input" placeholder="e.g. AI regulation trends" style="margin-bottom:var(--space-4);">
+
+        <label class="field-label">Sources (leave empty to auto-find by topic)</label>
+        <div class="source-list" style="margin-bottom:var(--space-4);">
+          ${sourceOpts || '<div class="empty-state"><div class="empty-title">No sources yet</div><div>Ingest a URL to populate.</div></div>'}
+        </div>
+
+        <label class="field-label" for="genExtra">Extra Instructions (optional)</label>
+        <textarea id="genExtra" class="field-textarea" rows="3" placeholder="e.g. Focus on the regulatory angle…" style="margin-bottom:var(--space-4);"></textarea>
+
+        <div style="display:flex; align-items:center; gap:var(--space-3);">
+          <button class="btn btn-primary" id="generateBtn" onclick="runGenerate()">Queue generation</button>
+          <span id="genStatus" class="subtext"></span>
+        </div>
+      </div>
+
+      <div class="pane pane-right">
+        <div class="section-header">
+          <div class="h3">Jobs</div>
+          <span class="muted" id="jobsSummary"></span>
+        </div>
+        <div style="display:flex; gap:var(--space-2); margin-bottom:var(--space-3);">
+          <button class="btn btn-ghost btn-sm" onclick="triggerAuto('topic_research')" title="Pick a hot graph topic and run a research poll">+ Spider research</button>
+          <button class="btn btn-ghost btn-sm" onclick="triggerAuto('auto_podcast')" title="Pick a hot graph topic and generate a podcast briefing">+ Auto-podcast</button>
+        </div>
+        <div id="jobsList"><div class="empty-state"><div>Loading…</div></div></div>
+
+        <div class="section-header" style="margin-top:var(--space-6);">
+          <div class="h3">Library</div>
+        </div>
+        <div id="libraryList"></div>
+      </div>
+    </div>
+  `;
+
+  startJobPolling(refreshCreatePanels);
+}
+
+async function refreshCreatePanels() {
+  const jobsEl = document.getElementById('jobsList');
+  const libEl = document.getElementById('libraryList');
+  const sumEl = document.getElementById('jobsSummary');
+  if (!jobsEl || !libEl) return;  // view navigated away
+
+  const [jobs, generated] = await Promise.all([
+    fetchJobs(),
+    api('/api/generated?limit=20').then(r => r || []),
+  ]);
+
+  const visibleJobs = jobs.filter(j =>
+    j.job_kind === 'content' || j.job_kind === 'research' ||
+    j.job_kind === 'topic_research' || j.job_kind === 'auto_podcast'
+  );
+  jobsEl.innerHTML = visibleJobs.length
+    ? visibleJobs.map(renderJobItem).join('')
+    : '<div class="empty-state"><div class="muted">No jobs yet. Queue one on the left.</div></div>';
+
+  const active = visibleJobs.filter(j => j.status === 'queued' || j.status === 'running').length;
+  if (sumEl) sumEl.textContent = active ? `${active} active` : '';
+
+  const linkedResultIds = new Set(visibleJobs.filter(j => j.result_id).map(j => j.result_id));
+  const libraryItems = generated.filter(g => !linkedResultIds.has(g.id));
+  libEl.innerHTML = libraryItems.length
+    ? libraryItems.map(g => `
+        <div class="card clickable" onclick="openGenerated(${g.id})" style="margin-bottom:var(--space-2);">
+          <div class="card-title">${esc(g.title)}</div>
+          <div class="card-meta"><span class="chip">${esc((g.content_type||'').replace('_',' '))}</span><span>${esc(g.created_at||'')}</span></div>
+        </div>`).join('')
+    : '<div class="empty-state"><div class="muted">Nothing saved yet.</div></div>';
 }
 
 async function runGenerate() {
-  const el = document.getElementById('genStatus');
-  el.innerHTML = '<span style="color:var(--subtext);">Generating... this may take 30-90 seconds.</span>';
-
+  const statusEl = document.getElementById('genStatus');
+  const btn = document.getElementById('generateBtn');
   const contentType = document.querySelector('input[name="genType"]:checked')?.value || 'article';
   const topic = document.getElementById('genTopic')?.value?.trim() || '';
   const extra = document.getElementById('genExtra')?.value?.trim() || '';
   const sourceIds = [...document.querySelectorAll('.gen-source-cb:checked')].map(cb => parseInt(cb.value));
 
-  const body = {
+  if (!topic && !sourceIds.length) {
+    statusEl.innerHTML = '<span style="color:var(--red);">Provide a topic or select sources.</span>';
+    return;
+  }
+
+  if (btn) btn.disabled = true;
+  statusEl.textContent = 'Queueing…';
+
+  const result = await apiPost('/api/generate', {
     content_type: contentType,
-    topic: topic,
+    topic,
     title_hint: topic,
     source_ids: sourceIds,
     extra_instructions: extra,
-  };
+  });
 
-  const result = await apiPost('/api/generate', body);
+  if (btn) btn.disabled = false;
   if (result?.success) {
-    el.innerHTML = `<span style="color:var(--green);">Done! Cost: $${(result.cost_usd||0).toFixed(4)}</span>`;
-    showGeneratedResult(result);
+    statusEl.innerHTML = `<span style="color:var(--green);">Queued #${result.job_id}</span>`;
+    setTimeout(() => { if (statusEl) statusEl.textContent = ''; }, 3000);
+    document.getElementById('genTopic').value = '';
+    document.getElementById('genExtra').value = '';
+    document.querySelectorAll('.gen-source-cb:checked').forEach(cb => cb.checked = false);
+    refreshCreatePanels();
   } else {
-    el.innerHTML = `<span style="color:var(--red);">${result?.error || 'Failed'}</span>`;
+    statusEl.innerHTML = `<span style="color:var(--red);">${esc(result?.error || 'Failed')}</span>`;
   }
 }
 
@@ -1249,8 +1592,15 @@ function showGeneratedResult(result) {
       <h2 style="color:var(--text);margin:0;">${esc(result.title)}</h2>
       <span class="type-badge" style="background:var(--green);color:var(--bg);">${typeLabel}</span>
       <button onclick="navigator.clipboard.writeText(document.getElementById('genContent').innerText)" style="margin-left:auto;padding:4px 12px;background:var(--surface2);color:var(--text);border:none;border-radius:4px;cursor:pointer;font-size:12px;">Copy</button>
-    </div>
-    <div id="genContent" class="md-content">${marked.parse(result.content||'')}</div>
+    </div>`;
+  if (result.audio_path) {
+    const audioFile = result.audio_path.split(/[/\\]/).pop();
+    html += `<div style="margin-bottom:16px;padding:12px;background:var(--surface0);border-radius:8px;">
+      <div style="color:var(--subtext);font-size:12px;margin-bottom:6px;">Podcast Audio</div>
+      <audio controls style="width:100%;" src="/api/audio/${encodeURIComponent(audioFile)}"></audio>
+    </div>`;
+  }
+  html += `<div id="genContent" class="md-content">${marked.parse(result.content||'')}</div>
     <div style="margin-top:16px;color:var(--subtext);font-size:12px;">$${(result.cost_usd||0).toFixed(4)} | ${result.source_ids?.length||0} sources</div>
   </div>`;
   content.innerHTML = html;
@@ -1267,8 +1617,18 @@ async function openGenerated(id) {
       <span class="type-badge">${typeLabel}</span>
       <button onclick="navigator.clipboard.writeText(document.getElementById('genContent').innerText)" style="margin-left:auto;padding:4px 12px;background:var(--surface2);color:var(--text);border:none;border-radius:4px;cursor:pointer;font-size:12px;">Copy</button>
       <button onclick="deleteGenerated(${id},'create')" style="padding:4px 12px;background:var(--red);color:var(--bg);border:none;border-radius:4px;cursor:pointer;font-size:12px;">Delete</button>
-    </div>
-    <div id="genContent" class="md-content">${marked.parse(data.content||'')}</div>`;
+    </div>`;
+  try {
+    const params = JSON.parse(data.parameters || '{}');
+    if (params.audio_path) {
+      const audioFile = params.audio_path.split(/[/\\]/).pop();
+      html += `<div style="margin-bottom:16px;padding:12px;background:var(--surface0);border-radius:8px;">
+        <div style="color:var(--subtext);font-size:12px;margin-bottom:6px;">Podcast Audio</div>
+        <audio controls style="width:100%;" src="/api/audio/${encodeURIComponent(audioFile)}"></audio>
+      </div>`;
+    }
+  } catch(e) {}
+  html += `<div id="genContent" class="md-content">${marked.parse(data.content||'')}</div>`;
   if (data.sources?.length) {
     html += '<div style="margin-top:24px;padding-top:16px;border-top:1px solid var(--surface2);"><strong style="color:var(--subtext);">Sources Used</strong><div style="margin-top:8px;">';
     for (const s of data.sources) {
@@ -1276,8 +1636,155 @@ async function openGenerated(id) {
     }
     html += '</div></div>';
   }
+  // Evolving thread section (articles only for v1)
+  if ((data.content_type || '') === 'article') {
+    html += `<div id="threadSection" style="margin-top:32px; padding-top:20px; border-top:1px solid var(--border);">
+      <div class="muted">Loading thread…</div>
+    </div>`;
+  }
   html += '</div>';
   content.innerHTML = html;
+  if ((data.content_type || '') === 'article') {
+    loadThreadSection(id);
+  }
+}
+
+// ── Evolving thread (auto-research) ───────────
+async function loadThreadSection(generatedId) {
+  const root = document.getElementById('threadSection');
+  if (!root) return;
+  const resp = await fetch(`/api/threads/by-generated/${generatedId}`);
+  if (resp.status === 404) {
+    root.innerHTML = `
+      <div class="section-header"><div class="h3">Evolving thread</div></div>
+      <p class="subtext" style="margin-bottom:var(--space-3);">Track this topic — NANTA will periodically search for related new sources and link them here.</p>
+      <label class="field-label" for="newFocus">Topics to focus on (optional)</label>
+      <textarea id="newFocus" class="field-textarea" rows="2" placeholder="e.g. EU regulations, whistleblower legal protections, implementation case studies — leave blank to derive purely from the article" style="margin-bottom:var(--space-3);"></textarea>
+      <button class="btn btn-primary" onclick="trackTopic(${generatedId})">Track topic</button>
+    `;
+    return;
+  }
+  if (!resp.ok) {
+    root.innerHTML = '<div class="muted">Could not load thread.</div>';
+    return;
+  }
+  const thread = await resp.json();
+  renderActiveThread(root, generatedId, thread);
+}
+
+function renderActiveThread(root, generatedId, thread) {
+  const isActive = thread.status === 'active';
+  const lastPolled = thread.last_polled_at ? thread.last_polled_at.replace('T',' ') : 'never';
+  const cadenceOpts = [4, 24, 168].map(h => {
+    const lbl = h === 168 ? '7d' : (h === 24 ? '24h' : `${h}h`);
+    return `<option value="${h}" ${thread.cadence_hours === h ? 'selected' : ''}>${lbl}</option>`;
+  }).join('');
+  const statusChip = isActive
+    ? '<span class="chip chip-green">Active</span>'
+    : '<span class="chip chip-peach">Paused</span>';
+
+  let discoveriesHTML = '';
+  if (thread.discoveries && thread.discoveries.length) {
+    discoveriesHTML = thread.discoveries.map(d => `
+      <div class="card clickable" onclick="openNote(${d.source_id})" style="margin-bottom:var(--space-2);">
+        <div class="card-title">${esc(d.title || d.url || '#'+d.source_id)}</div>
+        <div class="card-meta">
+          <span class="chip">${esc(d.source_type||'source')}</span>
+          <span>${esc((d.discovered_at||'').replace('T',' '))}</span>
+          ${d.query ? `<span class="muted">via "${esc(d.query)}"</span>` : ''}
+        </div>
+        ${d.summary ? `<div class="subtext" style="margin-top:6px; line-height:1.5;">${esc((d.summary||'').slice(0, 220))}${(d.summary||'').length > 220 ? '…' : ''}</div>` : ''}
+      </div>
+    `).join('');
+  } else {
+    discoveriesHTML = '<div class="empty-state"><div class="muted">No discoveries yet. Click Run now to start, or wait for the next scheduled poll.</div></div>';
+  }
+
+  root.innerHTML = `
+    <div class="section-header">
+      <div class="h3">Evolving thread</div>
+      <span class="muted">${thread.discoveries?.length || 0} discoveries</span>
+    </div>
+    <div style="display:flex; gap:var(--space-3); align-items:center; flex-wrap:wrap; margin-bottom:var(--space-4);">
+      ${statusChip}
+      <span class="muted">Last poll: ${esc(lastPolled)}</span>
+      <span style="flex:1;"></span>
+      <label class="muted" style="display:flex; gap:6px; align-items:center;">
+        Cadence
+        <select onchange="updateThread(${thread.id}, ${generatedId}, {cadence_hours: parseInt(this.value)})"
+                class="field-input" style="padding:4px 8px; width:auto;">
+          ${cadenceOpts}
+        </select>
+      </label>
+      <button class="btn btn-primary btn-sm" onclick="runThread(${thread.id}, ${generatedId})">Run now</button>
+      <button class="btn btn-ghost btn-sm" onclick="updateThread(${thread.id}, ${generatedId}, {status: '${isActive ? 'paused' : 'active'}'})">${isActive ? 'Pause' : 'Resume'}</button>
+      <button class="btn btn-danger btn-sm" onclick="deleteThread(${thread.id}, ${generatedId})">Stop tracking</button>
+    </div>
+    <div style="margin-bottom:var(--space-4);">
+      <label class="field-label" for="threadFocusInput">Research focus</label>
+      <textarea id="threadFocusInput" class="field-textarea" rows="2"
+        placeholder="e.g. EU regulations, whistleblower legal protections — leave blank to derive purely from the article">${esc(thread.focus_keywords || '')}</textarea>
+      <div style="display:flex; gap:var(--space-2); margin-top:var(--space-2); align-items:center;">
+        <button class="btn btn-sm" onclick="saveThreadFocus(${thread.id}, ${generatedId})">Save focus</button>
+        <span class="muted">Takes effect on the next poll.</span>
+      </div>
+    </div>
+    <div id="threadStatus" class="muted" style="margin-bottom:var(--space-3);"></div>
+    ${discoveriesHTML}
+  `;
+}
+
+async function trackTopic(generatedId) {
+  const focus = document.getElementById('newFocus')?.value?.trim() || '';
+  const r = await apiPost('/api/threads', { generated_id: generatedId, focus_keywords: focus });
+  if (r && r.id) {
+    showToast('Tracking enabled', 'success');
+    loadThreadSection(generatedId);
+  } else {
+    showToast('Failed to track', 'error');
+  }
+}
+
+async function saveThreadFocus(threadId, generatedId) {
+  const focus = document.getElementById('threadFocusInput')?.value || '';
+  const r = await api(`/api/threads/${threadId}`, {
+    method: 'PATCH',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ focus_keywords: focus }),
+  });
+  if (r) {
+    showToast('Focus saved — applies on next poll', 'success');
+    loadThreadSection(generatedId);
+  } else {
+    showToast('Save failed', 'error');
+  }
+}
+
+async function updateThread(threadId, generatedId, body) {
+  const r = await api(`/api/threads/${threadId}`, {
+    method: 'PATCH',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(body),
+  });
+  if (r) loadThreadSection(generatedId);
+}
+
+async function deleteThread(threadId, generatedId) {
+  if (!confirm('Stop tracking this topic? Discovered sources stay in your graph; only the thread link is removed.')) return;
+  await api(`/api/threads/${threadId}`, { method: 'DELETE' });
+  loadThreadSection(generatedId);
+}
+
+async function runThread(threadId, generatedId) {
+  const status = document.getElementById('threadStatus');
+  if (status) status.innerHTML = '<span class="spinner"></span>&nbsp; Queued — switch to Create to watch progress, or stay here and refresh in ~30s.';
+  const r = await apiPost(`/api/threads/${threadId}/run`, {});
+  if (r?.success) {
+    showToast(`Research job queued (#${r.job_id})`, 'info');
+    setTimeout(() => loadThreadSection(generatedId), 6000);
+  } else {
+    if (status) status.innerHTML = '<span style="color:var(--red);">Failed to queue.</span>';
+  }
 }
 
 function switchToNotes() {
