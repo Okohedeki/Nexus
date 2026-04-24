@@ -1,0 +1,3602 @@
+{
+  "$schema_version": 1,
+  "exported_at": "auto",
+  "stats": {
+    "sources": 20,
+    "entities": 188,
+    "relationships": 227,
+    "categories": 16,
+    "generated_content": 1,
+    "research_threads": 1,
+    "research_discoveries": 3
+  },
+  "categories": [
+    {
+      "id": 1,
+      "name": "Research",
+      "parent_id": null,
+      "color": "#89b4fa",
+      "sort_order": 0
+    },
+    {
+      "id": 2,
+      "name": "Politics",
+      "parent_id": null,
+      "color": "#89b4fa",
+      "sort_order": 0
+    },
+    {
+      "id": 3,
+      "name": "Science",
+      "parent_id": null,
+      "color": "#89b4fa",
+      "sort_order": 0
+    },
+    {
+      "id": 4,
+      "name": "Social",
+      "parent_id": null,
+      "color": "#89b4fa",
+      "sort_order": 0
+    },
+    {
+      "id": 5,
+      "name": "AI & Machine Learning",
+      "parent_id": null,
+      "color": "#cba6f7",
+      "sort_order": 100
+    },
+    {
+      "id": 6,
+      "name": "Software & Engineering",
+      "parent_id": null,
+      "color": "#89b4fa",
+      "sort_order": 101
+    },
+    {
+      "id": 7,
+      "name": "Business & Startups",
+      "parent_id": null,
+      "color": "#fab387",
+      "sort_order": 102
+    },
+    {
+      "id": 8,
+      "name": "Politics & Policy",
+      "parent_id": null,
+      "color": "#f38ba8",
+      "sort_order": 103
+    },
+    {
+      "id": 9,
+      "name": "Science & Research",
+      "parent_id": null,
+      "color": "#94e2d5",
+      "sort_order": 104
+    },
+    {
+      "id": 10,
+      "name": "Health & Biotech",
+      "parent_id": null,
+      "color": "#a6e3a1",
+      "sort_order": 105
+    },
+    {
+      "id": 11,
+      "name": "Climate & Environment",
+      "parent_id": null,
+      "color": "#74c7ec",
+      "sort_order": 106
+    },
+    {
+      "id": 12,
+      "name": "Society & Culture",
+      "parent_id": null,
+      "color": "#f5c2e7",
+      "sort_order": 107
+    },
+    {
+      "id": 13,
+      "name": "Media & Communication",
+      "parent_id": null,
+      "color": "#f9e2af",
+      "sort_order": 108
+    },
+    {
+      "id": 14,
+      "name": "Finance & Markets",
+      "parent_id": null,
+      "color": "#b4befe",
+      "sort_order": 109
+    },
+    {
+      "id": 15,
+      "name": "Education & Learning",
+      "parent_id": null,
+      "color": "#89dceb",
+      "sort_order": 110
+    },
+    {
+      "id": 16,
+      "name": "Personal Productivity",
+      "parent_id": null,
+      "color": "#cdd6f4",
+      "sort_order": 111
+    }
+  ],
+  "sources": [
+    {
+      "id": 6,
+      "url": "https://www.yahoo.com/news/articles/trump-rages-republicans-early-morning-135105757.html",
+      "title": "Trump rages at Republicans in early morning rant hours after they gave him a golden prize: ‘Enough’",
+      "source_type": "article",
+      "summary": "President Trump launched an early morning social media rant demanding Senate Republicans eliminate the filibuster to pass the 'Save America Act,' which includes restrictive voting measures, just hours after House Republicans honored him with a made-up award. His refusal to accept a DHS funding compromise has left 50,000 TSA workers unpaid for weeks, causing airport security staffing shortages and long checkpoint lines. Amid the chaos, polls show Trump at record-low approval ratings, with 59% of Americans disapproving of his overall job performance.",
+      "content_text": "Trump rages at Republicans in early morning rant hours after they gave him a golden prize: ‘Enough’\nPresident Donald Trump is lashing out at members of his own party and once again demanding changes to Senate rules that would allow the upper chamber to approve new restrictions on voting ahead of midterm elections that could cost Republicans control of the House, Senate — or both.\nIn a Thursday morning rant on Truth Social, he demanded Republican senators employ a parliamentary maneuver that would let them push any legislation through the Senate by ending the chamber’s 60-vote supermajority requirement for most bills and use that new power to end a weeks-long impasse over funding for the Department of Homeland Security instead of negotiating with Democrats over whether immigration agents can enter private homes without warrants.\n“When is ‘enough, enough’ for our Republican Senators. There comes a time when you must do what should have been done a long time ago, and something which the Lunatic Democrats will do on day one, if they ever get the chance,” he wrote. “TERMINATE THE FILIBUSTER, and get our airports, and everything else, moving again.”\nTrump also urged senators to “add the complete, all five items, SAVE AMERICA ACT items” and Go for the Gold” by doing so. The “five items” he was referring to include a host of new proposed limits on voting by mail and onerous national voter registration procedures that could disenfranchise millions of Americans based on flimsy conspira…",
+      "ingested_at": "2026-03-28 09:20:10",
+      "is_note": 0,
+      "chat_id": 0
+    },
+    {
+      "id": 7,
+      "url": "https://www.independent.co.uk/news/world/middle-east/iran-us-war-live-updates-trump-oil-strait-of-hormuz-b2946724.html",
+      "title": "Iran-US war latest: Yemen’s Tehran-backed Houthi rebels claim first attack on Israel since war began",
+      "source_type": "article",
+      "summary": "Yemen's Iran-backed Houthi rebels launched their first missile attack on Israel since the Iran-US war began, marking a significant regional escalation. The conflict is causing widespread global disruptions including shutdowns to Qatar's helium production affecting semiconductor supply chains, threats to subsea internet cables, and food security risks from disrupted fertilizer supply. Meanwhile, Iran-linked hackers breached FBI chief Kash Patel's email, and US troops were wounded in Iranian attacks on a Saudi air base.",
+      "content_text": "The Houthis, whose involvement on Saturday risks broadening and prolonging a war that has entered its fifth week, warned their operations would continue until the “aggression” on all fronts ended. Israel said it had intercepted a missile from Yemen.\nExperts have warned the rebel group may attempt to block the Bab al-Mandab Strait south of Yemen, further disrupting shipping lanes around the Red Sea.\nThe escalation comes after US Secretary of State Marco Rubio's latest update on the war suggested the conflict would last “weeks, not months” and Iran had indicated a willingness to talk about “certain things”.\nRubio raised concerns that Iran could operate the strait using a tolling system if their control over the waterway persisted.\nHe also said that he believed the US could achieve its goals in Iran without ground troops, despite reports from theDonald Trump is considering sending another 10,000 troops to the Middle East.\nFBI confirms Kash Patel photos were leaked by Iran-linked hackers\nAn FBI spokesperson confirmed that the agency chief Kash Patel's email was hacked by the Iran-linked Handala Hack Team.\nThe group published dozens of emails and photographs on Friday that they said were taken from a personal inbox belonging to Patel.\n“We have taken all necessary steps to mitigate potential risks associated with this activity,\" FBI spokesperson Ben Williamson said today.\nThe data accessed by the hackers were “historical in nature and involves no government information”, Williamson…",
+      "ingested_at": "2026-03-28 09:21:21",
+      "is_note": 0,
+      "chat_id": 0
+    },
+    {
+      "id": 131,
+      "url": "https://www.tiktok.com/t/ZTk5Jjc6Q",
+      "title": "On today’s real life black mirror episode. #oracle #blackmirror #disc...",
+      "source_type": "tiktok",
+      "summary": "",
+      "content_text": "On today’s real life black mirror episode. #oracle #blackmirror #disconnected #altrock #ai ",
+      "ingested_at": "2026-04-15 15:51:21",
+      "is_note": 0,
+      "chat_id": 0
+    },
+    {
+      "id": 132,
+      "url": "https://www.tiktok.com/t/ZTk5ec2Ap",
+      "title": "If they had friends it’s bc their dad was rich STAND UP TOUR DATES 📍I...",
+      "source_type": "tiktok",
+      "summary": "This TikTok post is from a stand-up comedian promoting their comedy tour. The title references a joke premise — that wealthy kids (those whose dads were rich) were the ones who had friends, implying social popularity was bought rather than earned. The post doubles as a tour announcement, listing nine confirmed cities across the United States spanning from March to June, with more dates promised. The tone is casual and comedic, typical of a comedian building audience engagement on social media while driving ticket sales.",
+      "content_text": "If they had friends it’s bc their dad was rich STAND UP TOUR DATES 📍Irvine, CA 3/22 📍Louisville, KY 4/29 📍Fort Wayne, IN 4/30 📍Chicago, IL 5/1 and 5/2 📍Tulsa, OK 5/20 📍Oklahoma City, OK 5/21 📍Portland, OR 6/2 📍Tacoma, WA 6/3 📍Spokane, WA 6/4 MORE DATES TO COME",
+      "ingested_at": "2026-04-15 16:22:33",
+      "is_note": 0,
+      "chat_id": 0
+    },
+    {
+      "id": 139,
+      "url": "https://x.com/SekaiUtu/status/2044238524522914211",
+      "title": "日本から逃げた人 - ブスは後ろで目立たない黒い制服で、美人は前列で白い制服。どんなに単一民族と言ってもその中でまた別の差別が生まれる。",
+      "source_type": "twitter",
+      "summary": "This tweet, posted by someone who identifies as having fled Japan, critiques a form of appearance-based discrimination observed within Japanese society. The author describes a practice—likely in a performance, school event, or corporate setting—where less conventionally attractive individuals are placed in the back rows wearing inconspicuous black uniforms, while conventionally attractive individuals are placed in the front rows wearing white uniforms. This visual and positional hierarchy is used as a concrete example of lookism (appearance-based discrimination).\n\nThe broader argument challenges the common narrative that Japan, as a self-described monoethnic or homogeneous society, is free from internal social stratification or discrimination. The author contends that even within a group that prides itself on ethnic uniformity, new hierarchies and forms of discrimination emerge—in this case based on physical appearance rather than ethnicity. The tweet implies a critical stance toward both Japanese social norms and the myth of egalitarianism within homogeneous societies.",
+      "content_text": "ブスは後ろで目立たない黒い制服で、美人は前列で白い制服。どんなに単一民族と言ってもその中でまた別の差別が生まれる。",
+      "ingested_at": "2026-04-15 17:45:27",
+      "is_note": 0,
+      "chat_id": 0
+    },
+    {
+      "id": 140,
+      "url": "https://www.tiktok.com/t/ZTk52vyBg",
+      "title": "Dave Chappelle Exposes the Real Reason Behind the Backlash: The Shock...",
+      "source_type": "tiktok",
+      "summary": "Dave Chappelle is facing public backlash for performing at a show in Saudi Arabia, and in response, he confronted a reporter by calling out what he sees as a glaring double standard. While acknowledging the tragedy of the Jamal Khashoggi murder, Chappelle pointed out that the United States government and major corporations like Netflix have long conducted business with Saudi Arabia without facing comparable moral outrage. He argues that the backlash against him is not genuinely rooted in human rights concerns, but rather in who is permitted to profit from those business relationships.\n\nChappelle frames the criticism in racial terms, arguing that Saudi money was never labeled 'dirty' until a Black man profited from it — suggesting critics only object when the established financial hierarchy is challenged. He broadens this argument by noting that nearly all modern commerce — from automobiles to smartphones — is entangled with ethically compromised systems, questioning whether true ethical consumption is even possible. His central thesis is that moral outrage in this case is selectively weaponized to control where and how certain individuals, particularly Black people, are allowed to succeed financially.",
+      "content_text": "Dave Chappelle Exposes the Real Reason Behind the Backlash: The Shocking Truth About “Dirty Money” Why is Dave Chappelle facing intense scrutiny for his recent show in Saudi Arabia, and what does it reveal about the unspoken rules of global commerce? During a recent exchange, Chappelle confronted a reporter’s questions regarding the Jamal Khashoggi incident, acknowledging the tragedy while simultaneously exposing a glaring double standard. He pointed out that major entities like the United States government and Netflix have conducted extensive business with the Saudis for years without facing similar outrage. This raises a critical question: why did the narrative suddenly shift to moral outrage only when Chappelle took the stage? The comedian didn’t hold back, suggesting that the backlash isn’t truly about human rights, but rather about who is allowed to profit. He boldly stated that no one had an issue with Saudi funds until a Black man made money “off the plantation,” arguing that critics only label the money as dirty when it challenges the established financial hierarchy. Is the outrage genuine, or is it a calculated move to dictate how and where certain individuals can succeed? By challenging the purity of modern commerce noting that everything from the cars we drive to the cell phones we use is tethered to compromised systems Chappelle forces us to examine whether true ethical consumption exists, or if it’s merely a weaponized talking point.  #DaveChappelle #TrendingNews…",
+      "ingested_at": "2026-04-15 19:05:48",
+      "is_note": 0,
+      "chat_id": 0
+    },
+    {
+      "id": 141,
+      "url": "https://www.tiktok.com/t/ZTkajVyh3",
+      "title": "TikTok video #7629084330974874894",
+      "source_type": "tiktok",
+      "summary": "The provided content contains no substantive information beyond the TikTok video identifier (#7629084330974874894). No descriptive text, transcript, captions, or metadata were included, making it impossible to summarize the actual video content or extract meaningful entities and relationships.",
+      "content_text": "TikTok video #7629084330974874894",
+      "ingested_at": "2026-04-16 19:25:41",
+      "is_note": 0,
+      "chat_id": 0
+    },
+    {
+      "id": 142,
+      "url": "https://www.tiktok.com/t/ZTkaxHphr",
+      "title": "Trying to stop black advancement, Brown advancement, women advancemen...",
+      "source_type": "tiktok",
+      "summary": "This TikTok post is a brief political commentary expressing frustration (indicated by the 😑 emoji) at an unnamed entity — implicitly a government, administration, or political faction — that is perceived to be simultaneously working against the progress of multiple marginalized or politically targeted groups: Black people, Brown people, women, and the nation of Iran. The post frames these as parallel struggles happening concurrently, suggesting a pattern of systemic opposition. No specific policy, event, or actor is named, but the framing implies criticism of a powerful political force engaging in coordinated suppression across racial, gender, and geopolitical lines.",
+      "content_text": "Trying to stop black advancement, Brown advancement, women advancement, and Iran’s advancement all at the same time. 😑",
+      "ingested_at": "2026-04-17 04:46:57",
+      "is_note": 0,
+      "chat_id": 0
+    },
+    {
+      "id": 143,
+      "url": "https://www.tiktok.com/t/ZTkaXoJDG",
+      "title": "A former Palantir exec just blew the whistle. This may be one of the ...",
+      "source_type": "tiktok",
+      "summary": "A former Palantir executive has reportedly come forward as a whistleblower, making claims about the company's alleged plans for long-term societal control and its growing influence within the United States government and military apparatus. The content frames Palantir's expansion as a form of modern imperialism, suggesting the company is positioned to dominate critical infrastructure and data systems in ways that could affect ordinary citizens indefinitely.\n\nThe video connects Palantir's rise to broader concerns about surveillance capitalism, government contracting, and the concentration of power among a small group of tech elites — notably referencing Peter Thiel, Palantir's co-founder and major ideological force. The content also draws a link between Palantir's operations and geopolitical conflicts, including the situation in Gaza and Palestine, implying the company's technology plays a role in military or surveillance activities in conflict zones.",
+      "content_text": "A former Palantir exec just blew the whistle. This may be one of the worst things to happen during our lifetimes. You’ll learn how Palantir plans to control you for eternity, and how they’re taking over the American Empire right now. This is a new era of imperialism. #palantir #whistleblower #peterthiel #freepalestine #gaza       ",
+      "ingested_at": "2026-04-17 08:40:40",
+      "is_note": 0,
+      "chat_id": 0
+    },
+    {
+      "id": 144,
+      "url": "https://www.tiktok.com/t/ZTku8SCAE",
+      "title": "Camille Paglia on men’s extreme drives #psychology #philosophy ",
+      "source_type": "tiktok",
+      "summary": "This TikTok clip features Camille Paglia discussing what she characterizes as men's extreme psychological and biological drives. Paglia, known for her contrarian feminist perspective, likely explores her signature argument that male aggression, sexual energy, and obsessive achievement-seeking are not purely social constructs but are rooted in biology and have historically fueled civilization's greatest creative and destructive forces. She tends to frame these drives as dangerous yet generative, arguing that society must understand rather than simply suppress them.\n\nThe content falls within Paglia's broader cultural and philosophical framework, drawing on psychology, mythology, and art history to contextualize masculine extremism. Her perspective challenges both conservative moralism and progressive constructivism, positioning male drives as a paradoxical force — simultaneously threatening and necessary for cultural advancement. The hashtags #psychology and #philosophy signal the clip is framed as intellectual commentary rather than political advocacy.",
+      "content_text": "Camille Paglia on men’s extreme drives #psychology #philosophy ",
+      "ingested_at": "2026-04-18 20:28:01",
+      "is_note": 0,
+      "chat_id": 0
+    },
+    {
+      "id": 145,
+      "url": null,
+      "title": "DATA in 2026",
+      "source_type": "note",
+      "summary": "A platform lead at a mid-size insurance company shares lessons from 18 months of running internal AI tools, specifically a RAG-based chatbot that answers underwriting and compliance questions against thousands of internal documents. His core argument is that the vast majority of production incidents (roughly 80%) were data infrastructure failures misattributed to AI/ML quality issues. The actual ML components—embeddings, the model, reranking—performed reliably. What broke repeatedly was unowned data plumbing: PDFs being silently replaced, duplicate SOP versions in the index, parsers quietly dropping table content from filings, and freshness signals with no lineage layer. Because the pipeline sat outside the data team's catalog, only the ML team got paged, creating a structural accountability gap.\n\nWhen evaluating bundled retrieval vendors including Denser, Vectara, and AWS Knowledge Bases, they found the tools accelerated prototyping but hit walls on lineage transparency—specifically the ability to know when a document was reprocessed, which version was active, and which chunks mapped to which source page. They ultimately kept ingestion in-house on Airflow, plugged the retrieval engine in as a downstream consumer, and modeled documents as slowly-changing dimensions. Incidents reportedly dropped meaningfully after this restructuring. The author finds the structural argument compelling but is uncertain whether it generalizes beyond regulated verticals like insurance, where lineage accountability is a hard requirement.",
+      "content_text": "Context: he runs the platform side at a mid-size insurer that's been shipping internal AI tools for about 18 months. Their chatbot answers underwriting and compliance questions off a couple thousand internal documents. Standard setup, nothing exotic.\n\nHis claim was that of all the things that broke in production, almost none of them were ML failures. Embeddings were fine. The model was fine. Reranking was fine. What broke, repeatedly, was the part nobody had assigned an owner to: PDFs being silently replaced, two versions of the same SOP both ending up in the index, the parser quietly dropping table content from quarterly filings, freshness signals that lived nowhere because nobody had built the lineage layer.\n\nHis framing was that 80% of the firefighting was data plumbing dressed up as AI quality issues. The ML team kept getting paged for stuff that was structurally an ELT problem. The data team didn't get paged because the pipeline wasn't in their catalog.\n\nWhere I started to actually agree was when he walked through their build/buy decision. They'd evaluated bundled retrieval vendors early, including Denser, Vectara, and AWS Knowledge Bases. The bundled options shortened time-to-prototype, but every one of them eventually hit a wall on lineage transparency, where his team needed to know exactly when a document was reprocessed, what version was active, and which chunks pointed at which source page. Some vendors expose that cleanly, some don't, and it's not always obvious wh…",
+      "ingested_at": "2026-04-22 08:06:05",
+      "is_note": 1,
+      "chat_id": 0
+    },
+    {
+      "id": 146,
+      "url": "https://www.tiktok.com/t/ZTkxxHXXK",
+      "title": "The demo doesn't lose enterprise deals. The security review does. RBA...",
+      "source_type": "tiktok",
+      "summary": "This content argues that enterprise deals are not lost during product demos but during security reviews. The speaker identifies three architectural commitments that are nearly impossible to retrofit after the fact: Role-Based Access Control (RBAC), audit logs, and tenant isolation. RBAC must go beyond simple admin/user distinctions to support scoped permissions by team, data type, and action. Audit logs must be immutable, queryable, and stored separately from application data — a SOC2 compliance requirement. Tenant isolation requires architecture-level data separation between customers, a decision that must be made on day one of system design.\n\nThe core argument is that AI-generated systems often lack these features by default, making them structurally incompatible with enterprise requirements. These are not features that can be added later through configuration or prompting — they are foundational architectural decisions. Failing to address any one of them during a security review can end an enterprise sales process entirely, regardless of how strong the product demo was.",
+      "content_text": "The demo doesn't lose enterprise deals. The security review does. RBAC. Audit logs. Tenant isolation. Three architectural commitments that are difficult to retrofit.\n\n--- Transcript ---\nThere's a moment in every enterprise sales process where a security reviewer opens your product. And three questions can end the deal before it starts. First, how does access control work? Not just admin versus user. They mean role-based permissions, scope by team, by data type, by action. AI-generated systems don't do this by default as part of their architecture, which means it can be difficult to fix without rebuilding. Second, show me your audit log. Who access what from where and when? Immutable, queryable, and separate from your app data. This is a SOC2 requirement. And if you don't have it, the conversation is over. Third, how is our data isolated from other customers? They want architecture-level isolation. And that's a decision you have to make on day one. None of these are features. They're architectural commitments. And you can't prompt your way into them after the fact.",
+      "ingested_at": "2026-04-22 22:39:48",
+      "is_note": 0,
+      "chat_id": 0
+    },
+    {
+      "id": 147,
+      "url": "https://www.tiktok.com/t/ZTkxVpBpu",
+      "title": "Should this be allowed? #ai #stocks ",
+      "source_type": "tiktok",
+      "summary": "",
+      "content_text": "Should this be allowed? #ai #stocks \n\n--- Transcript ---\nIf you did know, Clawed AI has its own investment portfolio and it just traded on insider info. Let me explain. So just a couple weeks ago, the AI announced that they were buying service now stock, which is a software company. But what's crazy about this is the stock was down over 20% because Clawed launched its own AI agents platform that investors thought was going to replace service now's entire company. Now this is where it gets crazy. Clawed said they were buying this stock because they knew their own software and didn't think it was going to replace service now's business. And now a week later, after Clawed took this position, they are up over 20%.",
+      "ingested_at": "2026-04-23 00:20:47",
+      "is_note": 0,
+      "chat_id": 0
+    },
+    {
+      "id": 148,
+      "url": "https://www.highereducationinquirer.org/search/label/Palantir",
+      "title": "Higher Education Inquirer",
+      "source_type": "article",
+      "summary": "American higher education faces a dual threat: domestic authoritarian surveillance that suppresses academic freedom and foreign cyberattacks from adversarial nation-states. Domestically, universities have become sites of intensified digital monitoring, with campus security partnering with agencies like the FBI, DHS, and ICE to surveil student protesters, faculty activists, and international scholars—particularly those advocating on issues like Palestine, racial justice, and labor rights. Tech firms like Palantir Technologies, originally developed with CIA venture capital backing through In-Q-Tel, have embedded surveillance infrastructure into universities under the guise of safety, enabling predictive policing and ideological profiling with little public accountability. Internationally, Russia runs disinformation campaigns targeting U.S. campuses, Iran conducts cyberespionage stealing research in nuclear science and public health, China is accused of IP theft and researcher recruitment via the Thousand Talents Plan, and Israeli firms like NSO Group sell spyware (Pegasus) that has been used against academics and activists globally.\n\nThe article argues that these threats converge dangerously: universities, which should defend democratic ideals and free inquiry, are instead being co-opted into both domestic repression and militarized cyberdefense—often with federal defense funding making them complicit. The author calls for a dual approach: robust defenses against genuine foreign cyberthreats alongside strict protections for academic freedom, transparency in cybersecurity partnerships, digital security support for activists and marginalized groups, and a preference for open-source and ethical tools over corporate surveillance platforms. The central warning is that cybersecurity must not become a vehicle for digital McCarthyism, and universities must choose between defending truth and enabling the systems that undermine it.",
+      "content_text": "American higher education stands at a dangerous crossroads—caught between the encroachment of authoritarian surveillance at home and the very real cybersecurity threats from adversarial states abroad. On one side, we see the growth of data collection and domestic monitoring that risks silencing dissent and undermining academic freedom. On the other, sophisticated cyberattacks from nation-states like Russia, China, Iran, Israel, and North Korea present significant threats to intellectual property, national security, and the safety of digital infrastructure on campus.\nThis double-edged sword raises urgent questions about the role of higher education in a time of rising fascism, geopolitical instability, and digital vulnerability.\nIn recent years, colleges and universities have become sites of intensified digital monitoring. Student protesters, faculty activists, and visiting scholars find themselves increasingly under surveillance by both state agencies and private contractors. Under the guise of “safety” and “cybersecurity,” dissident voices—especially those speaking out on issues like Palestine, racial justice, climate collapse, and labor rights—are monitored, flagged, and at times disciplined.\nCampus security partnerships with local police and federal agencies like the FBI, DHS, and ICE have created a new surveillance architecture that chills free speech and suppresses organizing. Social media is mined. Emails are monitored. Student groups that once flourished in the open no…",
+      "ingested_at": "2026-04-23 02:42:32",
+      "is_note": 0,
+      "chat_id": 0
+    },
+    {
+      "id": 149,
+      "url": "https://advox.globalvoices.org/2025/09/15/normalizing-surveillance-in-daily-life/",
+      "title": "Normalizing surveillance in daily life",
+      "source_type": "article",
+      "summary": "This article examines the historical roots and modern expansion of surveillance, arguing that it is increasingly normalized under the guise of care, security, and protection. Beginning with the Stasi — East Germany's infamous secret police — the piece draws a line from Cold War-era surveillance practices (including the Stasi's training of Syria's Mukhabarat) to today's data-rich environment, where the NSA can store nearly a billion times more data than the Stasi ever could. Germany itself, despite a strong cultural aversion to privacy violations, has adopted Palantir software for population surveillance and expanded police intelligence powers. Surveillance technology suppliers like Palantir (US), NSO Group, and Elbit Systems (Israel) serve governments worldwide, often at borders and in authoritarian contexts.",
+      "content_text": "This article was written by Safa for the series “Digitized Divides” and originally published on tacticaltech.org. An edited version is republished by Global Voices under a partnership agreement.\nSurveillance, monitoring, and control have been used historically and continue to be used currently under the guise of protection and security, but, as professor Hannah Zeavin explained, “[C]are is a mode that accommodates and justifies surveillance as a practice, framing it as an ethical ‘good’ or security necessity instead of a political choice.”\nTactical Tech is based in Berlin, the former capital city of international espionage. The Ministry for State Security (also referred to as the Stasi) was the state security and secret police of the former East Germany (German Democratic Republic or GDR) from 1950 until 1990. They are known as one of the most repressive police organizations to have existed. Upon the dissolution of the Stasi, thousands of protesters occupied their Berlin headquarters and prevented them from destroying their records. What survives includes nearly two million photos and so many files that if they were laid out flat, they would be more than 111 kilometers (70 miles) long.\nThe Stasi also conducted international operations that had lasting effects abroad. They extensively trained the former Syrian Mukhabarat (secret police) of the now fallen Assad regime, under Hafez al-Assad, “[in] methods of interrogation, infiltration, disinformation and brutal extraction of co…",
+      "ingested_at": "2026-04-23 02:42:58",
+      "is_note": 0,
+      "chat_id": 0
+    },
+    {
+      "id": 150,
+      "url": "https://www.biometricupdate.com/202504/digital-authoritarianism-increasing-as-ai-enhanced-surveillance-reshapes-federal-policies-under-trump",
+      "title": "Digital authoritarianism increasing as AI-enhanced surveillance reshapes federal policies under Trump | Biometric Update",
+      "source_type": "article",
+      "summary": "The article examines the accelerating expansion of AI-enhanced surveillance and enforcement tools across U.S. federal agencies under the Trump administration, arguing that this growth lacks sufficient oversight, transparency, or accountability. Brookings Institution Senior Fellow Darrell M. West warns that AI's scalability enables state actors to track behavior and suppress dissent — historically a hallmark of authoritarian regimes like China — and that these capabilities are now being deployed domestically. The Department of Homeland Security's AI inventory, analyzed by Just Futures Law's Paromita Shah, reveals nearly 200 AI applications spanning visa vetting, border enforcement, deportation logistics, and biometric identification, many previously unknown to the public. ICE's use of the 'Hurricane Score' and Risk Classification Assessment to make detention decisions — without disclosing algorithmic involvement to detainees or their counsel — and a $30 million Palantir contract to build 'ImmigrationOS' are cited as particularly alarming examples.\n\nThe Department of Justice's 2024 report on AI in criminal justice acknowledges efficiency gains in forensic analysis and biometric identification but issues stern warnings about bias, opacity, and constitutional risks in predictive policing and risk assessment tools. These tools frequently amplify historical injustices by turning flawed records into self-fulfilling prophecies that entrench racial profiling. The EPA has also faced allegations of using AI to monitor employee communications for signs of political disloyalty. DHS has repeatedly self-certified compliance, denied third-party oversight, and obscured its AI footprint by relabeling discontinued programs. Shah notes that only in the final days of the Biden administration did DHS release its most complete AI inventory — the sole transparency requirement it met — underscoring the systemic failure of accountability mechanisms as AI surveillance infrastructure continues to expand.",
+      "content_text": "Digital authoritarianism increasing as AI-enhanced surveillance reshapes federal policies under Trump\nThere is a common denominator that links recent developments in the Department of Homeland Security (DHS), Department of Justice (DOJ), and the broader federal AI governance landscape under the Trump administration. And that denominator is the aggressive expansion of AI into high-risk areas of surveillance and enforcement without sufficient oversight, transparency, or accountability.\nThis convergence of unchecked technology with diminished civil safeguards, particularly amid a politicized executive branch, has placed democratic norms under siege. And nowhere is this shift more visible than in the rapid adoption of AI technologies across U.S. federal agencies under the Trump administration’s new AI-centric directives and their broader national security implications.\nA recent analysis of AI’s dark applications by Brookings Institution Senior Fellow Darrell M. West underscores the political volatility of surveillance technologies when harnessed without robust oversight. West details how machine learning and data aggregation enable state authorities to track behavior and suppress dissent, a practice most dramatically illustrated by the Chinese government’s use of facial recognition, social media tracking, and real-time analytics to surveil dissidents.\nWhile such systems were once viewed as foreign threats, their domestic proliferation has become increasingly plausible and concern…",
+      "ingested_at": "2026-04-23 02:43:31",
+      "is_note": 0,
+      "chat_id": 0
+    },
+    {
+      "id": 151,
+      "url": "https://x.com/gothburz/status/2047148829917528134",
+      "title": "@gothburz: I have three monitors on my desk. The left one shows the order book. The middle ...",
+      "source_type": "twitter",
+      "summary": "A Senior Surveillance Analyst at a commodities exchange (@gothburz, Peter Girnus) with 19 years of experience describes a pattern of suspicious oil futures trading he has flagged across five separate events in early 2026. In each case, large directional bets — totaling $2.1 billion across April alone — were placed in narrow time windows (14 to 47 minutes) immediately before presidential announcements about the Iran conflict that caused significant oil price drops. The trades were placed during low-liquidity windows (post-settlement), yet every single one landed on the correct side of the announcement. He files flags into a system called TRACE, which routes reports to a quarterly committee; the only recorded action on any of his 2026 flags is the status 'Reviewed.' The CFTC chair claimed 'zero tolerance' for insider trading, yet the STOCK Act has seen zero prosecutions in 14 years.\n\nBeyond oil futures, the author notes suspicious activity on prediction markets Polymarket and Kalshi: six accounts created in February 2026 all bet on U.S. strikes against Iran and collectively collected $1.2 million; a single account called 'Burdensome-Mix' made $436,000 predicting the removal of Venezuela's Maduro one day before it happened, then changed its username and disappeared. The President's son sits on Kalshi's advisory board and is an investor in Polymarket. The White House reportedly sent an internal email instructing staff not to use insider information for prediction market bets — which the author notes implies the behavior was occurring. He frames the entire situation as a compliance system functioning perfectly on paper (flags filed, meetings held, sparkling water served) while producing zero accountability, concluding that the convergence of trade timing and announcement timing is compressing toward simultaneity.",
+      "content_text": "@gothburz (Peter Girnus 🦅)\nPosted: Thu Apr 23 03:01:29 +0000 2026\n\nI have three monitors on my desk. The left one shows the order book. The middle one shows Truth Social. The right one shows the investigation queue.\n\nOn April 21st, the left screen moved first.\n\nI am a Senior Surveillance Analyst at a commodities exchange. I have held this position for nineteen years. My job is to monitor trading activity for suspicious patterns and generate compliance reports. I am employee of the quarter. I have a mug.\n\nAt 19:54 GMT on April 21st, someone placed 4,260 sell orders on Brent crude futures. They did this during post-settlement. The window after the market closes when daily volume is typically in the dozens. Sometimes single digits. Sometimes I watch the screen and nothing happens for forty minutes and I think about whether my daughter is happy.\n\nOn April 21st, someone placed $430 million in directional bets in 120 seconds during that window. One hundred and twenty seconds. I timed it on my watch because the system clock rounds to the nearest minute and I have found, in nineteen years, that precision matters to no one but me.\n\nAt 20:10 GMT, the President posted on Truth Social that he was extending the Iran ceasefire.\n\nBrent dropped from $100.91 to $96.83.\n\nI flagged the trade. I flag a lot of trades. I want to tell you what happens to my flags.\n\nMy flags go into a system called TRACE. Trade Review and Compliance Evaluation. I did not name it. The system generates a report. The r…",
+      "ingested_at": "2026-04-23 08:18:39",
+      "is_note": 0,
+      "chat_id": 0
+    },
+    {
+      "id": 171,
+      "url": "https://en.wikipedia.org/wiki/March–May_2025_United_States_attacks_in_Yemen",
+      "title": "March–May 2025 United States attacks in Yemen - Wikipedia",
+      "source_type": "article",
+      "summary": "Operation Rough Rider was a large-scale US military air and naval campaign against Houthi targets in Yemen, running from March 15 to May 6, 2025 — the first major US military operation in the Middle East during President Donald Trump's second term. The strikes targeted Houthi radar systems, air defenses, and ballistic and drone launch sites used to attack commercial shipping in the Red Sea and Gulf of Aden. The campaign was triggered by the Houthis resuming attacks on Israeli targets and international shipping, which they had begun in October 2023 in solidarity with Palestinians following Israel's invasion of Gaza. The UK joined the strikes on April 30. The campaign ended May 6 via a ceasefire brokered by Oman. Estimated casualties ranged widely: the US/Yemeni PLC claimed 500–600 Houthis killed, while Airwars estimated 224 civilians killed. The US lost 2 F/A-18 Super Hornets and 7 MQ-9 Reaper drones.\n\nA significant behind-the-scenes controversy emerged when National Security Adviser Michael Waltz accidentally added Atlantic editor-in-chief Jeffrey Goldberg to a classified Signal group chat called 'Houthi PC small group,' used by senior Trump officials — including Pete Hegseth, JD Vance, Marco Rubio, and others — to coordinate the strikes. This incident became known as 'Signalgate.' Separately, JD Vance had initially urged a one-month delay over concerns about oil prices and messaging consistency with Trump's Europe policy, but Hegseth persuaded him to proceed, framing the operation as restoring freedom of navigation and re-establishing deterrence. The Houthis, backed by Iran and considered part of the Iranian-led Axis of Resistance, declared the ceasefire did not prevent them from continuing to target Israel.",
+      "content_text": "March–May 2025 United States attacks in Yemen\n| Operation Rough Rider | |\n|---|---|\n| Part of the US–UK airstrikes on Yemen, Red Sea crisis, and Middle Eastern crisis (2023–present) | |\n| Location | |\n| Target | |\n| Date | 15 March – 6 May 2025 (1 month and 3 weeks) |\n| Executed by | |\n| Outcome | Status quo ante bellum\n|\n| Casualties | US/Yemeni (PLC) estimate: 500–600 Houthis killed (up to 22 April)[1][2] Houthi claim: 123 people killed, 247 wounded (15 March to 15 April)[3] 80 killed, 150+ wounded (on 17 April)[4][5] Airwars estimate: 224 civilians killed[6] US material losses: 2 Boeing F/A-18 Super Hornet fighter aircraft[7] 7 General Atomics MQ-9 Reaper combat drones[8] |\nIn March 2025, the United States launched a large campaign of air and naval strikes against Houthi targets in Yemen. Codenamed Operation Rough Rider,[9] it was the first large-scale US military operation in the Middle East during President Donald Trump's second term.[10] The strikes began on March 15, targeting radar systems, air defenses, and ballistic and drone launch sites used by the Houthis to attack commercial ships and naval vessels in the Red Sea and Gulf of Aden.[11] On 30 April 2025, the United Kingdom joined the United States in conducting strikes on Houthi targets.[12]\nThe Houthi group began targeting international shipping in October 2023, after Israel invaded the Gaza Strip in response to the October 7 Hamas attacks. Claiming solidarity with Palestinians and aiming to pressure Israel into …",
+      "ingested_at": "2026-04-24 04:54:44",
+      "is_note": 0,
+      "chat_id": 0
+    },
+    {
+      "id": 172,
+      "url": "https://en.wikipedia.org/wiki/Red_Sea_crisis",
+      "title": "Red Sea crisis - Wikipedia",
+      "source_type": "article",
+      "summary": "The Red Sea crisis is an ongoing armed conflict and maritime crisis initiated by the Houthis, an Iran-backed Zaydi Shia Islamist militant group controlling parts of Yemen. Beginning in October 2023 in response to the Gaza war, the Houthis launched missiles and drones at Israel and attacked dozens of merchant and naval vessels in the Red Sea—particularly near the Bab-el-Mandeb strait—claiming to target ships linked to Israel. Their stated goal was to pressure Israel into ceasing the Gaza war and lifting its blockade of Gaza. The crisis caused significant global economic disruption, rerouting hundreds of commercial vessels around South Africa. The Houthis attacked 178 vessels over two years, sinking four ships and killing nine sailors, while also hijacking two ships and taking 36 crew members hostage.\n\nThe international response included UN Security Council Resolution 2722 condemning the attacks, and the US-led Operation Prosperity Guardian launched to protect Red Sea shipping. From January 2024, the US and UK conducted coalition air and missile strikes against Houthi targets in Yemen. A bilateral US-Houthi ceasefire was announced on 6 May 2025, and Houthi attacks on international shipping and Israel halted on 10 October 2025 following a Gaza peace plan. However, on 28 March 2026, the Houthis resumed attacks on Israel amid a broader 2026 Iran war, after the US and Israel attacked Iran. Houthi weapons—largely of Russian, Chinese, or Iranian origin—include long-range missiles, cruise missiles, UAVs, and naval drones capable of reaching Israel from Yemen.",
+      "content_text": "Red Sea crisis\n| Red Sea crisis | |||||||\n|---|---|---|---|---|---|---|---|\n| Part of the Iran–Israel proxy conflict, the Middle Eastern crisis (2023–present), and the Yemeni civil war (2014–present) | |||||||\nMap of Houthi activity near the Yemeni coast: Houthi-controlled Yemen (SPC) Government of Yemen (PLC) Houthi attacks (red) and hijackings (blue) | |||||||\n| |||||||\n| Belligerents | |||||||\n|\nIsrael Prosperity Guardian: | |||||||\n| Commanders and leaders | |||||||\n| Units involved | |||||||\n| See order of battle | |||||||\n| Strength | |||||||\n|\nYemeni Armed Forces (SPC) 1 Alvand-class frigate 1 intel ship |\nNaval assets:\n| ||||||\n| Casualties and losses | |||||||\n|\nPer Houthis: 14 detained[35] |\n3 soldiers killed[f] 3 F/A-18 Super Hornets lost[43][44][39] | ||||||\n|\n9 sailors killed and 11 injured[g] 2 Israeli civilians killed[55] and 248 injured[56] 1 WFP worker killed,[57] 1 UN worker injured[58] 319 Yemeni civilians killed and 1,143 injured[h][improper synthesis?] 68 African migrants killed, 47 injured[83] 3 Russian civilians injured[84] 6 Egyptian civilians wounded 5 Palestinian civilians wounded[85] | |||||||\n|\nTwo ships have been hijacked and 36 crew members have been taken hostage by Houthi militants; one ship remains in Houthi custody, while one ship and all hostages have been released. At least 30 ships have been damaged by Houthi attacks. One UK-owned and three Greek-owned cargo ships sunk.[86][87][88] |\nThe Red Sea crisis[i] is an ongoing armed conflict and m…",
+      "ingested_at": "2026-04-24 04:55:18",
+      "is_note": 0,
+      "chat_id": 0
+    },
+    {
+      "id": 173,
+      "url": "https://en.wikipedia.org/wiki/US–UK_airstrikes_on_Yemen",
+      "title": "US–UK airstrikes on Yemen - Wikipedia",
+      "source_type": "article",
+      "summary": "Between January 12, 2024 and May 6, 2025, the United States and United Kingdom, supported by Australia, Bahrain, Canada, Denmark, the Netherlands, and New Zealand, conducted a sustained campaign of cruise missile and airstrikes against the Houthi movement in Yemen. The campaign was triggered by Houthi attacks on commercial shipping in the Red Sea, which the Houthis declared were in solidarity with Palestinians during the Gaza war. The first phase, Operation Poseidon Archer (January 2024–January 2025), was ordered by President Biden and authorized by UK PM Rishi Sunak, targeting Houthi military infrastructure including radar sites, weapons storage, and drone launch facilities. By January 2, 2025, the Houthis had recorded 931 allied airstrikes resulting in 106 deaths and 314 injuries. Strikes were paused during a Gaza ceasefire from January to March 2025.\n\nA second phase, Operation Rough Rider, resumed March 15, 2025 under President Trump and UK PM Keir Starmer, with over 1,000 additional airstrikes conducted by late April. The campaign ended May 6, 2025 when Trump declared a ceasefire brokered by Oman. The Houthi attacks had severely disrupted Red Sea shipping—particularly container traffic—causing an 85% drop in activity at Israel's Port of Eilat and prompting major shipping companies to reroute around the Red Sea entirely. The broader context includes Iran's backing of the Houthis, a UN Security Council condemnation of Houthi activities, and earlier Biden-era removal of the Houthis from the US Foreign Terrorist Organization list in 2021.",
+      "content_text": "US–UK airstrikes on Yemen\n| US–UK airstrikes on Yemen | |||||||\n|---|---|---|---|---|---|---|---|\n| Part of the Operation Prosperity Guardian, Red Sea crisis and the Yemeni civil war | |||||||\nLocation of airstrikes in Houthi-controlled territory (green) in Yemen on 12 January 2024 | |||||||\n| |||||||\n| Belligerents | |||||||\n|\nUnited States United Kingdom | |||||||\n| Commanders and leaders | |||||||\n| Units involved | |||||||\n| |||||||\n| Strength | |||||||\n| Unknown | |||||||\n| Casualties and losses | |||||||\n| 15 MQ-9 Reapers shot down[12] | 600 Houthis killed (up to 22 April)[13] |\nBetween 12 January 2024 and 6 May 2025 the United States and the United Kingdom, with support from Australia, Bahrain, Canada, Denmark, the Netherlands, and New Zealand,[14] launched a series of cruise missile and airstrikes against the Houthi movement in Yemen in response to Houthi attacks on ships in the Red Sea.[15] The Houthis had previously declared that their attacks were in support of Palestinians during the Gaza war; Houthi attacks on shipping were condemned by the United Nations Security Council the day before the initial strike.[1][16][17][18]\nThe first phase of attacks between January 2024 and January 2025 were codenamed Operation Poseidon Archer. US President Joe Biden ordered the strikes, and UK Prime Minister Rishi Sunak convened his cabinet to authorize British participation.[19][20] American officials said the strikes were intended to degrade Houthi capabilities to attack Red Sea…",
+      "ingested_at": "2026-04-24 04:55:57",
+      "is_note": 0,
+      "chat_id": 0
+    }
+  ],
+  "source_categories": [
+    {
+      "source_id": 6,
+      "category_id": 2
+    },
+    {
+      "source_id": 7,
+      "category_id": 2
+    },
+    {
+      "source_id": 151,
+      "category_id": 14
+    },
+    {
+      "source_id": 171,
+      "category_id": 8
+    },
+    {
+      "source_id": 172,
+      "category_id": 8
+    },
+    {
+      "source_id": 173,
+      "category_id": 8
+    }
+  ],
+  "entities": [
+    {
+      "id": 1050,
+      "name": "AI-Generated Systems",
+      "entity_type": "technology"
+    },
+    {
+      "id": 1041,
+      "name": "AWS Knowledge Bases",
+      "entity_type": "technology"
+    },
+    {
+      "id": 1275,
+      "name": "Abdul-Malik al-Houthi",
+      "entity_type": "person"
+    },
+    {
+      "id": 1058,
+      "name": "Academic Freedom",
+      "entity_type": "concept"
+    },
+    {
+      "id": 1031,
+      "name": "Aggression",
+      "entity_type": "concept"
+    },
+    {
+      "id": 1037,
+      "name": "Airflow",
+      "entity_type": "technology"
+    },
+    {
+      "id": 39,
+      "name": "America First Award",
+      "entity_type": "concept"
+    },
+    {
+      "id": 595,
+      "name": "American Civil Liberties Union",
+      "entity_type": "org"
+    },
+    {
+      "id": 1016,
+      "name": "American Empire",
+      "entity_type": "concept"
+    },
+    {
+      "id": 1051,
+      "name": "Architectural Commitments",
+      "entity_type": "concept"
+    },
+    {
+      "id": 1045,
+      "name": "Audit Logs",
+      "entity_type": "concept"
+    },
+    {
+      "id": 1078,
+      "name": "Automobile Data Collection",
+      "entity_type": "concept"
+    },
+    {
+      "id": 1398,
+      "name": "Axis of Resistance",
+      "entity_type": "org"
+    },
+    {
+      "id": 50,
+      "name": "Bab al-Mandab Strait",
+      "entity_type": "place"
+    },
+    {
+      "id": 1395,
+      "name": "Bab-el-Mandeb",
+      "entity_type": "place"
+    },
+    {
+      "id": 1024,
+      "name": "Biological Determinism",
+      "entity_type": "concept"
+    },
+    {
+      "id": 1005,
+      "name": "Black Community",
+      "entity_type": "topic"
+    },
+    {
+      "id": 988,
+      "name": "Black Uniform",
+      "entity_type": "concept"
+    },
+    {
+      "id": 1104,
+      "name": "Brent Crude Futures",
+      "entity_type": "topic"
+    },
+    {
+      "id": 1092,
+      "name": "Brookings Institution",
+      "entity_type": "org"
+    },
+    {
+      "id": 1006,
+      "name": "Brown Community",
+      "entity_type": "topic"
+    },
+    {
+      "id": 1107,
+      "name": "Burdensome-Mix",
+      "entity_type": "person"
+    },
+    {
+      "id": 1102,
+      "name": "CFTC",
+      "entity_type": "org"
+    },
+    {
+      "id": 1022,
+      "name": "Camille Paglia",
+      "entity_type": "person"
+    },
+    {
+      "id": 969,
+      "name": "Chicago, IL",
+      "entity_type": "place"
+    },
+    {
+      "id": 794,
+      "name": "China",
+      "entity_type": "place"
+    },
+    {
+      "id": 27,
+      "name": "Chuck Schumer",
+      "entity_type": "person"
+    },
+    {
+      "id": 1029,
+      "name": "Civilization",
+      "entity_type": "concept"
+    },
+    {
+      "id": 1089,
+      "name": "Customs and Border Protection",
+      "entity_type": "org"
+    },
+    {
+      "id": 1082,
+      "name": "Darrell M. West",
+      "entity_type": "person"
+    },
+    {
+      "id": 1035,
+      "name": "Data Lineage",
+      "entity_type": "concept"
+    },
+    {
+      "id": 992,
+      "name": "Dave Chappelle",
+      "entity_type": "person"
+    },
+    {
+      "id": 1039,
+      "name": "Denser",
+      "entity_type": "org"
+    },
+    {
+      "id": 31,
+      "name": "Department of Homeland Security",
+      "entity_type": "org"
+    },
+    {
+      "id": 1087,
+      "name": "Department of Justice",
+      "entity_type": "org"
+    },
+    {
+      "id": 1099,
+      "name": "Digital Authoritarianism",
+      "entity_type": "concept"
+    },
+    {
+      "id": 1066,
+      "name": "Digital McCarthyism",
+      "entity_type": "concept"
+    },
+    {
+      "id": 998,
+      "name": "Dirty Money",
+      "entity_type": "concept"
+    },
+    {
+      "id": 1042,
+      "name": "Document Versioning",
+      "entity_type": "concept"
+    },
+    {
+      "id": 26,
+      "name": "Donald Trump",
+      "entity_type": "person"
+    },
+    {
+      "id": 997,
+      "name": "Double Standard",
+      "entity_type": "concept"
+    },
+    {
+      "id": 1036,
+      "name": "ELT Pipeline",
+      "entity_type": "concept"
+    },
+    {
+      "id": 1076,
+      "name": "Ed-Tech Industry",
+      "entity_type": "topic"
+    },
+    {
+      "id": 1071,
+      "name": "Elbit Systems",
+      "entity_type": "org"
+    },
+    {
+      "id": 251,
+      "name": "Elon Musk",
+      "entity_type": "person"
+    },
+    {
+      "id": 1077,
+      "name": "Employee Monitoring",
+      "entity_type": "concept"
+    },
+    {
+      "id": 1048,
+      "name": "Enterprise Sales Process",
+      "entity_type": "concept"
+    },
+    {
+      "id": 1090,
+      "name": "Environmental Protection Agency",
+      "entity_type": "org"
+    },
+    {
+      "id": 999,
+      "name": "Ethical Consumption",
+      "entity_type": "concept"
+    },
+    {
+      "id": 53,
+      "name": "FAO",
+      "entity_type": "org"
+    },
+    {
+      "id": 478,
+      "name": "FBI",
+      "entity_type": "org"
+    },
+    {
+      "id": 1098,
+      "name": "Facial Recognition",
+      "entity_type": "technology"
+    },
+    {
+      "id": 1030,
+      "name": "Feminism",
+      "entity_type": "topic"
+    },
+    {
+      "id": 35,
+      "name": "Filibuster",
+      "entity_type": "concept"
+    },
+    {
+      "id": 1000,
+      "name": "Financial Hierarchy",
+      "entity_type": "concept"
+    },
+    {
+      "id": 1013,
+      "name": "Former Palantir Executive",
+      "entity_type": "person"
+    },
+    {
+      "id": 968,
+      "name": "Fort Wayne, IN",
+      "entity_type": "place"
+    },
+    {
+      "id": 1019,
+      "name": "Gaza",
+      "entity_type": "place"
+    },
+    {
+      "id": 1272,
+      "name": "Gaza War",
+      "entity_type": "event"
+    },
+    {
+      "id": 1010,
+      "name": "Gender Advancement",
+      "entity_type": "concept"
+    },
+    {
+      "id": 1094,
+      "name": "Geo Group",
+      "entity_type": "org"
+    },
+    {
+      "id": 177,
+      "name": "Hamas",
+      "entity_type": "org"
+    },
+    {
+      "id": 47,
+      "name": "Handala Hack Team",
+      "entity_type": "org"
+    },
+    {
+      "id": 1068,
+      "name": "Hannah Zeavin",
+      "entity_type": "person"
+    },
+    {
+      "id": 1052,
+      "name": "Higher Education",
+      "entity_type": "topic"
+    },
+    {
+      "id": 985,
+      "name": "Homogeneous Society",
+      "entity_type": "concept"
+    },
+    {
+      "id": 1401,
+      "name": "Houthi Movement",
+      "entity_type": "org"
+    },
+    {
+      "id": 40,
+      "name": "Houthis",
+      "entity_type": "org"
+    },
+    {
+      "id": 1001,
+      "name": "Human Rights",
+      "entity_type": "topic"
+    },
+    {
+      "id": 1096,
+      "name": "Hurricane Score",
+      "entity_type": "technology"
+    },
+    {
+      "id": 33,
+      "name": "Immigration and Customs Enforcement",
+      "entity_type": "org"
+    },
+    {
+      "id": 1095,
+      "name": "ImmigrationOS",
+      "entity_type": "technology"
+    },
+    {
+      "id": 1017,
+      "name": "Imperialism",
+      "entity_type": "concept"
+    },
+    {
+      "id": 1054,
+      "name": "In-Q-Tel",
+      "entity_type": "org"
+    },
+    {
+      "id": 1112,
+      "name": "Insider Trading",
+      "entity_type": "concept"
+    },
+    {
+      "id": 41,
+      "name": "Iran",
+      "entity_type": "place"
+    },
+    {
+      "id": 1159,
+      "name": "Iran",
+      "entity_type": "org"
+    },
+    {
+      "id": 1108,
+      "name": "Iran Ceasefire",
+      "entity_type": "event"
+    },
+    {
+      "id": 38,
+      "name": "Iran War",
+      "entity_type": "event"
+    },
+    {
+      "id": 966,
+      "name": "Irvine, CA",
+      "entity_type": "place"
+    },
+    {
+      "id": 42,
+      "name": "Israel",
+      "entity_type": "place"
+    },
+    {
+      "id": 1125,
+      "name": "Israel",
+      "entity_type": "org"
+    },
+    {
+      "id": 1127,
+      "name": "JD Vance",
+      "entity_type": "person"
+    },
+    {
+      "id": 994,
+      "name": "Jamal Khashoggi",
+      "entity_type": "person"
+    },
+    {
+      "id": 888,
+      "name": "Japan",
+      "entity_type": "place"
+    },
+    {
+      "id": 990,
+      "name": "Japanese Social Norms",
+      "entity_type": "concept"
+    },
+    {
+      "id": 1377,
+      "name": "Jeffrey Goldberg",
+      "entity_type": "person"
+    },
+    {
+      "id": 1406,
+      "name": "Joe Biden",
+      "entity_type": "person"
+    },
+    {
+      "id": 1091,
+      "name": "Just Futures Law",
+      "entity_type": "org"
+    },
+    {
+      "id": 1106,
+      "name": "Kalshi",
+      "entity_type": "org"
+    },
+    {
+      "id": 46,
+      "name": "Kash Patel",
+      "entity_type": "person"
+    },
+    {
+      "id": 1409,
+      "name": "Keir Starmer",
+      "entity_type": "person"
+    },
+    {
+      "id": 49,
+      "name": "Kuwait International Airport",
+      "entity_type": "place"
+    },
+    {
+      "id": 984,
+      "name": "Lookism",
+      "entity_type": "concept"
+    },
+    {
+      "id": 967,
+      "name": "Louisville, KY",
+      "entity_type": "place"
+    },
+    {
+      "id": 1385,
+      "name": "MQ-9 Reaper",
+      "entity_type": "technology"
+    },
+    {
+      "id": 1302,
+      "name": "Maersk",
+      "entity_type": "org"
+    },
+    {
+      "id": 1023,
+      "name": "Male Psychology",
+      "entity_type": "concept"
+    },
+    {
+      "id": 44,
+      "name": "Marco Rubio",
+      "entity_type": "person"
+    },
+    {
+      "id": 1025,
+      "name": "Masculinity",
+      "entity_type": "concept"
+    },
+    {
+      "id": 1375,
+      "name": "Michael Waltz",
+      "entity_type": "person"
+    },
+    {
+      "id": 1033,
+      "name": "Mid-Size Insurer",
+      "entity_type": "org"
+    },
+    {
+      "id": 28,
+      "name": "Mike Johnson",
+      "entity_type": "person"
+    },
+    {
+      "id": 52,
+      "name": "Máximo Torero",
+      "entity_type": "person"
+    },
+    {
+      "id": 1075,
+      "name": "NSA",
+      "entity_type": "org"
+    },
+    {
+      "id": 1055,
+      "name": "NSO Group",
+      "entity_type": "org"
+    },
+    {
+      "id": 34,
+      "name": "National Republican Congressional Committee",
+      "entity_type": "org"
+    },
+    {
+      "id": 995,
+      "name": "Netflix",
+      "entity_type": "org"
+    },
+    {
+      "id": 971,
+      "name": "Oklahoma City, OK",
+      "entity_type": "place"
+    },
+    {
+      "id": 1124,
+      "name": "Oman",
+      "entity_type": "place"
+    },
+    {
+      "id": 1263,
+      "name": "Operation Poseidon Archer",
+      "entity_type": "event"
+    },
+    {
+      "id": 1261,
+      "name": "Operation Prosperity Guardian",
+      "entity_type": "event"
+    },
+    {
+      "id": 1371,
+      "name": "Operation Rough Rider",
+      "entity_type": "event"
+    },
+    {
+      "id": 1069,
+      "name": "Palantir",
+      "entity_type": "technology"
+    },
+    {
+      "id": 1012,
+      "name": "Palantir Technologies",
+      "entity_type": "org"
+    },
+    {
+      "id": 1020,
+      "name": "Palestine",
+      "entity_type": "place"
+    },
+    {
+      "id": 1083,
+      "name": "Paromita Shah",
+      "entity_type": "person"
+    },
+    {
+      "id": 1056,
+      "name": "Pegasus Spyware",
+      "entity_type": "technology"
+    },
+    {
+      "id": 991,
+      "name": "Person Who Fled Japan",
+      "entity_type": "person"
+    },
+    {
+      "id": 1374,
+      "name": "Pete Hegseth",
+      "entity_type": "person"
+    },
+    {
+      "id": 1100,
+      "name": "Peter Girnus",
+      "entity_type": "person"
+    },
+    {
+      "id": 1014,
+      "name": "Peter Thiel",
+      "entity_type": "person"
+    },
+    {
+      "id": 1028,
+      "name": "Philosophy",
+      "entity_type": "topic"
+    },
+    {
+      "id": 1032,
+      "name": "Platform Lead",
+      "entity_type": "person"
+    },
+    {
+      "id": 1011,
+      "name": "Political Suppression",
+      "entity_type": "concept"
+    },
+    {
+      "id": 1105,
+      "name": "Polymarket",
+      "entity_type": "org"
+    },
+    {
+      "id": 972,
+      "name": "Portland, OR",
+      "entity_type": "place"
+    },
+    {
+      "id": 1097,
+      "name": "Predictive Policing",
+      "entity_type": "concept"
+    },
+    {
+      "id": 1399,
+      "name": "Presidential Leadership Council",
+      "entity_type": "org"
+    },
+    {
+      "id": 1027,
+      "name": "Psychology",
+      "entity_type": "topic"
+    },
+    {
+      "id": 48,
+      "name": "Qatar",
+      "entity_type": "place"
+    },
+    {
+      "id": 1034,
+      "name": "RAG Chatbot",
+      "entity_type": "technology"
+    },
+    {
+      "id": 1009,
+      "name": "Racial Advancement",
+      "entity_type": "concept"
+    },
+    {
+      "id": 1002,
+      "name": "Racial Double Standard",
+      "entity_type": "concept"
+    },
+    {
+      "id": 1265,
+      "name": "Red Sea",
+      "entity_type": "place"
+    },
+    {
+      "id": 1387,
+      "name": "Red Sea Crisis",
+      "entity_type": "event"
+    },
+    {
+      "id": 1043,
+      "name": "Regulated Verticals",
+      "entity_type": "concept"
+    },
+    {
+      "id": 29,
+      "name": "Republican Party",
+      "entity_type": "org"
+    },
+    {
+      "id": 1408,
+      "name": "Rishi Sunak",
+      "entity_type": "person"
+    },
+    {
+      "id": 1044,
+      "name": "Role-Based Access Control",
+      "entity_type": "concept"
+    },
+    {
+      "id": 54,
+      "name": "Russia",
+      "entity_type": "place"
+    },
+    {
+      "id": 1047,
+      "name": "SOC2",
+      "entity_type": "concept"
+    },
+    {
+      "id": 1103,
+      "name": "STOCK Act",
+      "entity_type": "concept"
+    },
+    {
+      "id": 993,
+      "name": "Saudi Arabia",
+      "entity_type": "place"
+    },
+    {
+      "id": 36,
+      "name": "Save America Act",
+      "entity_type": "event"
+    },
+    {
+      "id": 1049,
+      "name": "Security Review",
+      "entity_type": "event"
+    },
+    {
+      "id": 1026,
+      "name": "Sexual Personae",
+      "entity_type": "topic"
+    },
+    {
+      "id": 1378,
+      "name": "Signalgate",
+      "entity_type": "event"
+    },
+    {
+      "id": 1038,
+      "name": "Slowly Changing Dimension",
+      "entity_type": "concept"
+    },
+    {
+      "id": 989,
+      "name": "Social Discrimination",
+      "entity_type": "concept"
+    },
+    {
+      "id": 974,
+      "name": "Spokane, WA",
+      "entity_type": "place"
+    },
+    {
+      "id": 964,
+      "name": "Stand-Up Comedian",
+      "entity_type": "person"
+    },
+    {
+      "id": 965,
+      "name": "Stand-Up Comedy Tour",
+      "entity_type": "event"
+    },
+    {
+      "id": 1067,
+      "name": "Stasi",
+      "entity_type": "org"
+    },
+    {
+      "id": 51,
+      "name": "Strait of Hormuz",
+      "entity_type": "place"
+    },
+    {
+      "id": 1059,
+      "name": "Surveillance Capitalism",
+      "entity_type": "concept"
+    },
+    {
+      "id": 1018,
+      "name": "Surveillance Technology",
+      "entity_type": "technology"
+    },
+    {
+      "id": 1074,
+      "name": "Syrian Mukhabarat",
+      "entity_type": "org"
+    },
+    {
+      "id": 1101,
+      "name": "TRACE",
+      "entity_type": "technology"
+    },
+    {
+      "id": 973,
+      "name": "Tacoma, WA",
+      "entity_type": "place"
+    },
+    {
+      "id": 1072,
+      "name": "Tactical Tech",
+      "entity_type": "org"
+    },
+    {
+      "id": 1046,
+      "name": "Tenant Isolation",
+      "entity_type": "concept"
+    },
+    {
+      "id": 540,
+      "name": "Tesla",
+      "entity_type": "org"
+    },
+    {
+      "id": 1073,
+      "name": "The Glass Room",
+      "entity_type": "project"
+    },
+    {
+      "id": 1057,
+      "name": "Thousand Talents Plan",
+      "entity_type": "event"
+    },
+    {
+      "id": 1003,
+      "name": "TikTok",
+      "entity_type": "org"
+    },
+    {
+      "id": 1004,
+      "name": "TikTok Video #7629084330974874894",
+      "entity_type": "event"
+    },
+    {
+      "id": 32,
+      "name": "Transportation Security Administration",
+      "entity_type": "org"
+    },
+    {
+      "id": 37,
+      "name": "Truth Social",
+      "entity_type": "technology"
+    },
+    {
+      "id": 970,
+      "name": "Tulsa, OK",
+      "entity_type": "place"
+    },
+    {
+      "id": 1021,
+      "name": "U.S. Government",
+      "entity_type": "org"
+    },
+    {
+      "id": 30,
+      "name": "U.S. Senate",
+      "entity_type": "org"
+    },
+    {
+      "id": 1397,
+      "name": "UN Security Council Resolution 2722",
+      "entity_type": "event"
+    },
+    {
+      "id": 1414,
+      "name": "USS Dwight D. Eisenhower",
+      "entity_type": "org"
+    },
+    {
+      "id": 986,
+      "name": "Uniform Color Hierarchy",
+      "entity_type": "concept"
+    },
+    {
+      "id": 1383,
+      "name": "United Kingdom",
+      "entity_type": "org"
+    },
+    {
+      "id": 43,
+      "name": "United States",
+      "entity_type": "place"
+    },
+    {
+      "id": 1157,
+      "name": "United States",
+      "entity_type": "org"
+    },
+    {
+      "id": 940,
+      "name": "United States Government",
+      "entity_type": "org"
+    },
+    {
+      "id": 1040,
+      "name": "Vectara",
+      "entity_type": "org"
+    },
+    {
+      "id": 1111,
+      "name": "Venezuela Maduro Seizure",
+      "entity_type": "event"
+    },
+    {
+      "id": 1081,
+      "name": "Volkswagen",
+      "entity_type": "org"
+    },
+    {
+      "id": 975,
+      "name": "Wealthy Upbringing",
+      "entity_type": "concept"
+    },
+    {
+      "id": 1015,
+      "name": "Whistleblower Disclosure",
+      "entity_type": "event"
+    },
+    {
+      "id": 1110,
+      "name": "White House",
+      "entity_type": "org"
+    },
+    {
+      "id": 987,
+      "name": "White Uniform",
+      "entity_type": "concept"
+    },
+    {
+      "id": 1007,
+      "name": "Women",
+      "entity_type": "topic"
+    },
+    {
+      "id": 1200,
+      "name": "Yemen",
+      "entity_type": "place"
+    }
+  ],
+  "entity_sources": [
+    {
+      "entity_id": 26,
+      "source_id": 6
+    },
+    {
+      "entity_id": 27,
+      "source_id": 6
+    },
+    {
+      "entity_id": 28,
+      "source_id": 6
+    },
+    {
+      "entity_id": 29,
+      "source_id": 6
+    },
+    {
+      "entity_id": 30,
+      "source_id": 6
+    },
+    {
+      "entity_id": 31,
+      "source_id": 6
+    },
+    {
+      "entity_id": 32,
+      "source_id": 6
+    },
+    {
+      "entity_id": 33,
+      "source_id": 6
+    },
+    {
+      "entity_id": 34,
+      "source_id": 6
+    },
+    {
+      "entity_id": 35,
+      "source_id": 6
+    },
+    {
+      "entity_id": 36,
+      "source_id": 6
+    },
+    {
+      "entity_id": 37,
+      "source_id": 6
+    },
+    {
+      "entity_id": 38,
+      "source_id": 6
+    },
+    {
+      "entity_id": 39,
+      "source_id": 6
+    },
+    {
+      "entity_id": 40,
+      "source_id": 7
+    },
+    {
+      "entity_id": 41,
+      "source_id": 7
+    },
+    {
+      "entity_id": 42,
+      "source_id": 7
+    },
+    {
+      "entity_id": 43,
+      "source_id": 7
+    },
+    {
+      "entity_id": 44,
+      "source_id": 7
+    },
+    {
+      "entity_id": 26,
+      "source_id": 7
+    },
+    {
+      "entity_id": 46,
+      "source_id": 7
+    },
+    {
+      "entity_id": 47,
+      "source_id": 7
+    },
+    {
+      "entity_id": 48,
+      "source_id": 7
+    },
+    {
+      "entity_id": 49,
+      "source_id": 7
+    },
+    {
+      "entity_id": 50,
+      "source_id": 7
+    },
+    {
+      "entity_id": 51,
+      "source_id": 7
+    },
+    {
+      "entity_id": 52,
+      "source_id": 7
+    },
+    {
+      "entity_id": 53,
+      "source_id": 7
+    },
+    {
+      "entity_id": 54,
+      "source_id": 7
+    },
+    {
+      "entity_id": 964,
+      "source_id": 132
+    },
+    {
+      "entity_id": 965,
+      "source_id": 132
+    },
+    {
+      "entity_id": 966,
+      "source_id": 132
+    },
+    {
+      "entity_id": 967,
+      "source_id": 132
+    },
+    {
+      "entity_id": 968,
+      "source_id": 132
+    },
+    {
+      "entity_id": 969,
+      "source_id": 132
+    },
+    {
+      "entity_id": 970,
+      "source_id": 132
+    },
+    {
+      "entity_id": 971,
+      "source_id": 132
+    },
+    {
+      "entity_id": 972,
+      "source_id": 132
+    },
+    {
+      "entity_id": 973,
+      "source_id": 132
+    },
+    {
+      "entity_id": 974,
+      "source_id": 132
+    },
+    {
+      "entity_id": 975,
+      "source_id": 132
+    },
+    {
+      "entity_id": 888,
+      "source_id": 139
+    },
+    {
+      "entity_id": 984,
+      "source_id": 139
+    },
+    {
+      "entity_id": 985,
+      "source_id": 139
+    },
+    {
+      "entity_id": 986,
+      "source_id": 139
+    },
+    {
+      "entity_id": 987,
+      "source_id": 139
+    },
+    {
+      "entity_id": 988,
+      "source_id": 139
+    },
+    {
+      "entity_id": 989,
+      "source_id": 139
+    },
+    {
+      "entity_id": 990,
+      "source_id": 139
+    },
+    {
+      "entity_id": 991,
+      "source_id": 139
+    },
+    {
+      "entity_id": 992,
+      "source_id": 140
+    },
+    {
+      "entity_id": 993,
+      "source_id": 140
+    },
+    {
+      "entity_id": 994,
+      "source_id": 140
+    },
+    {
+      "entity_id": 995,
+      "source_id": 140
+    },
+    {
+      "entity_id": 940,
+      "source_id": 140
+    },
+    {
+      "entity_id": 997,
+      "source_id": 140
+    },
+    {
+      "entity_id": 998,
+      "source_id": 140
+    },
+    {
+      "entity_id": 999,
+      "source_id": 140
+    },
+    {
+      "entity_id": 1000,
+      "source_id": 140
+    },
+    {
+      "entity_id": 1001,
+      "source_id": 140
+    },
+    {
+      "entity_id": 1002,
+      "source_id": 140
+    },
+    {
+      "entity_id": 1003,
+      "source_id": 141
+    },
+    {
+      "entity_id": 1004,
+      "source_id": 141
+    },
+    {
+      "entity_id": 1005,
+      "source_id": 142
+    },
+    {
+      "entity_id": 1006,
+      "source_id": 142
+    },
+    {
+      "entity_id": 1007,
+      "source_id": 142
+    },
+    {
+      "entity_id": 41,
+      "source_id": 142
+    },
+    {
+      "entity_id": 1009,
+      "source_id": 142
+    },
+    {
+      "entity_id": 1010,
+      "source_id": 142
+    },
+    {
+      "entity_id": 1011,
+      "source_id": 142
+    },
+    {
+      "entity_id": 1012,
+      "source_id": 143
+    },
+    {
+      "entity_id": 1013,
+      "source_id": 143
+    },
+    {
+      "entity_id": 1014,
+      "source_id": 143
+    },
+    {
+      "entity_id": 1015,
+      "source_id": 143
+    },
+    {
+      "entity_id": 1016,
+      "source_id": 143
+    },
+    {
+      "entity_id": 1017,
+      "source_id": 143
+    },
+    {
+      "entity_id": 1018,
+      "source_id": 143
+    },
+    {
+      "entity_id": 1019,
+      "source_id": 143
+    },
+    {
+      "entity_id": 1020,
+      "source_id": 143
+    },
+    {
+      "entity_id": 1021,
+      "source_id": 143
+    },
+    {
+      "entity_id": 1022,
+      "source_id": 144
+    },
+    {
+      "entity_id": 1023,
+      "source_id": 144
+    },
+    {
+      "entity_id": 1024,
+      "source_id": 144
+    },
+    {
+      "entity_id": 1025,
+      "source_id": 144
+    },
+    {
+      "entity_id": 1026,
+      "source_id": 144
+    },
+    {
+      "entity_id": 1027,
+      "source_id": 144
+    },
+    {
+      "entity_id": 1028,
+      "source_id": 144
+    },
+    {
+      "entity_id": 1029,
+      "source_id": 144
+    },
+    {
+      "entity_id": 1030,
+      "source_id": 144
+    },
+    {
+      "entity_id": 1031,
+      "source_id": 144
+    },
+    {
+      "entity_id": 1032,
+      "source_id": 145
+    },
+    {
+      "entity_id": 1033,
+      "source_id": 145
+    },
+    {
+      "entity_id": 1034,
+      "source_id": 145
+    },
+    {
+      "entity_id": 1035,
+      "source_id": 145
+    },
+    {
+      "entity_id": 1036,
+      "source_id": 145
+    },
+    {
+      "entity_id": 1037,
+      "source_id": 145
+    },
+    {
+      "entity_id": 1038,
+      "source_id": 145
+    },
+    {
+      "entity_id": 1039,
+      "source_id": 145
+    },
+    {
+      "entity_id": 1040,
+      "source_id": 145
+    },
+    {
+      "entity_id": 1041,
+      "source_id": 145
+    },
+    {
+      "entity_id": 1042,
+      "source_id": 145
+    },
+    {
+      "entity_id": 1043,
+      "source_id": 145
+    },
+    {
+      "entity_id": 1044,
+      "source_id": 146
+    },
+    {
+      "entity_id": 1045,
+      "source_id": 146
+    },
+    {
+      "entity_id": 1046,
+      "source_id": 146
+    },
+    {
+      "entity_id": 1047,
+      "source_id": 146
+    },
+    {
+      "entity_id": 1048,
+      "source_id": 146
+    },
+    {
+      "entity_id": 1049,
+      "source_id": 146
+    },
+    {
+      "entity_id": 1050,
+      "source_id": 146
+    },
+    {
+      "entity_id": 1051,
+      "source_id": 146
+    },
+    {
+      "entity_id": 1052,
+      "source_id": 148
+    },
+    {
+      "entity_id": 1012,
+      "source_id": 148
+    },
+    {
+      "entity_id": 1054,
+      "source_id": 148
+    },
+    {
+      "entity_id": 1055,
+      "source_id": 148
+    },
+    {
+      "entity_id": 1056,
+      "source_id": 148
+    },
+    {
+      "entity_id": 1057,
+      "source_id": 148
+    },
+    {
+      "entity_id": 1058,
+      "source_id": 148
+    },
+    {
+      "entity_id": 1059,
+      "source_id": 148
+    },
+    {
+      "entity_id": 478,
+      "source_id": 148
+    },
+    {
+      "entity_id": 31,
+      "source_id": 148
+    },
+    {
+      "entity_id": 54,
+      "source_id": 148
+    },
+    {
+      "entity_id": 794,
+      "source_id": 148
+    },
+    {
+      "entity_id": 41,
+      "source_id": 148
+    },
+    {
+      "entity_id": 42,
+      "source_id": 148
+    },
+    {
+      "entity_id": 1066,
+      "source_id": 148
+    },
+    {
+      "entity_id": 1067,
+      "source_id": 149
+    },
+    {
+      "entity_id": 1068,
+      "source_id": 149
+    },
+    {
+      "entity_id": 1069,
+      "source_id": 149
+    },
+    {
+      "entity_id": 1055,
+      "source_id": 149
+    },
+    {
+      "entity_id": 1071,
+      "source_id": 149
+    },
+    {
+      "entity_id": 1072,
+      "source_id": 149
+    },
+    {
+      "entity_id": 1073,
+      "source_id": 149
+    },
+    {
+      "entity_id": 1074,
+      "source_id": 149
+    },
+    {
+      "entity_id": 1075,
+      "source_id": 149
+    },
+    {
+      "entity_id": 1076,
+      "source_id": 149
+    },
+    {
+      "entity_id": 1077,
+      "source_id": 149
+    },
+    {
+      "entity_id": 1078,
+      "source_id": 149
+    },
+    {
+      "entity_id": 595,
+      "source_id": 149
+    },
+    {
+      "entity_id": 540,
+      "source_id": 149
+    },
+    {
+      "entity_id": 1081,
+      "source_id": 149
+    },
+    {
+      "entity_id": 1082,
+      "source_id": 150
+    },
+    {
+      "entity_id": 1083,
+      "source_id": 150
+    },
+    {
+      "entity_id": 26,
+      "source_id": 150
+    },
+    {
+      "entity_id": 251,
+      "source_id": 150
+    },
+    {
+      "entity_id": 31,
+      "source_id": 150
+    },
+    {
+      "entity_id": 1087,
+      "source_id": 150
+    },
+    {
+      "entity_id": 33,
+      "source_id": 150
+    },
+    {
+      "entity_id": 1089,
+      "source_id": 150
+    },
+    {
+      "entity_id": 1090,
+      "source_id": 150
+    },
+    {
+      "entity_id": 1091,
+      "source_id": 150
+    },
+    {
+      "entity_id": 1092,
+      "source_id": 150
+    },
+    {
+      "entity_id": 1012,
+      "source_id": 150
+    },
+    {
+      "entity_id": 1094,
+      "source_id": 150
+    },
+    {
+      "entity_id": 1095,
+      "source_id": 150
+    },
+    {
+      "entity_id": 1096,
+      "source_id": 150
+    },
+    {
+      "entity_id": 1097,
+      "source_id": 150
+    },
+    {
+      "entity_id": 1098,
+      "source_id": 150
+    },
+    {
+      "entity_id": 1099,
+      "source_id": 150
+    },
+    {
+      "entity_id": 1100,
+      "source_id": 151
+    },
+    {
+      "entity_id": 1101,
+      "source_id": 151
+    },
+    {
+      "entity_id": 1102,
+      "source_id": 151
+    },
+    {
+      "entity_id": 1103,
+      "source_id": 151
+    },
+    {
+      "entity_id": 1104,
+      "source_id": 151
+    },
+    {
+      "entity_id": 1105,
+      "source_id": 151
+    },
+    {
+      "entity_id": 1106,
+      "source_id": 151
+    },
+    {
+      "entity_id": 1107,
+      "source_id": 151
+    },
+    {
+      "entity_id": 1108,
+      "source_id": 151
+    },
+    {
+      "entity_id": 37,
+      "source_id": 151
+    },
+    {
+      "entity_id": 1110,
+      "source_id": 151
+    },
+    {
+      "entity_id": 1111,
+      "source_id": 151
+    },
+    {
+      "entity_id": 1112,
+      "source_id": 151
+    },
+    {
+      "entity_id": 1371,
+      "source_id": 171
+    },
+    {
+      "entity_id": 40,
+      "source_id": 171
+    },
+    {
+      "entity_id": 26,
+      "source_id": 171
+    },
+    {
+      "entity_id": 1374,
+      "source_id": 171
+    },
+    {
+      "entity_id": 1375,
+      "source_id": 171
+    },
+    {
+      "entity_id": 1127,
+      "source_id": 171
+    },
+    {
+      "entity_id": 1377,
+      "source_id": 171
+    },
+    {
+      "entity_id": 1378,
+      "source_id": 171
+    },
+    {
+      "entity_id": 1200,
+      "source_id": 171
+    },
+    {
+      "entity_id": 41,
+      "source_id": 171
+    },
+    {
+      "entity_id": 1265,
+      "source_id": 171
+    },
+    {
+      "entity_id": 1125,
+      "source_id": 171
+    },
+    {
+      "entity_id": 1383,
+      "source_id": 171
+    },
+    {
+      "entity_id": 1124,
+      "source_id": 171
+    },
+    {
+      "entity_id": 1385,
+      "source_id": 171
+    },
+    {
+      "entity_id": 40,
+      "source_id": 172
+    },
+    {
+      "entity_id": 1387,
+      "source_id": 172
+    },
+    {
+      "entity_id": 1272,
+      "source_id": 172
+    },
+    {
+      "entity_id": 1261,
+      "source_id": 172
+    },
+    {
+      "entity_id": 1159,
+      "source_id": 172
+    },
+    {
+      "entity_id": 1125,
+      "source_id": 172
+    },
+    {
+      "entity_id": 1157,
+      "source_id": 172
+    },
+    {
+      "entity_id": 1383,
+      "source_id": 172
+    },
+    {
+      "entity_id": 177,
+      "source_id": 172
+    },
+    {
+      "entity_id": 1395,
+      "source_id": 172
+    },
+    {
+      "entity_id": 1275,
+      "source_id": 172
+    },
+    {
+      "entity_id": 1397,
+      "source_id": 172
+    },
+    {
+      "entity_id": 1398,
+      "source_id": 172
+    },
+    {
+      "entity_id": 1399,
+      "source_id": 172
+    },
+    {
+      "entity_id": 1302,
+      "source_id": 172
+    },
+    {
+      "entity_id": 1401,
+      "source_id": 173
+    },
+    {
+      "entity_id": 1157,
+      "source_id": 173
+    },
+    {
+      "entity_id": 1383,
+      "source_id": 173
+    },
+    {
+      "entity_id": 1263,
+      "source_id": 173
+    },
+    {
+      "entity_id": 1371,
+      "source_id": 173
+    },
+    {
+      "entity_id": 1406,
+      "source_id": 173
+    },
+    {
+      "entity_id": 26,
+      "source_id": 173
+    },
+    {
+      "entity_id": 1408,
+      "source_id": 173
+    },
+    {
+      "entity_id": 1409,
+      "source_id": 173
+    },
+    {
+      "entity_id": 1265,
+      "source_id": 173
+    },
+    {
+      "entity_id": 1124,
+      "source_id": 173
+    },
+    {
+      "entity_id": 1272,
+      "source_id": 173
+    },
+    {
+      "entity_id": 1261,
+      "source_id": 173
+    },
+    {
+      "entity_id": 1414,
+      "source_id": 173
+    },
+    {
+      "entity_id": 1159,
+      "source_id": 173
+    }
+  ],
+  "relationships": [
+    {
+      "source_entity_id": 26,
+      "target_entity_id": 27,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 26,
+      "target_entity_id": 31,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 26,
+      "target_entity_id": 35,
+      "relationship_type": "discusses",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 26,
+      "target_entity_id": 36,
+      "relationship_type": "mentions",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 26,
+      "target_entity_id": 37,
+      "relationship_type": "uses",
+      "weight": 2.0
+    },
+    {
+      "source_entity_id": 26,
+      "target_entity_id": 38,
+      "relationship_type": "caused_by",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 26,
+      "target_entity_id": 41,
+      "relationship_type": "discusses",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 26,
+      "target_entity_id": 41,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 26,
+      "target_entity_id": 43,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 26,
+      "target_entity_id": 43,
+      "relationship_type": "works_at",
+      "weight": 2.0
+    },
+    {
+      "source_entity_id": 26,
+      "target_entity_id": 51,
+      "relationship_type": "mentions",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 26,
+      "target_entity_id": 51,
+      "relationship_type": "related_to",
+      "weight": 2.0
+    },
+    {
+      "source_entity_id": 26,
+      "target_entity_id": 794,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 26,
+      "target_entity_id": 1127,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 26,
+      "target_entity_id": 1371,
+      "relationship_type": "created",
+      "weight": 2.0
+    },
+    {
+      "source_entity_id": 28,
+      "target_entity_id": 31,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 28,
+      "target_entity_id": 39,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 31,
+      "target_entity_id": 32,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 31,
+      "target_entity_id": 33,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 31,
+      "target_entity_id": 1052,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 31,
+      "target_entity_id": 1099,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 33,
+      "target_entity_id": 31,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 33,
+      "target_entity_id": 1095,
+      "relationship_type": "uses",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 33,
+      "target_entity_id": 1096,
+      "relationship_type": "uses",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 34,
+      "target_entity_id": 26,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 34,
+      "target_entity_id": 39,
+      "relationship_type": "created",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 35,
+      "target_entity_id": 30,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 36,
+      "target_entity_id": 29,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 38,
+      "target_entity_id": 26,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 40,
+      "target_entity_id": 41,
+      "relationship_type": "related_to",
+      "weight": 6.0
+    },
+    {
+      "source_entity_id": 40,
+      "target_entity_id": 42,
+      "relationship_type": "related_to",
+      "weight": 4.0
+    },
+    {
+      "source_entity_id": 40,
+      "target_entity_id": 50,
+      "relationship_type": "related_to",
+      "weight": 3.0
+    },
+    {
+      "source_entity_id": 40,
+      "target_entity_id": 1200,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 40,
+      "target_entity_id": 1265,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 40,
+      "target_entity_id": 1272,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 40,
+      "target_entity_id": 1387,
+      "relationship_type": "caused_by",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 40,
+      "target_entity_id": 1395,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 41,
+      "target_entity_id": 40,
+      "relationship_type": "created",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 41,
+      "target_entity_id": 40,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 41,
+      "target_entity_id": 40,
+      "relationship_type": "uses",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 41,
+      "target_entity_id": 42,
+      "relationship_type": "compared_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 41,
+      "target_entity_id": 43,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 41,
+      "target_entity_id": 48,
+      "relationship_type": "caused_by",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 41,
+      "target_entity_id": 49,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 41,
+      "target_entity_id": 51,
+      "relationship_type": "related_to",
+      "weight": 7.0
+    },
+    {
+      "source_entity_id": 41,
+      "target_entity_id": 1052,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 41,
+      "target_entity_id": 1200,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 41,
+      "target_entity_id": 1401,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 42,
+      "target_entity_id": 41,
+      "relationship_type": "related_to",
+      "weight": 3.0
+    },
+    {
+      "source_entity_id": 42,
+      "target_entity_id": 1055,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 43,
+      "target_entity_id": 40,
+      "relationship_type": "related_to",
+      "weight": 2.0
+    },
+    {
+      "source_entity_id": 43,
+      "target_entity_id": 41,
+      "relationship_type": "related_to",
+      "weight": 4.0
+    },
+    {
+      "source_entity_id": 43,
+      "target_entity_id": 42,
+      "relationship_type": "related_to",
+      "weight": 2.0
+    },
+    {
+      "source_entity_id": 43,
+      "target_entity_id": 51,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 43,
+      "target_entity_id": 1261,
+      "relationship_type": "created",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 43,
+      "target_entity_id": 1263,
+      "relationship_type": "created",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 43,
+      "target_entity_id": 1371,
+      "relationship_type": "created",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 44,
+      "target_entity_id": 41,
+      "relationship_type": "discusses",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 44,
+      "target_entity_id": 50,
+      "relationship_type": "discusses",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 47,
+      "target_entity_id": 41,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 47,
+      "target_entity_id": 46,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 48,
+      "target_entity_id": 51,
+      "relationship_type": "uses",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 48,
+      "target_entity_id": 177,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 50,
+      "target_entity_id": 1265,
+      "relationship_type": "part_of",
+      "weight": 3.0
+    },
+    {
+      "source_entity_id": 51,
+      "target_entity_id": 26,
+      "relationship_type": "mentions",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 52,
+      "target_entity_id": 51,
+      "relationship_type": "discusses",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 52,
+      "target_entity_id": 53,
+      "relationship_type": "works_at",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 54,
+      "target_entity_id": 48,
+      "relationship_type": "compared_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 54,
+      "target_entity_id": 1052,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 177,
+      "target_entity_id": 41,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 177,
+      "target_entity_id": 1272,
+      "relationship_type": "caused_by",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 478,
+      "target_entity_id": 1052,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 540,
+      "target_entity_id": 1078,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 595,
+      "target_entity_id": 1076,
+      "relationship_type": "discusses",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 794,
+      "target_entity_id": 41,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 794,
+      "target_entity_id": 1057,
+      "relationship_type": "created",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 940,
+      "target_entity_id": 993,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 964,
+      "target_entity_id": 965,
+      "relationship_type": "created",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 964,
+      "target_entity_id": 975,
+      "relationship_type": "discusses",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 965,
+      "target_entity_id": 966,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 965,
+      "target_entity_id": 967,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 965,
+      "target_entity_id": 968,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 965,
+      "target_entity_id": 969,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 965,
+      "target_entity_id": 970,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 965,
+      "target_entity_id": 971,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 965,
+      "target_entity_id": 972,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 965,
+      "target_entity_id": 973,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 965,
+      "target_entity_id": 974,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 984,
+      "target_entity_id": 985,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 984,
+      "target_entity_id": 989,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 985,
+      "target_entity_id": 888,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 986,
+      "target_entity_id": 984,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 987,
+      "target_entity_id": 988,
+      "relationship_type": "compared_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 989,
+      "target_entity_id": 990,
+      "relationship_type": "caused_by",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 989,
+      "target_entity_id": 990,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 991,
+      "target_entity_id": 888,
+      "relationship_type": "discusses",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 991,
+      "target_entity_id": 984,
+      "relationship_type": "discusses",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 992,
+      "target_entity_id": 993,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 992,
+      "target_entity_id": 994,
+      "relationship_type": "mentions",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 992,
+      "target_entity_id": 997,
+      "relationship_type": "discusses",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 992,
+      "target_entity_id": 999,
+      "relationship_type": "discusses",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 992,
+      "target_entity_id": 1000,
+      "relationship_type": "discusses",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 992,
+      "target_entity_id": 1002,
+      "relationship_type": "discusses",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 993,
+      "target_entity_id": 40,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 993,
+      "target_entity_id": 50,
+      "relationship_type": "uses",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 993,
+      "target_entity_id": 51,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 994,
+      "target_entity_id": 993,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 995,
+      "target_entity_id": 993,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 997,
+      "target_entity_id": 1000,
+      "relationship_type": "caused_by",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 998,
+      "target_entity_id": 1002,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1001,
+      "target_entity_id": 997,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1009,
+      "target_entity_id": 1005,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1009,
+      "target_entity_id": 1006,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1010,
+      "target_entity_id": 1007,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1011,
+      "target_entity_id": 41,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1011,
+      "target_entity_id": 1005,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1011,
+      "target_entity_id": 1006,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1011,
+      "target_entity_id": 1007,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1012,
+      "target_entity_id": 1016,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1012,
+      "target_entity_id": 1017,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1012,
+      "target_entity_id": 1018,
+      "relationship_type": "uses",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1012,
+      "target_entity_id": 1019,
+      "relationship_type": "mentions",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1012,
+      "target_entity_id": 1021,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1012,
+      "target_entity_id": 1052,
+      "relationship_type": "uses",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1012,
+      "target_entity_id": 1054,
+      "relationship_type": "created",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1012,
+      "target_entity_id": 1059,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1012,
+      "target_entity_id": 1095,
+      "relationship_type": "created",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1013,
+      "target_entity_id": 1012,
+      "relationship_type": "works_at",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1013,
+      "target_entity_id": 1015,
+      "relationship_type": "caused_by",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1014,
+      "target_entity_id": 1012,
+      "relationship_type": "created",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1015,
+      "target_entity_id": 1012,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1018,
+      "target_entity_id": 1019,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1019,
+      "target_entity_id": 1020,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1022,
+      "target_entity_id": 1023,
+      "relationship_type": "discusses",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1022,
+      "target_entity_id": 1026,
+      "relationship_type": "created",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1022,
+      "target_entity_id": 1027,
+      "relationship_type": "uses",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1022,
+      "target_entity_id": 1028,
+      "relationship_type": "uses",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1022,
+      "target_entity_id": 1030,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1023,
+      "target_entity_id": 1024,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1023,
+      "target_entity_id": 1025,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1024,
+      "target_entity_id": 1030,
+      "relationship_type": "compared_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1031,
+      "target_entity_id": 1023,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1031,
+      "target_entity_id": 1029,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1032,
+      "target_entity_id": 1033,
+      "relationship_type": "works_at",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1032,
+      "target_entity_id": 1034,
+      "relationship_type": "created",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1032,
+      "target_entity_id": 1039,
+      "relationship_type": "compared_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1032,
+      "target_entity_id": 1040,
+      "relationship_type": "compared_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1032,
+      "target_entity_id": 1041,
+      "relationship_type": "compared_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1033,
+      "target_entity_id": 1043,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1034,
+      "target_entity_id": 1035,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1034,
+      "target_entity_id": 1037,
+      "relationship_type": "uses",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1035,
+      "target_entity_id": 1043,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1036,
+      "target_entity_id": 1035,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1038,
+      "target_entity_id": 1042,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1042,
+      "target_entity_id": 1036,
+      "relationship_type": "caused_by",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1044,
+      "target_entity_id": 1051,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1045,
+      "target_entity_id": 1047,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1045,
+      "target_entity_id": 1051,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1046,
+      "target_entity_id": 1051,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1049,
+      "target_entity_id": 1048,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1049,
+      "target_entity_id": 1051,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1050,
+      "target_entity_id": 1044,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1051,
+      "target_entity_id": 1048,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1055,
+      "target_entity_id": 42,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1055,
+      "target_entity_id": 1056,
+      "relationship_type": "created",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1056,
+      "target_entity_id": 1058,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1057,
+      "target_entity_id": 794,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1059,
+      "target_entity_id": 1058,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1066,
+      "target_entity_id": 1059,
+      "relationship_type": "compared_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1067,
+      "target_entity_id": 1074,
+      "relationship_type": "created",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1069,
+      "target_entity_id": 1055,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1071,
+      "target_entity_id": 42,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1072,
+      "target_entity_id": 1073,
+      "relationship_type": "created",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1075,
+      "target_entity_id": 1067,
+      "relationship_type": "compared_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1076,
+      "target_entity_id": 1077,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1081,
+      "target_entity_id": 1078,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1082,
+      "target_entity_id": 1092,
+      "relationship_type": "works_at",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1082,
+      "target_entity_id": 1099,
+      "relationship_type": "discusses",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1083,
+      "target_entity_id": 1091,
+      "relationship_type": "works_at",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1087,
+      "target_entity_id": 1097,
+      "relationship_type": "discusses",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1089,
+      "target_entity_id": 31,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1089,
+      "target_entity_id": 1098,
+      "relationship_type": "uses",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1090,
+      "target_entity_id": 251,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1091,
+      "target_entity_id": 31,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1097,
+      "target_entity_id": 1099,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1098,
+      "target_entity_id": 1097,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1100,
+      "target_entity_id": 1101,
+      "relationship_type": "uses",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1100,
+      "target_entity_id": 1102,
+      "relationship_type": "mentions",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1100,
+      "target_entity_id": 1112,
+      "relationship_type": "discusses",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1101,
+      "target_entity_id": 1102,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1102,
+      "target_entity_id": 1103,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1104,
+      "target_entity_id": 1108,
+      "relationship_type": "caused_by",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1107,
+      "target_entity_id": 1105,
+      "relationship_type": "uses",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1107,
+      "target_entity_id": 1111,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1108,
+      "target_entity_id": 37,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1112,
+      "target_entity_id": 1104,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1112,
+      "target_entity_id": 1105,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1112,
+      "target_entity_id": 1106,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1124,
+      "target_entity_id": 40,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1124,
+      "target_entity_id": 43,
+      "relationship_type": "related_to",
+      "weight": 2.0
+    },
+    {
+      "source_entity_id": 1124,
+      "target_entity_id": 51,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1124,
+      "target_entity_id": 51,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1124,
+      "target_entity_id": 1371,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1127,
+      "target_entity_id": 1371,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1261,
+      "target_entity_id": 40,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1261,
+      "target_entity_id": 1387,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1263,
+      "target_entity_id": 40,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1263,
+      "target_entity_id": 1261,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1272,
+      "target_entity_id": 1265,
+      "relationship_type": "caused_by",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1272,
+      "target_entity_id": 1387,
+      "relationship_type": "caused_by",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1275,
+      "target_entity_id": 40,
+      "relationship_type": "works_at",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1302,
+      "target_entity_id": 1265,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1302,
+      "target_entity_id": 1387,
+      "relationship_type": "mentions",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1371,
+      "target_entity_id": 1200,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1371,
+      "target_entity_id": 1261,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1374,
+      "target_entity_id": 1371,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1375,
+      "target_entity_id": 1378,
+      "relationship_type": "caused_by",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1377,
+      "target_entity_id": 1378,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1378,
+      "target_entity_id": 1371,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1385,
+      "target_entity_id": 1371,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1397,
+      "target_entity_id": 1387,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1401,
+      "target_entity_id": 1265,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1401,
+      "target_entity_id": 1272,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1406,
+      "target_entity_id": 1263,
+      "relationship_type": "created",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1408,
+      "target_entity_id": 1263,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1409,
+      "target_entity_id": 1371,
+      "relationship_type": "related_to",
+      "weight": 1.0
+    },
+    {
+      "source_entity_id": 1414,
+      "target_entity_id": 1263,
+      "relationship_type": "part_of",
+      "weight": 1.0
+    }
+  ],
+  "generated_content": [
+    {
+      "id": 14,
+      "content_type": "article",
+      "title": "The Architecture of Control: Power, Suppression, and the New American Empire",
+      "content": "# The Architecture of Control: Power, Suppression, and the New American Empire\n\n## When Resistance to Advancement Meets the Rise of Surveillance Capitalism\n\nThere is a pattern worth naming. Across political, technological, and social domains, a convergence is underway — one that links the suppression of marginalized communities to the infrastructure of a new kind of imperial control. Two threads, seemingly unrelated, pull in the same direction: the documented resistance to advancement among Black, Brown, and women's communities, and the quiet, algorithmic takeover described by a former Palantir executive turned whistleblower. Read together, these stories tell us something urgent about who gets to progress, and who decides.\n\n---\n\n## The Multi-Front Resistance to Advancement\n\nThe observation circulating widely in commentary is blunt and uncomfortable: efforts appear to be underway — simultaneously — to suppress the political, economic, and cultural advancement of Black communities, Brown communities, women, and Iran as a regional power. Critics have noted, as one viral TikTok framed it, the striking simultaneity of these campaigns: \"Trying to stop Black advancement, Brown advancement, women's advancement, and Iran's advancement all at the same time.\"\n\nThe simultaneity matters. It is not coincidental.\n\nHistorically, suppression of one marginalized group has often operated in concert with the suppression of others — because the underlying architecture of control requires broad application to remain stable. The civil rights era demonstrated this clearly: opposition to Black advancement was inseparable from opposition to labor rights, women's suffrage movements, and anti-colonial resistance globally. Power structures do not discriminate in their conservatism; they resist change comprehensively.\n\nToday's version carries the same logic, dressed in new institutional clothing. Legislative rollbacks on affirmative action, tightened immigration enforcement targeting Latin American communities, stalled reproductive rights protections, and hawkish foreign policy toward Iran are not isolated policy positions — they form a coherent posture toward any group that represents a meaningful challenge to an existing hierarchy.\n\nThe gendered dimension is particularly sharp. Women's advancement — in boardrooms, in legislatures, in reproductive autonomy — has faced coordinated pushback across multiple fronts. The overturning of *Roe v. Wade* was not simply a legal ruling; it was a signal about who controls bodies, futures, and political participation. When advancement in one domain is blocked, the effects ripple outward. Economic participation drops. Political representation stalls. Generational progress erodes.\n\n---\n\n## Palantir and the Infrastructure of the New Empire\n\nIf the first story is about who is being suppressed, the second is about the mechanism doing the suppressing — and who profits from it.\n\nAccording to a whistleblower disclosure described as potentially \"one of the worst things to happen during our lifetimes,\" a former Palantir executive has come forward with a damning account of the data analytics company's ambitions. The company, co-founded by Peter Thiel and closely aligned with the national security apparatus, reportedly plans to extend its reach far beyond its current government contracts — toward something the whistleblower characterized as permanent, pervasive control over American civic and imperial life.\n\nPalantir has long operated at the intersection of data, surveillance, and state power. Its platforms are used by the U.S. military, ICE, the CIA, and law enforcement agencies across the country. What the whistleblower disclosure adds is context about *intentionality* — the suggestion that this is not simply a contractor filling government needs, but a company with an ideological project: the construction of a data-driven American Empire, one in which algorithmic systems mediate who moves freely, who is watched, and who is stopped.\n\nThe phrase \"new era of imperialism\" in the whistleblower's framing is not hyperbole — it is architectural description. Classical imperialism was enforced by ships, armies, and trade coercion. The new imperialism operates through data pipelines, predictive policing models, border surveillance systems, and behavioral scoring. It is imperialism without flags, which makes it harder to see and harder to resist.\n\nPeter Thiel's role in this ecosystem is worth examining directly. Thiel, a libertarian ideologue and PayPal co-founder, has been explicit in some of his public writings about his skepticism toward democracy when it produces outcomes he disfavors. His investment in Palantir, his proximity to political power, and his stated views on governance create a context in which the whistleblower's claims become not just plausible but structurally coherent. When the founder of your surveillance company doubts the value of democratic participation, the uses to which that surveillance infrastructure gets put deserve scrutiny.\n\n---\n\n## The Convergence: Surveillance as a Tool of Suppression\n\nHere is where the two threads connect — and why reading them together matters.\n\nThe communities facing coordinated resistance to their advancement are precisely the communities most targeted by Palantir's surveillance infrastructure. ICE — a key Palantir client — has used company tools in operations targeting undocumented immigrants, disproportionately from Latin American communities. Predictive policing systems powered by data analytics have been deployed overwhelmingly in Black and Brown neighborhoods, producing feedback loops that inflate arrest rates and justify further surveillance. Border technologies trained on behavioral data embed the biases of their training sets.\n\nThis is not coincidence. It is function.\n\nWhen you build a system designed to monitor, predict, and constrain — and you deploy it against communities already subject to structural disadvantage — you do not produce neutral outcomes. You produce accelerated suppression. The algorithm becomes the new redline, the new stop-and-frisk, the new visa denial. It carries the same intent in a more laundered form.\n\nThe Gaza dimension raised in Palantir's whistleblower discourse is also significant. Critics have long noted that Palantir's tools have been used in contexts involving the Israeli military, raising serious questions about the export of surveillance technology to conflict zones and the role American capital plays in underwriting systems of control abroad. The \"#freepalestine\" framing attached to the whistleblower conversation in public discourse reflects an awareness that Palantir's imperial ambitions are not confined to American borders — they are global in reach, and the communities they affect overlap with those already facing suppression domestically.\n\n---\n\n## What Control Looks Like When It's Complete\n\nThe whistleblower's most alarming claim — that Palantir plans to \"control you for eternity\" — sounds dystopian until you examine what that would mean in practice. Complete longitudinal data profiles. Behavioral prediction models that flag dissent before it organizes. Employment screening, credit scoring, and travel authorization all mediated through systems no individual can audit or appeal.\n\nThis is not science fiction. The components already exist. What the whistleblower is describing is the assembly of those components into a coherent architecture — one that, once installed, becomes nearly impossible to dismantle because it is embedded in the infrastructure of daily life.\n\nThe communities most harmed by this system — Black and Brown Americans, immigrant communities, women whose reproductive decisions could be tracked via location data sold to states — are also the communities with the least political power to resist its construction. The suppression of their advancement is not unrelated to the building of this infrastructure; it is the point. A community with full political representation, economic parity, and social standing has the power to regulate the companies that surveil it. A community that has been structurally undermined does not.\n\n---\n\n## Implications and the Path Forward\n\nNone of this is inevitable. Whistleblower disclosures exist because people inside these systems retain conscience and courage. Public pressure has forced Palantir to exit some contracts in the past. Organizing by affected communities has shaped policy in ways that seemed impossible before they happened.\n\nBut the window matters. Infrastructure, once built, compounds. Data, once collected, persists. And systems of control, once normalized, become the baseline against which all future proposals are measured.\n\nThe convergence of multi-front suppression and surveillance capitalism is not a coincidence — it is a strategy, whether consciously coordinated or structurally emergent. Recognizing the pattern is the first step toward disrupting it.\n\nThe question the whistleblower's disclosure forces, taken alongside the broader suppression of community advancement, is an old one wearing new clothes: *Who gets to participate in the future, and who gets to decide?*\n\nThe architecture of control is being built right now. The communities most at risk are those already being told their advancement must wait. The time to name that pattern — and act on it — is before the infrastructure is complete.\n\n---\n\n*Sources: TikTok commentary on multi-front suppression of Black, Brown, women's, and Iranian advancement; TikTok commentary on former Palantir executive whistleblower disclosure regarding Palantir Technologies, Peter Thiel, and the new era of data-driven imperialism.*",
+      "parameters": "{\"topic\": \"\", \"source_ids\": [142, 143], \"category_id\": null, \"extra_instructions\": \"\"}",
+      "model_used": "sonnet",
+      "cost_usd": 0.0,
+      "created_at": "2026-04-22 23:18:10"
+    }
+  ],
+  "generated_content_sources": [
+    {
+      "source_id": 142
+    },
+    {
+      "source_id": 143
+    }
+  ],
+  "research_threads": [
+    {
+      "id": 1,
+      "generated_id": 14,
+      "status": "active",
+      "cadence_hours": 24,
+      "max_per_poll": 3,
+      "last_polled_at": "2026-04-24 02:57:53",
+      "created_at": "2026-04-23 02:41:37",
+      "focus_keywords": "EU AI Act enforcement and whistleblower protections"
+    }
+  ],
+  "research_discoveries": [
+    {
+      "id": 1,
+      "thread_id": 1,
+      "source_id": 148,
+      "query": "Palantir whistleblower surveillance capitalism marginalized communities 2025",
+      "discovered_at": "2026-04-23 02:42:32"
+    },
+    {
+      "id": 2,
+      "thread_id": 1,
+      "source_id": 149,
+      "query": "Palantir whistleblower surveillance capitalism marginalized communities 2025",
+      "discovered_at": "2026-04-23 02:42:58"
+    },
+    {
+      "id": 3,
+      "thread_id": 1,
+      "source_id": 150,
+      "query": "Palantir whistleblower surveillance capitalism marginalized communities 2025",
+      "discovered_at": "2026-04-23 02:43:32"
+    }
+  ]
+}

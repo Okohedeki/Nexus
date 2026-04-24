@@ -3,7 +3,8 @@ __pycache__/
 *.pyc
 .venv/
 .claude/
-data/
+data/*
+!data/demo/
 *.db
 build/
 dist/
